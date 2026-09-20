@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07111f"/><stop offset="1" stop-color="#132c46"/></linearGradient><linearGradient id="a" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#66e3c4"/><stop offset="1" stop-color="#6f8cff"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#g)"/>
+<circle cx="1030" cy="80" r="220" fill="#6f8cff" opacity=".12"/>
+<circle cx="110" cy="570" r="250" fill="#66e3c4" opacity=".10"/>
+<rect x="90" y="90" width="88" height="88" rx="24" fill="url(#a)"/>
+<text x="134" y="146" text-anchor="middle" font-family="Arial" font-weight="700" font-size="30" fill="#07111f">UQ</text>
+<text x="90" y="290" font-family="Arial" font-weight="700" font-size="70" fill="#ffffff">Umar Saeed Qureshi</text>
+<text x="90" y="370" font-family="Arial" font-weight="600" font-size="38" fill="#66e3c4">Flutter Mobile App Developer</text>
+<text x="90" y="435" font-family="Arial" font-size="26" fill="#9fb0c4">Flutter · Firebase · REST APIs · Google Maps · Play Store</text>
+</svg>
