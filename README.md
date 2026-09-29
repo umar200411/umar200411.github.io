@@ -16,23 +16,17 @@ This is a production-ready static portfolio website for **Umar Saeed Qureshi**, 
 
 Double-click `index.html` and open it in Chrome.
 
-## Recommended launch setup — GitHub Pages
+## Recommended launch setup — Hostinger
 
-### 1. Enable GitHub Pages
+### 1. Configure the domain and SSL
 
-In the repository settings, open **Pages** and configure:
+The production domain is `https://umarsaeedqureshi.com`. In Hostinger, point the domain to the hosting account, enable the SSL certificate, and force HTTPS.
 
-- **Source:** Deploy from a branch
-- **Branch:** `main`
-- **Folder:** `/ (root)`
+### 2. Upload the website
 
-The included `CNAME` file sets the custom domain to `umarsaeedqureshi.com`. GitHub Pages will provision HTTPS for the domain after DNS is configured.
+Upload the **contents** of this repository directly into Hostinger's `public_html` directory. `index.html` must be directly inside `public_html`, with `assets` beside it. Include the root `favicon.ico`, the `assets/favicon-48.png`, `assets/favicon-96.png`, and `assets/social-preview.png` files.
 
-### 2. Configure the domain
-
-At your DNS provider, point the apex domain to GitHub Pages using GitHub's current Pages IP addresses, and point `www` to `umar200411.github.io` with a CNAME record. Then enable **Enforce HTTPS** in the repository's Pages settings.
-
-The `.htaccess` file is retained for Apache/Hostinger deployments but is ignored by GitHub Pages.
+The included `.htaccess` enables HTTPS redirects, compression, browser caching, and baseline security headers on Hostinger's Apache server.
 
 ### 3. Professional email
 After configuring your domain, use Google Workspace if you want Gmail with a professional address.
