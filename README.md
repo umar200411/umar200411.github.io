@@ -16,22 +16,17 @@ This is a production-ready static portfolio website for **Umar Saeed Qureshi**, 
 
 Double-click `index.html` and open it in Chrome.
 
-## Recommended launch setup
+## Recommended launch setup — Hostinger
 
-### 1. Domain
-Choose a clean personal domain such as:
-- `umarsaeedqureshi.com` (purchased)
+### 1. Domain and SSL
 
-### 2. Hosting
-For a static portfolio, Netlify is beginner-friendly:
-1. Create a Netlify account.
-2. Drag the whole website folder into Netlify's deployment interface, or connect your GitHub repository.
-3. Netlify generates a temporary URL.
-4. Add your custom domain in Netlify.
-5. Follow Netlify's DNS instructions.
-6. HTTPS/SSL is handled automatically on supported custom-domain setups.
+The production domain is `https://umarsaeedqureshi.com`. In Hostinger, point the domain to the hosting account, enable the free SSL certificate, and force HTTPS.
 
-Vercel or GitHub Pages are also suitable alternatives.
+### 2. Upload
+
+Upload the **contents** of this repository directly into Hostinger's `public_html` directory. `index.html` must be directly inside `public_html`, not inside another folder. Keep the `assets` directory beside it.
+
+The included `.htaccess` enables HTTPS redirects, compression, browser caching, and safe baseline security headers on Hostinger's Apache server.
 
 ### 3. Professional email
 After buying your domain, use Google Workspace if you want Gmail with a professional address.
@@ -43,14 +38,9 @@ Examples:
 
 Your existing Gmail can remain your recovery/personal email.
 
-### 4. Before publishing
-Replace/update:
-- final domain in `sitemap.xml`
-- final domain in Open Graph tags if desired
-- company dates/roles if you want them public
-- project screenshots if you provide them
-- a professional profile photo if you want a photo-based hero
-- CV/resume link once you have a final PDF
+### 3. Before publishing
+
+Verify the home page, mobile menu, email buttons, Google Play link, GitHub and LinkedIn links, HTTPS redirect, and social preview. Submit `https://umarsaeedqureshi.com/sitemap.xml` to Google Search Console after the domain is live.
 
 ## Suggested next upgrades
 
@@ -67,6 +57,4 @@ Replace/update:
 - Domain: https://umarsaeedqureshi.com
 - Professional email: umar@umarsaeedqureshi.com
 
-## Hostinger upload
-Upload the CONTENTS of this package directly into `public_html`. `index.html` must be directly inside `public_html`, not one folder deeper.
 # umar200411.github.io

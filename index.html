@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#100c27">
   <meta name="description"
-    content="Umar Saeed Qureshi builds playful, production-ready Flutter experiences with Firebase, APIs, and thoughtful interaction design.">
+    content="Umar Saeed Qureshi builds playful, production-ready Flutter and Node.js experiences with Firebase, APIs, and thoughtful interaction design.">
   <meta name="author" content="Umar Saeed Qureshi">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Umar Saeed Qureshi — Flutter Developer">
   <meta property="og:description"
     content="Beautifully built. Seriously functional. Mobile apps with a little more magic.">
   <meta property="og:url" content="https://umarsaeedqureshi.com/">
-  <meta property="og:image" content="https://umarsaeedqureshi.com/assets/developer-character.png">
+  <meta property="og:image" content="https://umarsaeedqureshi.com/assets/social-preview.svg">
   <title>Umar Saeed Qureshi — Creative Flutter Developer</title>
   <link rel="canonical" href="https://umarsaeedqureshi.com/">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -25,21 +25,24 @@
   <link rel="preload" as="image" type="image/webp" href="assets/developer-character.webp">
   <link rel="stylesheet" href="styles.css">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Umar Saeed Qureshi","url":"https://umarsaeedqureshi.com/","jobTitle":"Flutter Mobile App Developer","email":"mailto:umar@umarsaeedqureshi.com","address":{"@type":"PostalAddress","addressCountry":"Pakistan"},"sameAs":["https://github.com/umar200411/","https://www.linkedin.com/in/umar-saeed-qureshi-8a6484296/"],"knowsAbout":["Flutter","Dart","Firebase","Cloud Firestore","REST APIs","Google Maps API","GetX","Provider","Firebase Cloud Messaging","Hive","Google Play Publishing"]}
+  {"@context":"https://schema.org","@type":"Person","name":"Umar Saeed Qureshi","url":"https://umarsaeedqureshi.com/","jobTitle":"Flutter Mobile App Developer","email":"mailto:umar@umarsaeedqureshi.com","address":{"@type":"PostalAddress","addressCountry":"Pakistan"},"sameAs":["https://github.com/umar200411/","https://www.linkedin.com/in/umar-saeed-qureshi-8a6484296/"],"knowsAbout":["Flutter","Dart","Firebase","Cloud Firestore","Node.js","REST APIs","JSON","Google Maps API","GetX","Provider","Firebase Cloud Messaging","Hive","Git","GitHub","Google Play Publishing"]}
   </script>
 </head>
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
 
-  <header class="site-header" id="top">
+  <div id="top" class="page-top" aria-hidden="true"></div>
+  <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Umar Saeed Qureshi, back to top">umar<span class="brand-spark"
           aria-hidden="true">✳</span><small>DEV / DESIGN / SHIP</small></a>
       <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
         <a href="#work">Projects</a><a href="#about">About</a><a href="#experience">Experience</a><a
-          href="#expertise">Toolkit</a>
+          href="#expertise">Toolkit</a><a href="#process">Process</a>
         <a class="nav-contact" href="#contact">Let's connect <span aria-hidden="true">↗</span></a>
       </nav>
       <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav"
@@ -52,16 +55,20 @@
       <div class="hero-mesh" aria-hidden="true"></div>
       <div class="hero-grid" aria-hidden="true"></div>
       <div class="hero-noise" aria-hidden="true"></div>
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <svg class="hero-morph" viewBox="0 0 600 400" aria-hidden="true">
+        <path d="M70 245C125 90 245 72 316 161s128 111 214-34" />
+      </svg>
       <div class="container hero-layout">
         <div class="hero-copy">
           <div class="hero-overline"><span class="status-pill"><span class="status-pulse"></span> AVAILABLE FOR NEW
               PROJECTS</span><span class="hero-edition">PORTFOLIO / 26</span></div>
-          <p class="hello">Hey, I'm Umar <span aria-hidden="true">✦</span></p>
-          <h1 id="hero-title"><span class="headline-row">I make</span><span class="headline-row">mobile apps</span><span
-              class="headline-row headline-last">feel <em>alive<span class="headline-star"
+          <p class="hello">UMAR SAEED QURESHI / FLUTTER DEVELOPER <span aria-hidden="true">✦</span></p>
+          <h1 id="hero-title"><span class="headline-row">I build</span><span class="headline-row">mobile apps</span><span
+              class="headline-row headline-last">that feel <em>alive<span class="headline-star"
                   aria-hidden="true">✳</span></em></span></h1>
-          <p class="hero-description">Flutter developer turning bold ideas into <strong>beautifully built, seriously
-              functional</strong> mobile experiences.</p>
+          <p class="hero-description glitch-text" data-text="Flutter developer turning bold ideas into beautifully built, seriously functional mobile experiences — with clean GitHub code behind every release.">Flutter developer turning bold ideas into <strong>beautifully built, seriously
+              functional</strong> mobile experiences — with clean GitHub code behind every release.</p>
           <div class="hero-actions"><a class="button button-lime magnetic" href="#work">See what I've built <span
                 class="button-arrow" aria-hidden="true">↗</span></a><a class="button button-ghost magnetic"
               href="#contact">Let's talk <span class="button-arrow" aria-hidden="true">↗</span></a></div>
@@ -79,7 +86,7 @@
               aria-hidden="true"></span>
             <picture class="portrait-image">
               <source srcset="assets/developer-character.webp" type="image/webp"><img
-                src="assets/developer-character.png" width="1122" height="1402" fetchpriority="high"
+                src="assets/developer-character.webp" width="1122" height="1402" fetchpriority="high"
                 alt="Illustrated portrait of Umar holding a tablet" draggable="false">
             </picture>
             <span class="stage-bottom" aria-hidden="true">IMAGINE ↗ CREATE ↗ REPEAT</span>
@@ -115,7 +122,8 @@
           <div><span class="section-kicker"><span class="kicker-dot"></span> 01 / FEATURED PROJECT</span>
             <h2 id="work-title">Small screens.<br><span class="accent-text">Big energy.</span></h2>
           </div>
-          <p>Everything comes together in the details. Here's a real product I designed and built from idea to release.
+          <p>Beautify is a real product I designed and built from idea to release — a compact showcase of the product,
+            interface, and engineering decisions I bring to every build.
           </p>
         </div>
         <article class="project-card reveal">
@@ -124,8 +132,8 @@
                 ↗</span></div>
             <div class="project-main"><span class="project-eyebrow">BEAUTY & WELLNESS / MOBILE APP</span>
               <h3>Beautify<span>✳</span></h3>
-              <p>Find your next favorite salon. Discover beauty services, explore what's nearby, and make bookings — all
-                in one smooth mobile experience.</p>
+              <p>Find your next favorite salon. Discover services, explore what's nearby, and make bookings — all in one
+                smooth Flutter experience backed by Firebase.</p>
               <div class="project-tags">
                 <span>Flutter</span><span>Firebase</span><span>Bookings</span><span>Maps</span><span>Notifications</span>
               </div>
@@ -135,14 +143,14 @@
                 rel="noopener noreferrer">View on Google Play <span class="button-arrow"
                   aria-hidden="true">↗</span></a><span>INDEPENDENTLY BUILT<br>AND PUBLISHED</span></div>
           </div>
-          <div class="project-art" role="img"
-            aria-label="Illustrative concept of the Beautify app interface, not an actual screenshot"><span
+          <div class="project-art"
+            aria-label="Interactive concept of the Beautify app interface, not an actual screenshot"><span
               class="project-orbit project-orbit-a" aria-hidden="true"></span><span
               class="project-orbit project-orbit-b" aria-hidden="true"></span><span class="project-art-label"
               aria-hidden="true">A LITTLE SELF-CARE, ANYWHERE.</span>
-            <div class="project-phone" aria-hidden="true">
+            <div class="project-phone" id="beautify-phone" aria-hidden="true">
               <div class="phone-buttons"><span></span><span></span></div>
-              <div class="phone-screen">
+              <div class="phone-screen" data-view="discover">
                 <div class="phone-status"><span>9:41</span><span>●●● ▰</span></div>
                 <div class="phone-greeting"><small>GOOD MORNING,</small><strong>Find your glow.</strong></div>
                 <div class="phone-search">⌕ &nbsp; Search salons &amp; services <b>⌘</b></div>
@@ -162,14 +170,23 @@
                 <div class="phone-nav"><span>⌂</span><span>⌕</span><span>♡</span><span>◉</span></div>
               </div>
             </div>
+            <div class="demo-switcher" aria-label="Preview Beautify app screens" role="group">
+              <span class="demo-label">SCREEN GALLERY</span>
+              <button class="demo-control is-active" type="button" aria-controls="beautify-phone" aria-pressed="true"
+                data-demo="discover"><i aria-hidden="true">⌕</i><span>Discover</span></button>
+              <button class="demo-control" type="button" aria-controls="beautify-phone" aria-pressed="false"
+                data-demo="book"><i aria-hidden="true">◷</i><span>Book</span></button>
+              <button class="demo-control" type="button" aria-controls="beautify-phone" aria-pressed="false"
+                data-demo="profile"><i aria-hidden="true">◉</i><span>Profile</span></button>
+            </div>
             <div class="project-art-chip" aria-hidden="true"><span>✦</span><span>MADE FOR<br><strong>REAL
                   LIFE</strong></span></div><span class="project-art-caption" aria-hidden="true">FIG 01 / VISUAL
               CONCEPT</span>
           </div>
         </article>
-        <div class="project-postscript reveal"><span>UNDER THE HOOD <b>✳</b></span>
-          <p>Authentication, Firestore, location-aware discovery, push notifications, and the Play Store release
-            workflow. The design is only half the story.</p><a href="https://github.com/umar200411/" target="_blank"
+        <div class="project-postscript reveal"><span>THE BUILD <b>✳</b></span>
+          <p>Authentication, Firestore, location-aware discovery, push notifications, and a Play Store release workflow.
+            The interface is only half the story.</p><a href="https://github.com/umar200411/" target="_blank"
             rel="noopener noreferrer">Explore my GitHub <span aria-hidden="true">↗</span></a>
         </div>
       </div>
@@ -186,12 +203,13 @@
           <p class="about-lead">I like apps that make people say <em>“wow”</em> — and keep working after the wow wears
             off.</p>
           <p>I'm Umar, a Flutter developer working across UI, authentication, backend integrations, maps, notifications,
-            and state management. I care about the tiny interactions as much as the architecture behind them.</p>
+            and state management. I write clean, collaborative code with GitHub workflows, readable commits, and
+            organized delivery behind every product.</p>
           <p>My background in computer science, business, and information systems helps me connect the technical details
             to what a product actually needs.</p>
           <div class="about-stats">
-            <div><strong>01<span>+</span></strong><small>APP ON<br>GOOGLE PLAY</small></div>
-            <div><strong>02</strong><small>TECH COMPANIES<br>WORKED WITH</small></div>
+            <div><strong class="stat-number" data-count="1">00<span>+</span></strong><small>APP ON<br>GOOGLE PLAY</small></div>
+            <div><strong class="stat-number" data-count="2">00</strong><small>TECH COMPANIES<br>WORKED WITH</small></div>
             <div><strong>PK</strong><small>BASED IN<br>PAKISTAN</small></div>
           </div>
         </div>
@@ -265,8 +283,17 @@
                 class="skill-bottom">BEYOND THE SCREEN <b>✳</b></span>
             </div>
           </article>
+          <article class="skill-card skill-node reveal tilt-card">
+            <div class="skill-top"><span>04 / THE API LAYER</span><span>↗</span></div>
+            <div class="skill-icon skill-node-icon" aria-hidden="true">JS</div>
+            <div class="skill-body">
+              <h3>Node.js APIs</h3>
+              <p>Practical backend endpoints for mobile apps, with JSON data, integrations, validation, and reliable client-server flows.</p>
+              <div class="skill-pills"><span>Node.js</span><span>REST</span><span>JSON</span></div>
+            </div>
+          </article>
           <article class="skill-card skill-delivery reveal tilt-card">
-            <div class="skill-top"><span>04 / THE FINISH LINE</span><span>↗</span></div>
+            <div class="skill-top"><span>05 / THE FINISH LINE</span><span>↗</span></div>
             <div class="release-window" aria-label="Illustrative software release checklist">
               <div class="release-title"><span>● ● ●</span> release.sh</div>
               <p><span>✓</span> build &amp; test</p>
@@ -279,11 +306,20 @@
               <p>Testing, Play Store publishing, updates, GitHub, ClickUp, and collaborative product delivery.</p>
             </div>
           </article>
+          <article class="skill-card skill-github reveal tilt-card">
+            <div class="skill-top"><span>06 / THE WORKFLOW</span><span>↗</span></div>
+            <div class="skill-icon skill-github-icon" aria-hidden="true">⌘</div>
+            <div class="skill-body">
+              <h3>GitHub &amp; Git</h3>
+              <p>Version control, readable commits, collaborative review, issue tracking, and organized project delivery.</p>
+              <span class="skill-bottom">SHIP WITH CONFIDENCE <b>↗</b></span>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="process-section" aria-labelledby="process-title">
+    <section class="process-section" id="process" aria-labelledby="process-title">
       <div class="container">
         <div class="process-heading reveal"><span class="section-kicker"><span class="kicker-dot"></span> 05 / HOW I
             WORK</span>
@@ -291,29 +327,29 @@
           <p>A simple, practical process that keeps the product — and the people using it — at the center.</p>
         </div>
         <ol class="process-grid">
-          <li class="process-step reveal"><span class="step-number">01</span><span class="step-icon"
+          <li class="process-step reveal is-open"><button class="process-trigger" type="button" aria-expanded="true"><span class="step-number">01</span><span class="step-icon"
               aria-hidden="true">✳</span>
             <h3>Discover</h3>
             <p>Understand the problem, the users, and what success looks like.</p><span class="step-arrow"
-              aria-hidden="true">↗</span>
+              aria-hidden="true">↗</span></button><div class="process-details"><span>ACTIVITIES</span><ul><li>Brief &amp; user goals</li><li>Market signals</li></ul><span>DELIVERABLE</span><strong>Product direction</strong></div>
           </li>
-          <li class="process-step reveal"><span class="step-number">02</span><span class="step-icon"
+          <li class="process-step reveal"><button class="process-trigger" type="button" aria-expanded="false"><span class="step-number">02</span><span class="step-icon"
               aria-hidden="true">⌘</span>
             <h3>Architect</h3>
             <p>Map the flows, data, interactions, and technical approach.</p><span class="step-arrow"
-              aria-hidden="true">↗</span>
+              aria-hidden="true">↗</span></button><div class="process-details"><span>ACTIVITIES</span><ul><li>Flows &amp; wireframes</li><li>Data architecture</li></ul><span>DELIVERABLE</span><strong>Build-ready blueprint</strong></div>
           </li>
-          <li class="process-step reveal"><span class="step-number">03</span><span class="step-icon"
+          <li class="process-step reveal"><button class="process-trigger" type="button" aria-expanded="false"><span class="step-number">03</span><span class="step-icon"
               aria-hidden="true">◈</span>
             <h3>Build &amp; refine</h3>
             <p>Make it real, test the details, and polish what matters.</p><span class="step-arrow"
-              aria-hidden="true">↗</span>
+              aria-hidden="true">↗</span></button><div class="process-details"><span>ACTIVITIES</span><ul><li>Flutter implementation</li><li>Interaction polish</li></ul><span>DELIVERABLE</span><strong>Testable product</strong></div>
           </li>
-          <li class="process-step reveal"><span class="step-number">04</span><span class="step-icon"
+          <li class="process-step reveal"><button class="process-trigger" type="button" aria-expanded="false"><span class="step-number">04</span><span class="step-icon"
               aria-hidden="true">↗</span>
             <h3>Test &amp; ship</h3>
             <p>Validate the experience and put it in people's hands.</p><span class="step-arrow"
-              aria-hidden="true">↗</span>
+              aria-hidden="true">↗</span></button><div class="process-details"><span>ACTIVITIES</span><ul><li>QA &amp; release checks</li><li>Store submission</li></ul><span>DELIVERABLE</span><strong>Live, supported release</strong></div>
           </li>
         </ol>
       </div>
@@ -329,12 +365,31 @@
         <div class="contact-bottom reveal">
           <p>I'm open to Flutter roles, freelance projects, and product collaborations. Tell me what you're dreaming up.
           </p>
-          <div class="contact-actions"><a class="button button-dark magnetic"
-              href="mailto:umar@umarsaeedqureshi.com?subject=Project%20Inquiry%20for%20Umar%20Saeed%20Qureshi">Start a
+          <div class="contact-actions"><a class="button button-lime magnetic"
+              href="mailto:umar@umarsaeedqureshi.com?subject=Project%20Inquiry%20for%20Umar%20Saeed%20Qureshi"><svg
+                class="contact-email-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2.5 5.5A2.5 2.5 0 0 1 5 3h14a2.5 2.5 0 0 1 2.5 2.5v13A2.5 2.5 0 0 1 19 21H5a2.5 2.5 0 0 1-2.5-2.5v-13Zm2.8.1L12 11l6.7-5.4H5.3ZM19.5 8.2 12.8 13a1.4 1.4 0 0 1-1.6 0L4.5 8.2v10.3c0 .3.2.5.5.5h14c.3 0 .5-.2.5-.5V8.2Z"/>
+              </svg>Start a
               conversation <span class="button-arrow" aria-hidden="true">↗</span></a><button
-              class="button button-outline-dark copy-email" type="button" data-email="umar@umarsaeedqureshi.com">Copy my
-              email <span aria-hidden="true">⧉</span></button><span class="copy-status" role="status"
-              aria-live="polite"></span></div>
+              class="contact-email copy-email" type="button" data-email="umar@umarsaeedqureshi.com">or copy
+              umar@umarsaeedqureshi.com</button><span class="copy-status" role="status" aria-live="polite"></span></div>
+          <div class="contact-channels" aria-label="Additional contact options">
+            <span class="contact-channels-label">WHATSAPP</span>
+            <a class="contact-channel" href="https://wa.me/923492287799" target="_blank" rel="noopener noreferrer"
+              aria-label="Message Umar on WhatsApp Pakistan">
+              <svg class="contact-channel-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.5 4.1 1.6 5.9L.2 24l6.5-1.7a11.8 11.8 0 0 0 5.4 1.3h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.1-1.2-6.1-3.5-8.3ZM12.1 21.5h-.1c-1.7 0-3.4-.5-4.8-1.4l-.3-.2-3.9 1 1-3.8-.2-.3a9.7 9.7 0 1 1 8.3 4.7Zm5.3-7.2c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.7.9-.8 1.1-.2.2-.3.2-.6.1-1.6-.8-2.7-1.4-3.8-3.2-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.6-.1-.2-.7-1.6-1-2.2-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.3 3.5 5.6 4.9.8.3 1.4.5 1.9.6.8.3 1.5.2 2.1.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.1-1.4-.1-.2-.3-.2-.6-.3Z"/>
+              </svg>
+              <span><strong>Pakistan</strong><small>0349 2287799</small></span><b aria-hidden="true">↗</b>
+            </a>
+            <a class="contact-channel" href="https://wa.me/19296449065" target="_blank" rel="noopener noreferrer"
+              aria-label="Message Umar on WhatsApp International">
+              <svg class="contact-channel-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.5 4.1 1.6 5.9L.2 24l6.5-1.7a11.8 11.8 0 0 0 5.4 1.3h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.1-1.2-6.1-3.5-8.3ZM12.1 21.5h-.1c-1.7 0-3.4-.5-4.8-1.4l-.3-.2-3.9 1 1-3.8-.2-.3a9.7 9.7 0 1 1 8.3 4.7Zm5.3-7.2c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.7.9-.8 1.1-.2.2-.3.2-.6.1-1.6-.8-2.7-1.4-3.8-3.2-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.6-.1-.2-.7-1.6-1-2.2-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.3 3.5 5.6 4.9.8.3 1.4.5 1.9.6.8.3 1.5.2 2.1.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.1-1.4-.1-.2-.3-.2-.6-.3Z"/>
+              </svg>
+              <span><strong>International</strong><small>+1 929 644 9065</small></span><b aria-hidden="true">↗</b>
+            </a>
+          </div>
         </div>
         <div class="contact-bottom-note" aria-hidden="true">MAKE IT MATTER. MAKE IT MEMORABLE. ↗</div>
       </div>
