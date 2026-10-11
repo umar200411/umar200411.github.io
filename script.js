@@ -91,7 +91,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 window.addEventListener('resize', () => {
   updateScrollUI();
-  if (innerWidth > 900) closeMenu();
+  if (innerWidth > 1100) closeMenu();
 }, { passive: true });
 updateScrollUI();
 
@@ -103,27 +103,61 @@ document.querySelectorAll('.process-trigger').forEach(trigger => {
   });
 });
 
-document.querySelectorAll('.demo-switcher').forEach(switcher => {
-  const art = switcher.closest('.project-art');
-  const screen = art?.querySelector('.phone-screen');
-  const bannerCopy = screen?.querySelector('.phone-banner strong');
-  switcher.querySelectorAll('.demo-control').forEach(control => {
-    control.addEventListener('click', () => {
-      switcher.querySelectorAll('.demo-control').forEach(item => {
-        item.classList.remove('is-active');
-        item.setAttribute('aria-pressed', 'false');
-      });
-      control.classList.add('is-active');
-      control.setAttribute('aria-pressed', 'true');
-      const view = control.dataset.demo || 'discover';
-      screen?.setAttribute('data-view', view);
-      if (bannerCopy) {
-        bannerCopy.textContent = {
-          discover: 'A little time for yourself.',
-          book: 'Book your moment.',
-          profile: 'Your glow starts here.'
-        }[view];
+document.querySelectorAll('.screenshot-gallery').forEach(gallery => {
+  const controls = [...gallery.querySelectorAll('.demo-control[data-image]')];
+  const target = document.getElementById(controls[0]?.getAttribute('aria-controls') || '');
+  const image = target?.querySelector('img');
+  const status = gallery.querySelector('.gallery-status');
+  if (!image || !controls.length) return;
+
+  const preloads = new Map();
+  const preload = src => {
+    if (preloads.has(src)) return preloads.get(src);
+    const request = new Promise((resolve, reject) => {
+      const candidate = new Image();
+      candidate.decoding = 'async';
+      candidate.onload = () => resolve(candidate);
+      candidate.onerror = reject;
+      candidate.src = src;
+      if (candidate.complete && candidate.naturalWidth) resolve(candidate);
+    });
+    preloads.set(src, request);
+    return request;
+  };
+
+  const preloadNeighbors = control => {
+    const index = controls.indexOf(control);
+    [controls[index - 1], controls[index + 1]]
+      .filter(item => item?.dataset.image && item.dataset.image !== image.getAttribute('src'))
+      .forEach(item => preload(item.dataset.image).catch(() => {}));
+  };
+  const activeControl = () => controls.find(control => control.getAttribute('aria-pressed') === 'true') || controls[0];
+  gallery.addEventListener('pointerenter', () => preloadNeighbors(activeControl()), { once: true, passive: true });
+  gallery.addEventListener('focusin', () => preloadNeighbors(activeControl()), { once: true });
+
+  controls.forEach(control => {
+    control.addEventListener('click', async () => {
+      const src = control.dataset.image;
+      if (!src || new URL(src, document.baseURI).href === image.src) return;
+      try {
+        await preload(src);
+      } catch {
+        return;
       }
+      image.src = src;
+      image.alt = control.dataset.alt || control.dataset.label || 'Project screenshot';
+      if (target.classList.contains('browser-preview')) {
+        const mobileLayout = control.dataset.layout === 'mobile';
+        target.classList.toggle('is-mobile', mobileLayout);
+        target.closest('.project-media--magnet')?.classList.toggle('is-mobile-preview', mobileLayout);
+      }
+      controls.forEach(item => {
+        const selected = item === control;
+        item.classList.toggle('is-active', selected);
+        item.setAttribute('aria-pressed', String(selected));
+      });
+      if (status) status.textContent = `Showing ${control.dataset.label || 'selected'} screenshot.`;
+      preloadNeighbors(control);
     });
   });
 });
@@ -299,6 +333,8 @@ if (!reduceMotion.matches) {
     let height = 0;
     let frame = 0;
     let lastTime = 0;
+    let heroVisible = true;
+    let pageVisible = !document.hidden;
     let pointer = { x: .75, y: .35 };
 
     const resizeCanvas = () => {
@@ -311,6 +347,7 @@ if (!reduceMotion.matches) {
     };
 
     const renderCanvas = time => {
+      frame = 0;
       const delta = Math.min(32, time - lastTime || 16);
       lastTime = time;
       context.clearRect(0, 0, width, height);
@@ -341,7 +378,17 @@ if (!reduceMotion.matches) {
         context.fill();
       });
       while (trail.length && trail[0].life <= 0) trail.shift();
-      frame = requestAnimationFrame(renderCanvas);
+      if (heroVisible && pageVisible) frame = requestAnimationFrame(renderCanvas);
+    };
+
+    const syncCanvasAnimation = () => {
+      if (heroVisible && pageVisible && !frame) {
+        lastTime = 0;
+        frame = requestAnimationFrame(renderCanvas);
+      } else if ((!heroVisible || !pageVisible) && frame) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+      }
     };
 
     hero.addEventListener('pointermove', event => {
@@ -353,9 +400,23 @@ if (!reduceMotion.matches) {
       hero.style.setProperty('--parallax-y', `${((pointer.y - .5) * 12).toFixed(1)}px`);
     }, { passive: true });
     window.addEventListener('resize', resizeCanvas, { passive: true });
+    document.addEventListener('visibilitychange', () => {
+      pageVisible = !document.hidden;
+      syncCanvasAnimation();
+    });
+    if ('IntersectionObserver' in window) {
+      const heroObserver = new IntersectionObserver(entries => {
+        heroVisible = entries.some(entry => entry.isIntersecting);
+        syncCanvasAnimation();
+      });
+      heroObserver.observe(hero);
+    }
     resizeCanvas();
-    frame = requestAnimationFrame(renderCanvas);
-    window.addEventListener('pagehide', () => cancelAnimationFrame(frame), { once: true });
+    syncCanvasAnimation();
+    window.addEventListener('pagehide', () => {
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+    }, { once: true });
   }
 }
 
