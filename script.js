@@ -310,7 +310,7 @@ if (coarsePointer.matches) {
 }
 
 // Lightweight canvas atmosphere: particle trails and matrix-like drops on capable devices.
-if (!reduceMotion.matches) {
+if (!reduceMotion.matches && finePointer.matches) {
   const canvas = document.querySelector('.hero-canvas');
   const hero = document.querySelector('.hero');
   const context = canvas?.getContext('2d');
@@ -434,3 +434,55 @@ copyButton?.addEventListener('click', async () => {
 });
 const year = document.querySelector('#year');
 if (year) year.textContent = String(new Date().getFullYear());
+
+const stateTitle = document.querySelector('[data-state-title]');
+const stateCopy = document.querySelector('[data-state-copy]');
+const stateButtons = document.querySelectorAll('[data-state]');
+const stateMessages = {
+  idle: ['Ready to book', 'Select a service to see the state change.'],
+  loading: ['Checking availability…', 'Fetching the latest salon and time-slot data.'],
+  success: ['Booking confirmed', 'A clear success state keeps the next step obvious.'],
+  error: ['Could not complete booking', 'The user gets a recovery path instead of a dead end.']
+};
+stateButtons.forEach(button => button.addEventListener('click', () => {
+  const state = button.dataset.state;
+  const message = stateMessages[state];
+  if (!message) return;
+  stateButtons.forEach(item => item.classList.toggle('is-selected', item.dataset.state === state));
+  if (stateTitle) stateTitle.textContent = message[0];
+  if (stateCopy) stateCopy.textContent = message[1];
+  const demo = document.querySelector('.state-demo');
+  demo?.setAttribute('data-active-state', state);
+  if (demo && !reduceMotion.matches) {
+    demo.classList.remove('state-changing');
+    requestAnimationFrame(() => demo.classList.add('state-changing'));
+  }
+}));
+
+const projectFilters = document.querySelectorAll('.project-filter');
+const projectCards = document.querySelectorAll('[data-project-type]');
+projectFilters.forEach(filter => filter.addEventListener('click', () => {
+  const selected = filter.dataset.filter;
+  projectFilters.forEach(item => item.classList.toggle('is-active', item === filter));
+  projectCards.forEach(card => {
+    const matches = selected === 'all' || card.dataset.projectType.split(' ').includes(selected);
+    if (matches) {
+      card.hidden = false;
+      requestAnimationFrame(() => card.classList.add('filter-enter'));
+      window.setTimeout(() => card.classList.remove('filter-enter'), 380);
+    } else {
+      card.hidden = true;
+    }
+  });
+}));
+
+const projectBrief = document.querySelector('#project-brief');
+projectBrief?.addEventListener('submit', event => {
+  event.preventDefault();
+  const data = new FormData(projectBrief);
+  const body = `Project type: ${data.get('type')}\nTimeline: ${data.get('timeline')}\n\nProject note:\n${data.get('message') || 'I would like to discuss a project.'}`;
+  const href = `mailto:umar@umarsaeedqureshi.com?subject=${encodeURIComponent('Project brief for Umar Saeed Qureshi')}&body=${encodeURIComponent(body)}`;
+  const status = projectBrief.querySelector('.brief-status');
+  if (status) status.textContent = 'Opening your email app…';
+  window.location.href = href;
+});

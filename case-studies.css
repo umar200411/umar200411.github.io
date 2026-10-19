@@ -568,12 +568,31 @@
   background: #fff;
   box-shadow: 0 14px 36px rgba(16,12,39,.06);
   transition: transform .28s var(--ease-out), box-shadow .28s var(--ease-out);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  cursor: default;
+}
+
+.service-card::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, rgba(255,255,255,.42), transparent 55%);
+  content: "";
+  opacity: 0;
+  transition: opacity .28s var(--ease-out);
+  pointer-events: none;
 }
 
 .service-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 24px 42px rgba(16,12,39,.13);
 }
+
+.service-card:hover::before { opacity: 1; }
+.service-card:hover .service-icon { transform: rotate(8deg) scale(1.08); background: rgba(255,255,255,.35); }
+.service-icon { transition: transform .25s var(--ease-out), background .25s var(--ease-out); }
 
 .service-card--flutter { background: #e4d9ff; }
 .service-card--backend { background: #d4f1ff; }
@@ -627,6 +646,10 @@
   border-radius: 100px;
   font: 700 8px var(--mono);
 }
+
+.services-section .section-heading > p { max-width: 470px; }
+.services-cta { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 32px; padding: 22px 0 0; border-top: 1px solid rgba(16,12,39,.16); }
+.services-cta p { margin: 0; font: 700 13px var(--body); }
 
 .services-cta {
   display: flex;

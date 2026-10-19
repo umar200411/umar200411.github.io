@@ -131,7 +131,7 @@
           aria-hidden="true">✳</span><small>DEV / DESIGN / SHIP</small></a>
       <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
         <a href="#work">Projects</a><a href="#about">About</a><a href="#experience">Experience</a><a
-          href="#expertise">Toolkit</a><a href="#services">Services</a><a href="#process">Process</a>
+          href="#expertise">Toolkit</a><a href="#state-lab">State Lab</a><a href="#services">Services</a><a href="#process">Process</a>
         <a class="nav-contact" href="#contact">Let's connect <span aria-hidden="true">↗</span></a>
       </nav>
       <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav"
@@ -156,7 +156,7 @@
           <h1 id="hero-title"><span class="headline-row">I build</span><span class="headline-row">apps + web</span><span
               class="headline-row headline-last">that feel <em>alive<span class="headline-star"
                   aria-hidden="true">✳</span></em></span></h1>
-          <p class="hero-description glitch-text" data-text="Flutter developer and web creator turning ideas into intuitive mobile apps, responsive websites, and products built for real people.">Flutter developer and web creator turning ideas into <strong>intuitive mobile apps, responsive websites,</strong> and products built for real people.</p>
+          <p class="hero-description">Flutter developer and web creator turning ideas into <strong>intuitive mobile apps, responsive websites,</strong> and products built for real people.</p>
           <div class="hero-actions"><a class="button button-lime magnetic" href="#work">See what I've built <span
                 class="button-arrow" aria-hidden="true">↗</span></a><a class="button button-ghost magnetic"
               href="#contact">Let's talk <span class="button-arrow" aria-hidden="true">↗</span></a></div>
@@ -204,6 +204,15 @@
       </div>
     </div>
 
+    <section class="proof-strip" aria-label="Portfolio highlights">
+      <div class="container proof-strip-inner">
+        <div><strong>01</strong><span>Published mobile app</span></div>
+        <div><strong>02</strong><span>Featured product case studies</span></div>
+        <div><strong>05+</strong><span>Core delivery capabilities</span></div>
+        <div><strong>PK</strong><span>Available worldwide</span></div>
+      </div>
+    </section>
+
     <section class="section work-section" id="work" aria-labelledby="work-title">
       <div class="container">
         <div class="section-heading reveal">
@@ -214,7 +223,13 @@
             for a Pakistani spice brand.
           </p>
         </div>
-        <article class="project-card project-card--beautify reveal">
+        <div class="project-filters reveal" role="group" aria-label="Filter projects">
+          <button class="project-filter is-active" type="button" data-filter="all">All work</button>
+          <button class="project-filter" type="button" data-filter="mobile">Mobile apps</button>
+          <button class="project-filter" type="button" data-filter="web">Websites</button>
+          <button class="project-filter" type="button" data-filter="firebase">Firebase</button>
+        </div>
+        <article class="project-card project-card--beautify reveal" data-project-type="mobile firebase">
           <div class="project-copy">
             <div class="project-top"><span class="project-num">PROJECT 001</span><span class="project-year">LIVE / PLAY
                 ↗</span></div>
@@ -225,6 +240,7 @@
               <div class="project-tags">
                 <span>Flutter</span><span>Dart</span><span>Firebase</span><span>Google Maps</span><span>Bookings</span>
               </div>
+              <div class="project-impact"><div><strong>01</strong><span>Published product</span></div><div><strong>04+</strong><span>Core user flows</span></div><div><strong>REAL</strong><span>Firebase backend</span></div></div>
             </div>
             <div class="project-bottom"><div class="project-actions"><a class="button button-dark magnetic"
                   href="https://play.google.com/store/apps/details?id=com.umar.beautify" target="_blank"
@@ -242,7 +258,7 @@
               <div class="phone-screen" id="beautify-screen" aria-live="polite" aria-atomic="true">
                 <img id="beautify-screenshot" src="assets/projects/beautify/discover.png" width="414" height="896"
                   alt="Beautify Discover screen showing salon offers, beauty service categories, and nearby services."
-                  loading="eager" decoding="async">
+                  loading="lazy" decoding="async">
               </div>
             </div>
             <div class="demo-switcher screenshot-gallery" aria-label="Beautify app screenshots" role="group"
@@ -274,7 +290,7 @@
             rel="noopener noreferrer">See the Play listing <span aria-hidden="true">↗</span></a>
         </div>
 
-        <article class="project-card project-card--magnet reveal">
+        <article class="project-card project-card--magnet reveal" data-project-type="web">
           <div class="project-media project-media--magnet" role="group"
             aria-label="Authentic screenshots of the Magnet Masala website">
             <div class="project-orbit project-orbit-a" aria-hidden="true"></div>
@@ -321,6 +337,7 @@
               <div class="project-tags">
                 <span>Responsive Web</span><span>E-commerce</span><span>Product Catalog</span><span>WhatsApp Ordering</span>
               </div>
+              <div class="project-impact"><div><strong>LIVE</strong><span>Storefront</span></div><div><strong>100%</strong><span>Responsive UI</span></div><div><strong>FAST</strong><span>Purchase path</span></div></div>
             </div>
             <div class="project-bottom"><div class="project-actions"><a class="button button-dark magnetic"
                   href="https://magnetmasala.com/" target="_blank" rel="noopener noreferrer">Visit Live Website
@@ -329,6 +346,24 @@
               <span>LIVE STORE<br>MAGNETMASALA.COM</span></div>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section class="now-section" aria-labelledby="now-title">
+      <div class="container now-layout">
+        <div class="reveal"><span class="section-kicker"><span class="kicker-dot"></span> CURRENTLY / 2026</span><h2 id="now-title">Building with<br><span class="accent-text">intent.</span></h2></div>
+        <div class="now-grid reveal">
+          <article><span>01</span><h3>Open to the right build</h3><p>Available for Flutter roles, product collaborations, and focused web projects where thoughtful engineering matters.</p><a href="#contact">Start a conversation ↗</a></article>
+          <article><span>02</span><h3>Learning in public</h3><p>Deepening architecture, testing, and BLoC patterns while shipping practical products with clean, readable code.</p><a href="#expertise">See the toolkit ↗</a></article>
+          <article><span>03</span><h3>Designing for the next state</h3><p>Exploring resilient interfaces where loading, empty, error, and success states feel intentional—not accidental.</p><a href="#state-lab">Explore State Lab ↗</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="working-section" aria-labelledby="working-title">
+      <div class="container working-layout">
+        <div class="reveal"><span class="section-kicker"><span class="kicker-dot"></span> THE DIFFERENCE</span><h2 id="working-title">A thoughtful<br><span>technical partner.</span></h2></div>
+        <div class="working-points reveal"><article><span>01</span><h3>Clear communication</h3><p>Short feedback loops, readable updates, and decisions explained in plain language.</p></article><article><span>02</span><h3>Product-minded builds</h3><p>I care about the user flow, not just the widget tree or API response.</p></article><article><span>03</span><h3>Release confidence</h3><p>Edge cases, responsive behavior, and the final handoff are part of the build.</p></article></div>
       </div>
     </section>
 
@@ -510,10 +545,49 @@
       </div>
     </section>
 
+    <section class="state-lab-section" id="state-lab" aria-labelledby="state-lab-title">
+      <div class="container">
+        <div class="section-heading state-lab-heading reveal">
+          <div><span class="section-kicker"><span class="kicker-dot"></span> 05 / STATE LAB</span>
+            <h2 id="state-lab-title"><span class="state-title-accent">Good state</span><br><span class="accent-text">feels invisible.</span></h2>
+          </div>
+          <p>State management is where product thinking becomes interaction design: predictable data, clear loading states, and UI that always knows what to do next.</p>
+        </div>
+        <div class="state-lab-grid">
+          <div class="state-demo reveal" aria-live="polite">
+            <div class="state-demo-top"><span>INTERACTIVE FLOW / BOOKING</span><span class="state-live"><i></i> LIVE STATE</span></div>
+            <div class="state-demo-body">
+              <div class="state-status"><span class="state-status-dot"></span><strong data-state-title>Ready to book</strong><small data-state-copy>Select a service to see the state change.</small></div>
+              <div class="state-progress" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="state-actions" role="group" aria-label="Booking state controls">
+                <button class="state-control is-selected" type="button" data-state="idle">Idle</button>
+                <button class="state-control" type="button" data-state="loading">Loading</button>
+                <button class="state-control" type="button" data-state="success">Success</button>
+                <button class="state-control" type="button" data-state="error">Error</button>
+              </div>
+              <button class="button button-lime state-trigger" type="button" data-state="loading">Run booking flow <span class="button-arrow" aria-hidden="true">↗</span></button>
+            </div>
+          </div>
+          <div class="state-architecture reveal">
+            <div class="state-architecture-head"><span class="section-kicker"><span class="kicker-dot"></span> THE PATTERN</span><span>01 → 02 → 03</span></div>
+            <div class="state-flow">
+              <article><span>01</span><h3>Event</h3><p>User taps “Book now”.</p><code>bookService()</code></article>
+              <b aria-hidden="true">→</b>
+              <article><span>02</span><h3>State</h3><p>Controller updates one source of truth.</p><code>status = loading</code></article>
+              <b aria-hidden="true">→</b>
+              <article><span>03</span><h3>UI</h3><p>Every state gets a useful response.</p><code>view(status)</code></article>
+            </div>
+            <div class="state-tools"><span>Flutter</span><span>GetX</span><span>Provider</span><span>Firebase</span><span>Clean Architecture</span></div>
+          </div>
+        </div>
+        <div class="state-proof reveal"><span>What this means in a real product</span><strong>Less guesswork for users.</strong><strong>Fewer surprises for teams.</strong><strong>Interfaces that stay resilient.</strong></div>
+      </div>
+    </section>
+
     <section class="section services-section" id="services" aria-labelledby="services-title">
       <div class="container">
         <div class="section-heading reveal">
-          <div><span class="section-kicker"><span class="kicker-dot"></span> 05 / SERVICES</span>
+          <div><span class="section-kicker"><span class="kicker-dot"></span> 06 / SERVICES</span>
             <h2 id="services-title">What I can<br><span class="accent-text">build for you.</span></h2>
           </div>
           <p>From mobile applications to responsive web experiences, I turn practical ideas into functional digital products with thoughtful design and reliable engineering.</p>
@@ -550,7 +624,7 @@
 
     <section class="process-section" id="process" aria-labelledby="process-title">
       <div class="container">
-        <div class="process-heading reveal"><span class="section-kicker"><span class="kicker-dot"></span> 06 / HOW I
+          <div class="process-heading reveal"><span class="section-kicker"><span class="kicker-dot"></span> 07 / HOW I
             WORK</span>
           <h2 id="process-title">From <span>what if?</span><br>to <em>it's live.</em></h2>
           <p>A simple, practical process that keeps the product — and the people using it — at the center.</p>
@@ -609,7 +683,7 @@
         class="contact-deco contact-deco-one" aria-hidden="true">✳</span><span class="contact-deco contact-deco-two"
         aria-hidden="true">✦</span>
       <div class="container contact-content">
-        <div class="contact-top reveal"><span class="section-kicker"><span class="kicker-dot"></span> 07 / YOUR
+        <div class="contact-top reveal"><span class="section-kicker"><span class="kicker-dot"></span> 08 / YOUR
             MOVE</span><span>GOT AN IDEA? I WANT TO HEAR IT.</span></div>
         <h2 id="contact-title" class="reveal">Let's build<br>something <em>unreal.</em></h2>
         <div class="contact-bottom reveal">
@@ -641,6 +715,12 @@
             </a>
           </div>
         </div>
+        <form class="project-brief reveal" id="project-brief">
+          <div class="project-brief-heading"><span class="section-kicker"><span class="kicker-dot"></span> QUICK BRIEF</span><h3>Start with the shape<br>of your idea.</h3><p>Share the essentials. I’ll bring the technical questions.</p></div>
+          <div class="brief-steps" aria-label="Project brief steps"><span><b>01</b> Choose a direction</span><span><b>02</b> Add context</span><span><b>03</b> Open your email</span></div>
+          <div class="brief-fields"><label>Your project type<select name="type"><option>Flutter mobile app</option><option>Responsive website</option><option>Firebase / API integration</option><option>App improvement</option></select></label><label>Timeline<select name="timeline"><option>Exploring an idea</option><option>1–4 weeks</option><option>1–3 months</option><option>Flexible</option></select></label><label class="brief-message">What are you building?<textarea name="message" rows="3" placeholder="A short note about the product, users, or challenge…"></textarea></label></div>
+          <button class="button button-ghost" type="submit">Prepare project email <span class="button-arrow" aria-hidden="true">↗</span></button><span class="brief-status" role="status" aria-live="polite"></span>
+        </form>
         <div class="contact-bottom-note" aria-hidden="true">MAKE IT MATTER. MAKE IT MEMORABLE. ↗</div>
       </div>
     </section>
@@ -649,7 +729,7 @@
   <footer class="site-footer">
     <div class="container footer-inner"><a href="#top" class="footer-brand"
         aria-label="Back to top">umar<span>✳</span></a>
-      <p>© <span id="year">2026</span> UMAR SAEED QURESHI<br><span>MADE WITH INTENTION / PAKISTAN</span></p>
+      <p>© <span id="year">2026</span> UMAR SAEED QURESHI<br><span>MADE WITH INTENTION / PAKISTAN</span></p><nav class="footer-sitemap" aria-label="Footer sitemap"><a href="#work">Projects</a><a href="#about">About</a><a href="#expertise">Toolkit</a><a href="#services">Services</a><a href="#process">Process</a><a href="#contact">Contact</a></nav>
       <div class="footer-links"><a href="mailto:umar@umarsaeedqureshi.com">EMAIL ↗</a><a
           href="https://github.com/umar200411/" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><a
           href="https://www.linkedin.com/in/umar-saeed-qureshi-8a6484296/" target="_blank"
