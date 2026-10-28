@@ -219,35 +219,33 @@ if (finePointer.matches && !reduceMotion.matches) {
   let pointerPending = false;
   let pointerX = 0;
   let pointerY = 0;
-  let cursorX = 0;
-  let cursorY = 0;
   let cursorFrame = 0;
-  let ringX = 0;
-  let ringY = 0;
+  let cursorX = -100;
+  let cursorY = -100;
+  let ringX = -100;
+  let ringY = -100;
 
   document.documentElement.classList.add('has-custom-cursor');
-  const updateCursor = () => {
-    ringX += (cursorX - ringX) * 0.18;
-    ringY += (cursorY - ringY) * 0.18;
+  const renderCursor = () => {
+    cursorFrame = 0;
+    ringX += (cursorX - ringX) * .2;
+    ringY += (cursorY - ringY) * .2;
     cursorDot?.style.setProperty('--cursor-x', `${cursorX}px`);
     cursorDot?.style.setProperty('--cursor-y', `${cursorY}px`);
     cursorRing?.style.setProperty('--cursor-x', `${ringX}px`);
     cursorRing?.style.setProperty('--cursor-y', `${ringY}px`);
-    if (Math.abs(cursorX - ringX) > 0.1 || Math.abs(cursorY - ringY) > 0.1) {
-      cursorFrame = requestAnimationFrame(updateCursor);
-    } else {
-      cursorFrame = 0;
+    if (Math.abs(cursorX - ringX) > .1 || Math.abs(cursorY - ringY) > .1) {
+      cursorFrame = requestAnimationFrame(renderCursor);
     }
   };
+
   document.addEventListener('pointermove', event => {
     cursorX = event.clientX;
     cursorY = event.clientY;
-    if (!cursorFrame) {
-      ringX = cursorX;
-      ringY = cursorY;
-      cursorFrame = requestAnimationFrame(updateCursor);
-    }
+    if (!cursorFrame) cursorFrame = requestAnimationFrame(renderCursor);
   }, { passive: true });
+  document.addEventListener('pointerleave', () => document.documentElement.classList.remove('has-custom-cursor'));
+  document.addEventListener('pointerenter', () => document.documentElement.classList.add('has-custom-cursor'));
   document.querySelectorAll('a, button, .tilt-card, .project-art').forEach(element => {
     element.addEventListener('pointerenter', () => document.documentElement.classList.add('cursor-hover'));
     element.addEventListener('pointerleave', () => document.documentElement.classList.remove('cursor-hover'));
@@ -307,117 +305,6 @@ if (coarsePointer.matches) {
     element.addEventListener('pointercancel', clearPress, { passive: true });
     element.addEventListener('pointerleave', clearPress, { passive: true });
   });
-}
-
-// Lightweight canvas atmosphere: particle trails and matrix-like drops on capable devices.
-if (!reduceMotion.matches && finePointer.matches) {
-  const canvas = document.querySelector('.hero-canvas');
-  const hero = document.querySelector('.hero');
-  const context = canvas?.getContext('2d');
-  if (canvas && context && hero) {
-    const particles = Array.from({ length: 34 }, (_, index) => ({
-      x: Math.random(),
-      y: Math.random(),
-      speed: .00015 + Math.random() * .00035,
-      size: 1 + Math.random() * 2,
-      phase: index * .7
-    }));
-    const drops = Array.from({ length: 16 }, (_, index) => ({
-      x: .56 + Math.random() * .42,
-      y: Math.random(),
-      speed: .0007 + Math.random() * .0012,
-      char: ['0', '1', '✦', '↗'][index % 4]
-    }));
-    const trail = [];
-    let width = 0;
-    let height = 0;
-    let frame = 0;
-    let lastTime = 0;
-    let heroVisible = true;
-    let pageVisible = !document.hidden;
-    let pointer = { x: .75, y: .35 };
-
-    const resizeCanvas = () => {
-      const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
-      width = canvas.clientWidth = hero.clientWidth;
-      height = canvas.clientHeight = hero.clientHeight;
-      canvas.width = Math.round(width * ratio);
-      canvas.height = Math.round(height * ratio);
-      context.setTransform(ratio, 0, 0, ratio, 0, 0);
-    };
-
-    const renderCanvas = time => {
-      frame = 0;
-      const delta = Math.min(32, time - lastTime || 16);
-      lastTime = time;
-      context.clearRect(0, 0, width, height);
-      context.font = '11px Space Grotesk, sans-serif';
-      context.textAlign = 'center';
-
-      particles.forEach(particle => {
-        particle.y -= particle.speed * delta;
-        if (particle.y < -.03) particle.y = 1.03;
-        const x = particle.x * width + Math.sin(time * .0005 + particle.phase) * 18;
-        const y = particle.y * height;
-        context.fillStyle = 'rgba(215, 255, 100, .55)';
-        context.fillRect(x, y, particle.size, particle.size);
-      });
-
-      drops.forEach(drop => {
-        drop.y += drop.speed * delta;
-        if (drop.y > 1.08) drop.y = -.04;
-        context.fillStyle = 'rgba(157, 234, 255, .18)';
-        context.fillText(drop.char, drop.x * width, drop.y * height);
-      });
-
-      trail.forEach((point, index) => {
-        point.life -= delta * .0018;
-        context.fillStyle = `rgba(215, 255, 100, ${Math.max(0, point.life) * .28})`;
-        context.beginPath();
-        context.arc(point.x, point.y, 1.5 + index * .08, 0, Math.PI * 2);
-        context.fill();
-      });
-      while (trail.length && trail[0].life <= 0) trail.shift();
-      if (heroVisible && pageVisible) frame = requestAnimationFrame(renderCanvas);
-    };
-
-    const syncCanvasAnimation = () => {
-      if (heroVisible && pageVisible && !frame) {
-        lastTime = 0;
-        frame = requestAnimationFrame(renderCanvas);
-      } else if ((!heroVisible || !pageVisible) && frame) {
-        cancelAnimationFrame(frame);
-        frame = 0;
-      }
-    };
-
-    hero.addEventListener('pointermove', event => {
-      const rect = hero.getBoundingClientRect();
-      pointer = { x: (event.clientX - rect.left) / rect.width, y: (event.clientY - rect.top) / rect.height };
-      trail.push({ x: event.clientX - rect.left, y: event.clientY - rect.top, life: 1 });
-      if (trail.length > 22) trail.shift();
-      hero.style.setProperty('--parallax-x', `${((pointer.x - .5) * 18).toFixed(1)}px`);
-      hero.style.setProperty('--parallax-y', `${((pointer.y - .5) * 12).toFixed(1)}px`);
-    }, { passive: true });
-    window.addEventListener('resize', resizeCanvas, { passive: true });
-    document.addEventListener('visibilitychange', () => {
-      pageVisible = !document.hidden;
-      syncCanvasAnimation();
-    });
-    if ('IntersectionObserver' in window) {
-      const heroObserver = new IntersectionObserver(entries => {
-        heroVisible = entries.some(entry => entry.isIntersecting);
-        syncCanvasAnimation();
-      });
-      heroObserver.observe(hero);
-    }
-    resizeCanvas();
-    syncCanvasAnimation();
-    window.addEventListener('pagehide', () => {
-      if (frame) cancelAnimationFrame(frame);
-      frame = 0;
-    }, { once: true });
-  }
 }
 
 const copyButton = document.querySelector('.copy-email');

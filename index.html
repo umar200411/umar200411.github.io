@@ -37,7 +37,6 @@
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@500;600;700;800&amp;display=swap"
     rel="stylesheet">
-  <link rel="preload" as="image" type="image/webp" href="assets/developer-character.webp">
   <link rel="stylesheet" href="styles.css?v=20261019-2">
   <link rel="stylesheet" href="case-studies.css?v=20261019-2">
   <script type="application/ld+json">
@@ -123,7 +122,6 @@
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
   <div class="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-ring" aria-hidden="true"></div>
-
   <div id="top" class="page-top" aria-hidden="true"></div>
   <header class="site-header">
     <div class="container header-inner">
@@ -144,10 +142,6 @@
       <div class="hero-mesh" aria-hidden="true"></div>
       <div class="hero-grid" aria-hidden="true"></div>
       <div class="hero-noise" aria-hidden="true"></div>
-      <canvas class="hero-canvas" aria-hidden="true"></canvas>
-      <svg class="hero-morph" viewBox="0 0 600 400" aria-hidden="true">
-        <path d="M70 245C125 90 245 72 316 161s128 111 214-34" />
-      </svg>
       <div class="container hero-layout">
         <div class="hero-copy">
           <div class="hero-overline"><span class="status-pill"><span class="status-pulse"></span> AVAILABLE FOR NEW
@@ -164,29 +158,109 @@
               rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/umar-saeed-qureshi-8a6484296/"
               target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
         </div>
-        <div class="hero-visual" aria-label="Illustration of Umar with Flutter and mobile development elements">
-          <div class="visual-glow" aria-hidden="true"></div>
-          <div class="portrait-stage tilt-card">
-            <span class="stage-label" aria-hidden="true">CREATIVE DEVELOPER // 001</span>
-            <span class="stage-cross stage-cross-a" aria-hidden="true">✳</span><span class="stage-cross stage-cross-b"
-              aria-hidden="true">✳</span>
-            <span class="stage-ring stage-ring-one" aria-hidden="true"></span><span class="stage-ring stage-ring-two"
-              aria-hidden="true"></span>
-            <picture class="portrait-image">
-              <source srcset="assets/developer-character.webp" type="image/webp"><img
-                src="assets/developer-character.webp" width="1122" height="1402" fetchpriority="high"
-                alt="Illustrated portrait of Umar holding a tablet" draggable="false">
-            </picture>
-            <span class="stage-bottom" aria-hidden="true">IMAGINE ↗ CREATE ↗ REPEAT</span>
-          </div>
-          <div class="float-card float-card-one" aria-hidden="true"><span class="float-icon">⌘</span>
-            <div><small>MAIN CHARACTER ENERGY</small><strong>Flutter + Firebase</strong></div>
-          </div>
-          <div class="float-card float-card-two" aria-hidden="true"><span class="float-dot"></span>
-            <div><small>STATUS: DEPLOYED</small><strong>Live on Google Play ↗</strong></div>
-          </div>
-          <span class="hero-spark hero-spark-a" aria-hidden="true">✦</span><span class="hero-spark hero-spark-b"
-            aria-hidden="true">✳</span>
+        <div class="hero-visual" aria-label="Floating isometric workspace with a glass code editor, smartphone, Flutter mark, and Firebase mark">
+          <svg class="hero-illustration" viewBox="0 0 640 620" role="img" aria-labelledby="hero-illustration-title">
+            <title id="hero-illustration-title">Futuristic Flutter and Firebase development workspace</title>
+            <defs>
+              <linearGradient id="hero-browser" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#7e55ed"/>
+                <stop offset="1" stop-color="#24144f"/>
+              </linearGradient>
+              <linearGradient id="hero-phone" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#3d2779"/>
+                <stop offset="1" stop-color="#120c2d"/>
+              </linearGradient>
+              <linearGradient id="hero-screen" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#25204d"/>
+                <stop offset="1" stop-color="#11102b"/>
+              </linearGradient>
+              <filter id="hero-glow" x="-80%" y="-80%" width="260%" height="260%">
+                <feGaussianBlur stdDeviation="12"/>
+              </filter>
+              <filter id="hero-shadow" x="-40%" y="-40%" width="180%" height="200%">
+                <feDropShadow dx="0" dy="24" stdDeviation="18" flood-color="#080517" flood-opacity=".7"/>
+              </filter>
+            </defs>
+
+            <g class="hero-workspace-base" filter="url(#hero-shadow)">
+              <path d="m148 447 226-70 183 61-229 80Z" fill="#211747" fill-opacity=".92" stroke="#a98bff" stroke-opacity=".38"/>
+              <path d="m148 447v18l180 67v-14Z" fill="#120d2d" fill-opacity=".9"/>
+              <path d="m557 438v18l-229 76v-14Z" fill="#0c0920" fill-opacity=".86"/>
+              <path d="m242 442 103-31 80 27-104 32Z" fill="#100c27" stroke="#d7ff64" stroke-opacity=".35"/>
+              <path d="m259 441 69-21 56 18-70 22Z" fill="#d7ff64" fill-opacity=".16"/>
+              <path d="m280 438 12-4m9-3 12-4m9-3 12-4m9-3 12-4" stroke="#d7ff64" stroke-opacity=".6" stroke-width="3" stroke-linecap="round"/>
+            </g>
+            <ellipse class="hero-illustration-glow" cx="360" cy="480" rx="205" ry="48"/>
+            <path class="hero-illustration-orbit" d="M92 402c99 111 349 132 470 23"/>
+
+            <g class="hero-browser-device" filter="url(#hero-shadow)" transform="translate(48 150) rotate(-7 230 130)">
+              <path d="M28 0h400c16 0 28 12 28 28v225c0 14-10 25-24 25H24c-14 0-24-11-24-25V28C0 12 12 0 28 0Z" fill="url(#hero-browser)" stroke="#b899ff" stroke-opacity=".62"/>
+              <path d="M0 50h456v203H0Z" fill="#11102b" stroke="#9d7dff" stroke-opacity=".28"/>
+              <circle cx="25" cy="25" r="5" fill="#ff8c92"/><circle cx="43" cy="25" r="5" fill="#d7ff64"/><circle cx="61" cy="25" r="5" fill="#9deaff"/>
+              <rect x="95" y="17" width="190" height="16" rx="8" fill="#120d2d" fill-opacity=".72"/>
+              <rect x="18" y="68" width="74" height="174" rx="8" fill="#1b1740"/>
+              <rect x="31" y="84" width="42" height="7" rx="3" fill="#d7ff64" fill-opacity=".75"/>
+              <rect x="31" y="108" width="28" height="6" rx="3" fill="#9deaff" fill-opacity=".5"/>
+              <rect x="31" y="132" width="39" height="6" rx="3" fill="#b9b1d3" fill-opacity=".4"/>
+              <rect x="31" y="156" width="34" height="6" rx="3" fill="#b9b1d3" fill-opacity=".35"/>
+              <rect x="31" y="202" width="25" height="7" rx="3" fill="#ff8c92" fill-opacity=".7"/>
+              <g class="hero-code-lines">
+                <rect x="112" y="75" width="38" height="7" rx="3" fill="#d7ff64"/>
+                <rect x="157" y="75" width="76" height="7" rx="3" fill="#9deaff" fill-opacity=".75"/>
+                <rect x="126" y="94" width="28" height="7" rx="3" fill="#ff8c92" fill-opacity=".8"/>
+                <rect x="161" y="94" width="124" height="7" rx="3" fill="#b9b1d3" fill-opacity=".5"/>
+                <rect x="126" y="113" width="58" height="7" rx="3" fill="#d7ff64" fill-opacity=".8"/>
+                <rect x="191" y="113" width="92" height="7" rx="3" fill="#9deaff" fill-opacity=".65"/>
+                <rect x="112" y="132" width="22" height="7" rx="3" fill="#ff8c92" fill-opacity=".75"/>
+                <rect x="141" y="132" width="90" height="7" rx="3" fill="#b9b1d3" fill-opacity=".42"/>
+                <rect x="141" y="151" width="42" height="7" rx="3" fill="#d7ff64" fill-opacity=".85"/>
+                <rect x="190" y="151" width="105" height="7" rx="3" fill="#b9b1d3" fill-opacity=".45"/>
+                <rect x="112" y="180" width="138" height="42" rx="8" fill="#211c4b"/>
+                <path d="M126 207h22l10-17 13 10 16-21 17 12 22-18" fill="none" stroke="#d7ff64" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="224" cy="173" r="4" fill="#9deaff"/>
+              </g>
+              <path d="M426 72v164" stroke="#d7ff64" stroke-opacity=".18"/>
+            </g>
+
+            <g class="hero-phone-device" filter="url(#hero-shadow)" transform="translate(354 250) rotate(12 82 164)">
+              <rect width="164" height="328" rx="30" fill="url(#hero-phone)" stroke="#a98bff" stroke-opacity=".75" stroke-width="2"/>
+              <rect x="11" y="12" width="142" height="304" rx="21" fill="url(#hero-screen)" stroke="#ffffff" stroke-opacity=".12"/>
+              <rect x="60" y="22" width="44" height="7" rx="4" fill="#0b0820"/>
+              <rect x="29" y="60" width="62" height="10" rx="5" fill="#d7ff64"/>
+              <rect x="29" y="82" width="92" height="7" rx="3" fill="#b9b1d3" fill-opacity=".55"/>
+              <rect x="29" y="112" width="104" height="72" rx="13" fill="#2b235b"/>
+              <path d="M43 163l18-20 18 10 20-30 20 18" fill="none" stroke="#d7ff64" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="119" cy="133" r="5" fill="#9deaff"/>
+              <rect x="29" y="204" width="46" height="45" rx="10" fill="#392b75"/>
+              <rect x="87" y="204" width="46" height="45" rx="10" fill="#392b75"/>
+              <rect x="29" y="270" width="104" height="10" rx="5" fill="#9deaff" fill-opacity=".7"/>
+            </g>
+
+            <g class="hero-illustration-shape hero-shape-cube">
+              <path d="m142 91 30-17 30 17-30 18Z" fill="#d7ff64"/>
+              <path d="m142 91v35l30 17v-34Z" fill="#91ab45"/>
+              <path d="m202 91v35l-30 17v-34Z" fill="#b3d653"/>
+            </g>
+            <g class="hero-illustration-shape hero-shape-diamond">
+              <path d="m519 132 25-15 25 15-25 15Z" fill="#9deaff"/>
+              <path d="m519 132v30l25 15v-30Z" fill="#5a9cae"/>
+              <path d="m569 132v30l-25 15v-30Z" fill="#77cadd"/>
+            </g>
+            <g class="hero-glass-logo hero-flutter-logo" aria-label="Flutter mark">
+              <path d="m122 360 28-28h44l-28 28-22 22-22-22Zm38 8 20-20 27 27-20 20Z" fill="#d7ff64" fill-opacity=".9"/>
+              <path d="m122 360 22 22-16 16-22-22Z" fill="#9deaff" fill-opacity=".55"/>
+            </g>
+            <g class="hero-glass-logo hero-firebase-logo" aria-label="Firebase mark">
+              <path d="m486 388 22-62 13 24 21-4-29 63Z" fill="#ff8c92" fill-opacity=".82"/>
+              <path d="m484 390 29 19 29-20-13 30-17 10Z" fill="#d7ff64" fill-opacity=".88"/>
+              <path d="m508 326 13 24-19 4Z" fill="#9deaff" fill-opacity=".7"/>
+            </g>
+            <circle class="hero-illustration-sphere hero-sphere-one" cx="107" cy="292" r="12"/>
+            <circle class="hero-illustration-sphere hero-sphere-two" cx="548" cy="335" r="17"/>
+            <text class="hero-code-bracket hero-code-bracket-one" x="68" y="218">{</text>
+            <text class="hero-code-bracket hero-code-bracket-two" x="548" y="245">}</text>
+            <path class="hero-illustration-spark" d="m532 430 6 15 15 6-15 6-6 15-6-15-15-6 15-6Z"/>
+          </svg>
         </div>
       </div>
       <div class="container hero-foot"><span>SCROLL TO EXPLORE <span aria-hidden="true">↓</span></span><span>DESIGNED TO
