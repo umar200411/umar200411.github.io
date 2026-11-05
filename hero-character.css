@@ -1,0 +1,153 @@
+/* Character layer: the existing violet/lime system stays in charge of the hero. */
+.hero-character {
+  isolation: isolate;
+  width: 100%;
+  height: clamp(500px, 43vw, 620px);
+  overflow: visible;
+  transform: none;
+}
+
+.hero-character-halo {
+  position: absolute;
+  z-index: -1;
+  inset: 7% -4% 4%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 43%, rgba(255, 208, 218, .29), rgba(135, 86, 255, .2) 38%, transparent 70%);
+  filter: blur(16px);
+  pointer-events: none;
+}
+
+.hero-character-stage {
+  position: relative;
+  width: min(100%, 500px);
+  height: 100%;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.hero-character-fallback,
+.hero-character-canvas {
+  grid-area: 1 / 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 30px 32px rgba(6, 3, 20, .45));
+}
+
+.hero-character-fallback {
+  animation: hero-character-breathe 6.5s ease-in-out infinite;
+  transform-origin: center 72%;
+  transition: opacity .24s ease;
+}
+
+.hero-character-canvas {
+  opacity: 0;
+  transition: opacity .24s ease;
+}
+
+.hero-character.has-frames .hero-character-fallback { opacity: 0; }
+.hero-character.has-frames .hero-character-canvas { opacity: 1; }
+
+.hero-reaction {
+  position: absolute;
+  z-index: 2;
+  top: 14%;
+  right: -3%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: min(235px, 48%);
+  min-height: 52px;
+  padding: 12px 15px;
+  border: 1px solid rgba(255, 255, 255, .23);
+  border-radius: 17px 17px 17px 4px;
+  background: rgba(35, 24, 69, .82);
+  box-shadow: 0 18px 45px rgba(7, 3, 26, .2);
+  backdrop-filter: blur(14px);
+  color: #fff;
+  font: 700 12px/1.35 var(--mono);
+  pointer-events: none;
+}
+
+.hero-reaction-mark { color: var(--lime); font-size: 18px; }
+.hero-reaction-text { opacity: 0; transform: translateY(4px); transition: opacity .2s, transform .2s; }
+.hero-reaction-text.is-visible { opacity: 1; transform: none; }
+
+.hero-interaction-hint {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 18px 0 0;
+  color: #bdb3d2;
+  font: 600 11px var(--mono);
+  letter-spacing: .04em;
+}
+
+.hero-interaction-hint span { color: var(--coral); font-size: 18px; }
+
+.hero-say-hello {
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 6%;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid rgba(215, 255, 100, .5);
+  border-radius: 100px;
+  background: rgba(16, 12, 39, .84);
+  color: var(--lime);
+  cursor: pointer;
+  font: 700 11px var(--mono);
+  box-shadow: 0 10px 30px rgba(5, 3, 16, .25);
+  transition: background .2s, transform .2s;
+}
+
+.hero-say-hello:hover { background: #292046; transform: translateY(-2px); }
+.hero-say-hello span { font-size: 17px; }
+
+.hero-character.fallback-error .hero-character-fallback { visibility: hidden; }
+.hero-character.fallback-error .hero-character-stage::after {
+  content: 'umar✳';
+  color: var(--lime);
+  font: 800 clamp(55px, 9vw, 130px) var(--display);
+}
+
+@keyframes hero-character-breathe {
+  50% { transform: translateY(-6px) scale(1.006); }
+}
+
+@media (min-width: 901px) {
+  .hero-layout { grid-template-columns: minmax(0, 1.06fr) minmax(390px, .94fr); }
+  .hero-character { height: clamp(500px, 43vw, 620px); }
+}
+
+@media (max-width: 900px) {
+  .hero-layout { gap: 20px; }
+  .hero-character { width: min(100%, 540px); height: min(650px, 110vw); min-height: 410px; margin-inline: auto; }
+  .hero-reaction { right: 0; }
+  .hero-interaction-hint { display: none; }
+}
+
+@media (max-width: 600px) {
+  .hero-character { width: min(100%, 420px); height: min(116vw, 510px); min-height: 340px; margin-top: 0; }
+  .hero-reaction { top: 8%; right: 0; max-width: 53%; font-size: 10px; padding: 9px 11px; min-height: 44px; }
+  .hero-say-hello { bottom: 2%; right: 0; }
+  .hero-foot { margin-top: 14px; }
+}
+
+@media (max-width: 380px) {
+  .hero-character { min-height: 300px; }
+  .hero-reaction { top: 3%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-character-fallback { animation: none; }
+  .hero-reaction-text { opacity: 1; transform: none; }
+  .hero-interaction-hint { display: none; }
+}

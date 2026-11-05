@@ -1,0 +1,6 @@
+{
+  "name": "umar-portfolio-depot",
+  "private": true,
+  "scripts": { "test:depot": "playwright test" },
+  "devDependencies": { "@playwright/test": "^1.56.1" }
+}

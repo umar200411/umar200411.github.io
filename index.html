@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#100c27">
+  <meta name="theme-color" content="#0f74e0">
   <meta name="description"
     content="Umar Saeed Qureshi is a Flutter developer and web creator building mobile applications with Firebase and responsive websites. Explore real projects and product experience.">
   <meta name="author" content="Umar Saeed Qureshi">
@@ -39,6 +39,8 @@
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20261019-2">
   <link rel="stylesheet" href="case-studies.css?v=20261019-2">
+  <link rel="stylesheet" href="depot.css?v=20261105-2">
+  <link rel="stylesheet" href="pulse-project.css?v=20261105-1">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -119,18 +121,15 @@
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="scroll-progress" aria-hidden="true"><span></span></div>
-  <div class="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-ring" aria-hidden="true"></div>
-  <div id="top" class="page-top" aria-hidden="true"></div>
+    <div id="top" class="page-top" aria-hidden="true"></div>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Umar Saeed Qureshi, back to top">umar<span class="brand-spark"
           aria-hidden="true">✳</span><small>DEV / DESIGN / SHIP</small></a>
       <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
-        <a href="#work">Projects</a><a href="#about">About</a><a href="#experience">Experience</a><a
-          href="#expertise">Toolkit</a><a href="#state-lab">State Lab</a><a href="#services">Services</a><a href="#process">Process</a>
-        <a class="nav-contact" href="#contact">Let's connect <span aria-hidden="true">↗</span></a>
+        <a href="#depot-work" data-depot-target="work">Projects</a><a href="#depot-about" data-depot-target="about">About</a><a href="#depot-about" data-depot-target="about">Experience</a><a
+          href="#depot-toolkit" data-depot-target="toolkit">Toolkit</a><a href="#depot-toolkit" data-depot-target="toolkit">State Lab</a><a href="#depot-services" data-depot-target="services">Services</a><a href="#depot-process" data-depot-target="journey">Process</a>
+        <a class="nav-contact" href="#depot-contact" data-depot-target="contact">Let's connect <span aria-hidden="true">↗</span></a>
       </nav>
       <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav"
         aria-expanded="false"><span></span><span></span></button>
@@ -138,135 +137,82 @@
   </header>
 
   <main id="main">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-mesh" aria-hidden="true"></div>
-      <div class="hero-grid" aria-hidden="true"></div>
-      <div class="hero-noise" aria-hidden="true"></div>
-      <div class="container hero-layout">
-        <div class="hero-copy">
-          <div class="hero-overline"><span class="status-pill"><span class="status-pulse"></span> AVAILABLE FOR NEW
-              PROJECTS</span><span class="hero-edition">PORTFOLIO / 26</span></div>
-          <p class="hello">UMAR SAEED QURESHI / FLUTTER + WEB DEVELOPER <span aria-hidden="true">✦</span></p>
-          <h1 id="hero-title"><span class="headline-row">I build</span><span class="headline-row">apps + web</span><span
-              class="headline-row headline-last">that feel <em>alive<span class="headline-star"
-                  aria-hidden="true">✳</span></em></span></h1>
-          <p class="hero-description">Flutter developer and web creator turning ideas into <strong>intuitive mobile apps, responsive websites,</strong> and products built for real people.</p>
-          <div class="hero-actions"><a class="button button-lime magnetic" href="#work">See what I've built <span
-                class="button-arrow" aria-hidden="true">↗</span></a><a class="button button-ghost magnetic"
-              href="#contact">Let's talk <span class="button-arrow" aria-hidden="true">↗</span></a></div>
-          <div class="hero-social"><span>FIND ME ON</span><a href="https://github.com/umar200411/" target="_blank"
-              rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/umar-saeed-qureshi-8a6484296/"
-              target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
+    <section class="hero depot-page" aria-labelledby="hero-title">
+      <div class="depot-blueprint" aria-hidden="true"></div>
+      <div class="depot-atmosphere depot-atmosphere--one" aria-hidden="true"></div>
+      <div class="depot-atmosphere depot-atmosphere--two" aria-hidden="true"></div>
+
+      <header class="depot-nav">
+        <div class="depot-brand-lockup"><a href="#top" aria-label="umar, back to top">umar<span>✳</span></a><small>PORTFOLIO DEPOT / 2026</small></div>
+        <nav class="depot-shortcuts" aria-label="Portfolio shortcuts">
+          <a href="#depot-work" data-depot-target="work">Work</a>
+          <a href="#depot-about" data-depot-target="about">About</a>
+          <a href="#depot-process" data-depot-target="journey">Process</a>
+          <a href="#depot-contact" data-depot-target="contact">Contact</a>
+        </nav>
+        <div class="depot-tools">
+          <a class="depot-talk" href="mailto:umar@umarsaeedqureshi.com">Let's talk <span aria-hidden="true">↗</span></a>
+          <button class="depot-explore-toggle" type="button" aria-expanded="false" aria-controls="depot-more-links">More</button>
+          <nav id="depot-more-links" class="depot-more-links" aria-label="More portfolio containers">
+            <a href="#depot-about" data-depot-target="about">Experience</a>
+            <a href="#depot-toolkit" data-depot-target="toolkit">Toolkit</a>
+            <a href="#depot-services" data-depot-target="services">Services</a>
+          </nav>
         </div>
-        <div class="hero-visual" aria-label="Floating isometric workspace with a glass code editor, smartphone, Flutter mark, and Firebase mark">
-          <svg class="hero-illustration" viewBox="0 0 640 620" role="img" aria-labelledby="hero-illustration-title">
-            <title id="hero-illustration-title">Futuristic Flutter and Firebase development workspace</title>
-            <defs>
-              <linearGradient id="hero-browser" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#7e55ed"/>
-                <stop offset="1" stop-color="#24144f"/>
-              </linearGradient>
-              <linearGradient id="hero-phone" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#3d2779"/>
-                <stop offset="1" stop-color="#120c2d"/>
-              </linearGradient>
-              <linearGradient id="hero-screen" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#25204d"/>
-                <stop offset="1" stop-color="#11102b"/>
-              </linearGradient>
-              <filter id="hero-glow" x="-80%" y="-80%" width="260%" height="260%">
-                <feGaussianBlur stdDeviation="12"/>
-              </filter>
-              <filter id="hero-shadow" x="-40%" y="-40%" width="180%" height="200%">
-                <feDropShadow dx="0" dy="24" stdDeviation="18" flood-color="#080517" flood-opacity=".7"/>
-              </filter>
-            </defs>
+      </header>
 
-            <g class="hero-workspace-base" filter="url(#hero-shadow)">
-              <path d="m148 447 226-70 183 61-229 80Z" fill="#211747" fill-opacity=".92" stroke="#a98bff" stroke-opacity=".38"/>
-              <path d="m148 447v18l180 67v-14Z" fill="#120d2d" fill-opacity=".9"/>
-              <path d="m557 438v18l-229 76v-14Z" fill="#0c0920" fill-opacity=".86"/>
-              <path d="m242 442 103-31 80 27-104 32Z" fill="#100c27" stroke="#d7ff64" stroke-opacity=".35"/>
-              <path d="m259 441 69-21 56 18-70 22Z" fill="#d7ff64" fill-opacity=".16"/>
-              <path d="m280 438 12-4m9-3 12-4m9-3 12-4m9-3 12-4" stroke="#d7ff64" stroke-opacity=".6" stroke-width="3" stroke-linecap="round"/>
-            </g>
-            <ellipse class="hero-illustration-glow" cx="360" cy="480" rx="205" ry="48"/>
-            <path class="hero-illustration-orbit" d="M92 402c99 111 349 132 470 23"/>
+      <div class="depot-layout">
+        <section class="depot-intro" aria-labelledby="hero-title">
+          <p class="depot-kicker"><span class="depot-status-dot"></span> UMAR SAEED QURESHI <span>/ FLUTTER &amp; WEB DEVELOPER</span></p>
+          <h1 id="hero-title">I build apps + web <em>that feel alive.</em></h1>
+          <p class="depot-intro-copy">Thoughtful mobile apps, responsive websites, and products built for real people.</p>
+          <div class="depot-intro-actions">
+            <a class="depot-intro-link depot-intro-link--primary" href="#depot-work" data-depot-target="work">Explore my work <span aria-hidden="true">↗</span></a>
+            <a class="depot-intro-link depot-intro-link--secondary" href="mailto:umar@umarsaeedqureshi.com">Let's talk</a>
+          </div>
+          <p class="depot-intro-note">Select a container to explore the work.</p>
+        </section>
 
-            <g class="hero-browser-device" filter="url(#hero-shadow)" transform="translate(48 150) rotate(-7 230 130)">
-              <path d="M28 0h400c16 0 28 12 28 28v225c0 14-10 25-24 25H24c-14 0-24-11-24-25V28C0 12 12 0 28 0Z" fill="url(#hero-browser)" stroke="#b899ff" stroke-opacity=".62"/>
-              <path d="M0 50h456v203H0Z" fill="#11102b" stroke="#9d7dff" stroke-opacity=".28"/>
-              <circle cx="25" cy="25" r="5" fill="#ff8c92"/><circle cx="43" cy="25" r="5" fill="#d7ff64"/><circle cx="61" cy="25" r="5" fill="#9deaff"/>
-              <rect x="95" y="17" width="190" height="16" rx="8" fill="#120d2d" fill-opacity=".72"/>
-              <rect x="18" y="68" width="74" height="174" rx="8" fill="#1b1740"/>
-              <rect x="31" y="84" width="42" height="7" rx="3" fill="#d7ff64" fill-opacity=".75"/>
-              <rect x="31" y="108" width="28" height="6" rx="3" fill="#9deaff" fill-opacity=".5"/>
-              <rect x="31" y="132" width="39" height="6" rx="3" fill="#b9b1d3" fill-opacity=".4"/>
-              <rect x="31" y="156" width="34" height="6" rx="3" fill="#b9b1d3" fill-opacity=".35"/>
-              <rect x="31" y="202" width="25" height="7" rx="3" fill="#ff8c92" fill-opacity=".7"/>
-              <g class="hero-code-lines">
-                <rect x="112" y="75" width="38" height="7" rx="3" fill="#d7ff64"/>
-                <rect x="157" y="75" width="76" height="7" rx="3" fill="#9deaff" fill-opacity=".75"/>
-                <rect x="126" y="94" width="28" height="7" rx="3" fill="#ff8c92" fill-opacity=".8"/>
-                <rect x="161" y="94" width="124" height="7" rx="3" fill="#b9b1d3" fill-opacity=".5"/>
-                <rect x="126" y="113" width="58" height="7" rx="3" fill="#d7ff64" fill-opacity=".8"/>
-                <rect x="191" y="113" width="92" height="7" rx="3" fill="#9deaff" fill-opacity=".65"/>
-                <rect x="112" y="132" width="22" height="7" rx="3" fill="#ff8c92" fill-opacity=".75"/>
-                <rect x="141" y="132" width="90" height="7" rx="3" fill="#b9b1d3" fill-opacity=".42"/>
-                <rect x="141" y="151" width="42" height="7" rx="3" fill="#d7ff64" fill-opacity=".85"/>
-                <rect x="190" y="151" width="105" height="7" rx="3" fill="#b9b1d3" fill-opacity=".45"/>
-                <rect x="112" y="180" width="138" height="42" rx="8" fill="#211c4b"/>
-                <path d="M126 207h22l10-17 13 10 16-21 17 12 22-18" fill="none" stroke="#d7ff64" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="224" cy="173" r="4" fill="#9deaff"/>
-              </g>
-              <path d="M426 72v164" stroke="#d7ff64" stroke-opacity=".18"/>
-            </g>
-
-            <g class="hero-phone-device" filter="url(#hero-shadow)" transform="translate(354 250) rotate(12 82 164)">
-              <rect width="164" height="328" rx="30" fill="url(#hero-phone)" stroke="#a98bff" stroke-opacity=".75" stroke-width="2"/>
-              <rect x="11" y="12" width="142" height="304" rx="21" fill="url(#hero-screen)" stroke="#ffffff" stroke-opacity=".12"/>
-              <rect x="60" y="22" width="44" height="7" rx="4" fill="#0b0820"/>
-              <rect x="29" y="60" width="62" height="10" rx="5" fill="#d7ff64"/>
-              <rect x="29" y="82" width="92" height="7" rx="3" fill="#b9b1d3" fill-opacity=".55"/>
-              <rect x="29" y="112" width="104" height="72" rx="13" fill="#2b235b"/>
-              <path d="M43 163l18-20 18 10 20-30 20 18" fill="none" stroke="#d7ff64" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="119" cy="133" r="5" fill="#9deaff"/>
-              <rect x="29" y="204" width="46" height="45" rx="10" fill="#392b75"/>
-              <rect x="87" y="204" width="46" height="45" rx="10" fill="#392b75"/>
-              <rect x="29" y="270" width="104" height="10" rx="5" fill="#9deaff" fill-opacity=".7"/>
-            </g>
-
-            <g class="hero-illustration-shape hero-shape-cube">
-              <path d="m142 91 30-17 30 17-30 18Z" fill="#d7ff64"/>
-              <path d="m142 91v35l30 17v-34Z" fill="#91ab45"/>
-              <path d="m202 91v35l-30 17v-34Z" fill="#b3d653"/>
-            </g>
-            <g class="hero-illustration-shape hero-shape-diamond">
-              <path d="m519 132 25-15 25 15-25 15Z" fill="#9deaff"/>
-              <path d="m519 132v30l25 15v-30Z" fill="#5a9cae"/>
-              <path d="m569 132v30l-25 15v-30Z" fill="#77cadd"/>
-            </g>
-            <g class="hero-glass-logo hero-flutter-logo" aria-label="Flutter mark">
-              <path d="m122 360 28-28h44l-28 28-22 22-22-22Zm38 8 20-20 27 27-20 20Z" fill="#d7ff64" fill-opacity=".9"/>
-              <path d="m122 360 22 22-16 16-22-22Z" fill="#9deaff" fill-opacity=".55"/>
-            </g>
-            <g class="hero-glass-logo hero-firebase-logo" aria-label="Firebase mark">
-              <path d="m486 388 22-62 13 24 21-4-29 63Z" fill="#ff8c92" fill-opacity=".82"/>
-              <path d="m484 390 29 19 29-20-13 30-17 10Z" fill="#d7ff64" fill-opacity=".88"/>
-              <path d="m508 326 13 24-19 4Z" fill="#9deaff" fill-opacity=".7"/>
-            </g>
-            <circle class="hero-illustration-sphere hero-sphere-one" cx="107" cy="292" r="12"/>
-            <circle class="hero-illustration-sphere hero-sphere-two" cx="548" cy="335" r="17"/>
-            <text class="hero-code-bracket hero-code-bracket-one" x="68" y="218">{</text>
-            <text class="hero-code-bracket hero-code-bracket-two" x="548" y="245">}</text>
-            <path class="hero-illustration-spark" d="m532 430 6 15 15 6-15 6-6 15-6-15-15-6 15-6Z"/>
-          </svg>
-        </div>
+        <section class="depot-workspace" aria-label="Interactive portfolio depot">
+          <div class="depot-label">UMAR'S DEPOT <span>·</span> <strong>7 CONTAINERS</strong></div>
+          <div class="depot-character" aria-hidden="true">
+            <div class="cursor-scrub-video" data-cursor-scrub data-video-file="" data-poster="assets/character-still.png" data-axis="horizontal" data-tracking-area="window" data-smoothing="0.22" data-object-fit="contain" data-show-poster="true" data-static-on-touch="true"></div>
+          </div>
+          <div class="depot-stage" id="depot-stage" data-depot-stage>
+            <div class="depot-floor" aria-hidden="true"></div>
+            <div class="depot-rail" aria-hidden="true"><span class="depot-rail-top"></span><span class="depot-rail-track"></span><span class="depot-carriage"><i></i><i></i></span><span class="depot-rod"></span><span class="depot-grip-head"><i class="depot-finger depot-finger-left"></i><i class="depot-finger depot-finger-right"></i></span></div>
+            <div class="depot-container-pile" role="group" aria-label="Interactive portfolio containers">
+              <div class="depot-container depot-container--intro" data-depot-container="intro" aria-label="Open container 01, portfolio introduction" role="group" style="--container-color:#e5322d;--container-depth:48px">
+                <button class="depot-trigger" type="button" aria-label="Select container 01, portfolio introduction"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">PORT<br>FOLIO</span><span class="depot-tag">UMAR ✳</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+              <div class="depot-container depot-container--work" data-depot-container="work" aria-label="Open container 02, selected work" role="group" style="--container-color:#f26a1f;--container-depth:42px">
+                <button class="depot-trigger" type="button" aria-label="Select container 02, selected work"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">THE<br>WORK</span><span class="depot-tag">02</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+              <div class="depot-container depot-container--about" data-depot-container="about" aria-label="Open container 03, about Umar" role="group" style="--container-color:#1d55d8;--container-depth:44px">
+                <button class="depot-trigger" type="button" aria-label="Select container 03, about Umar"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">ABOUT<br>ME</span><span class="depot-tag">03</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+              <div class="depot-container depot-container--journey" data-depot-container="journey" aria-label="Open container 04, process" role="group" style="--container-color:#f6b919;--container-depth:42px">
+                <button class="depot-trigger" type="button" aria-label="Select container 04, process"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">PRO<br>CESS</span><span class="depot-tag">04</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+              <div class="depot-container depot-container--toolkit" data-depot-container="toolkit" aria-label="Open container 05, toolkit" role="group" style="--container-color:#97a1ad;--container-depth:48px">
+                <button class="depot-trigger" type="button" aria-label="Select container 05, toolkit"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">TOOL<br>KIT</span><span class="depot-tag">05</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+              <div class="depot-container depot-container--services" data-depot-container="services" aria-label="Open container 06, services" role="group" style="--container-color:#e5322d;--container-depth:42px">
+                <button class="depot-trigger" type="button" aria-label="Select container 06, services"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">WHAT<br>I DO</span><span class="depot-tag">06</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+              <div class="depot-container depot-container--contact" data-depot-container="contact" aria-label="Open container 07, contact" role="group" style="--container-color:#2546b8;--container-depth:46px">
+                <button class="depot-trigger" type="button" aria-label="Select container 07, contact"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">SAY<br>HELLO</span><span class="depot-tag">07</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+            </div>
+            <aside class="depot-content-dock" aria-label="Selected portfolio content" aria-hidden="true" inert>
+              <div class="depot-dock-content"></div>
+            </aside>
+            <p class="depot-pick-hint" aria-hidden="true">CHOOSE A CONTAINER</p>
+          </div>
+        </section>
       </div>
-      <div class="container hero-foot"><span>SCROLL TO EXPLORE <span aria-hidden="true">↓</span></span><span>DESIGNED TO
-          FEEL DIFFERENT. BUILT TO WORK.</span><span>© 2026</span></div>
     </section>
-
+    <div class="portfolio-details">
     <div class="marquee" aria-label="Flutter, Firebase, Dart, mobile experiences, design, and development">
       <div class="marquee-track" aria-hidden="true">
         <div class="marquee-set"><span>FLUTTER</span><b>✳</b><span>FIREBASE</span><b>✳</b><span>GOOD
@@ -291,18 +237,41 @@
       <div class="container">
         <div class="section-heading reveal">
           <div><span class="section-kicker"><span class="kicker-dot"></span> 01 / FEATURED PROJECTS</span>
-            <h2 id="work-title">Real projects.<br><span class="accent-text">Real impact.</span></h2>
+            <h2 id="work-title">Projects built<br><span class="accent-text">with intention.</span></h2>
           </div>
-          <p>Two products built for people: an independently published beauty booking app and a live e-commerce storefront
-            for a Pakistani spice brand.
+          <p>From Pulse, a student-first app in development, to a published mobile product and a live e-commerce storefront.
           </p>
         </div>
         <div class="project-filters reveal" role="group" aria-label="Filter projects">
           <button class="project-filter is-active" type="button" data-filter="all">All work</button>
           <button class="project-filter" type="button" data-filter="mobile">Mobile apps</button>
+          <button class="project-filter" type="button" data-filter="flutter">Flutter</button>
+          <button class="project-filter" type="button" data-filter="productivity">Productivity</button>
           <button class="project-filter" type="button" data-filter="web">Websites</button>
           <button class="project-filter" type="button" data-filter="firebase">Firebase</button>
         </div>
+        <div class="projects-list">
+        <article class="project-card project-card--pulse reveal" data-project-type="mobile flutter productivity">
+          <div class="project-copy pulse-project-copy">
+            <div class="project-top"><span class="project-num">FEATURED PROJECT</span><span class="pulse-status">IN DEVELOPMENT</span></div>
+            <div class="project-main"><span class="project-eyebrow">FLUTTER / MOBILE APPLICATION / PRODUCTIVITY</span>
+              <h3>Pulse<span>✳</span></h3>
+              <p>Pulse is an all-in-one productivity and life-management app designed to help students organize their daily lives, manage academics, build routines, track personal progress, and stay focused—all through a calm, beautifully crafted digital experience.</p>
+              <p class="pulse-tagline">Your day. Your routines. Your progress.</p>
+              <div class="project-tags"><span>Flutter</span><span>Dart</span><span>Student-first</span><span>Productivity</span></div>
+            </div>
+            <div class="project-bottom"><div class="project-actions"><a class="button button-dark" href="/projects/pulse/">View Case Study <span class="button-arrow" aria-hidden="true">↗</span></a></div><span>PRODUCT IN PROGRESS<br>FEATURED CASE STUDY</span></div>
+          </div>
+          <div class="project-art pulse-project-art" role="group" aria-label="Pulse project media placeholder">
+            <div class="pulse-visual-placeholder" role="img" aria-label="Authentic Pulse app screens have not been supplied yet. This is a labeled placeholder, not an app screenshot.">
+              <span class="pulse-placeholder-kicker">PULSE / APP PREVIEW</span>
+              <div class="pulse-placeholder-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+              <strong>Real app screens<br>coming soon</strong>
+              <small>VISUAL PLACEHOLDER · NOT AN APP SCREEN</small>
+            </div>
+            <span class="project-art-caption">MEDIA PLACEHOLDER / REPLACE WITH AUTHENTIC CAPTURE</span>
+          </div>
+        </article>
         <article class="project-card project-card--beautify reveal" data-project-type="mobile firebase">
           <div class="project-copy">
             <div class="project-top"><span class="project-num">PROJECT 001</span><span class="project-year">LIVE / PLAY
@@ -420,6 +389,7 @@
               <span>LIVE STORE<br>MAGNETMASALA.COM</span></div>
           </div>
         </article>
+        </div>
       </div>
     </section>
 
@@ -798,8 +768,9 @@
         <div class="contact-bottom-note" aria-hidden="true">MAKE IT MATTER. MAKE IT MEMORABLE. ↗</div>
       </div>
     </section>
-  </main>
 
+    </div>
+  </main>
   <footer class="site-footer">
     <div class="container footer-inner"><a href="#top" class="footer-brand"
         aria-label="Back to top">umar<span>✳</span></a>
@@ -810,7 +781,12 @@
           rel="noopener noreferrer">LINKEDIN ↗</a></div><a class="back-to-top" href="#top">BACK TO TOP ↑</a>
     </div>
   </footer>
-  <script src="script.js?v=20261019-2" defer></script>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <script src="script.js?v=20261105-2" defer></script>
+  <script src="depot-content.js?v=20261105-3" defer></script>
+  <script src="depot.js?v=20261105-3" defer></script>
+  <script src="cursor-scrub-video.js?v=20261105-2" defer></script>
 </body>
 
 </html>
