@@ -1,6 +1,6 @@
 # Umar Saeed Qureshi — Portfolio Website
 
-This is a production-ready static portfolio website for **Umar Saeed Qureshi**, Flutter Mobile App Developer.
+This is the static portfolio website for **Umar Saeed Qureshi**, Flutter & Web Developer. Its redesigned hero pairs the original blue shipping-container depot with a two-column introduction and responsive interactive workspace; the detailed project, experience, toolkit, State Lab, services, process, and contact sections remain available below it.
 
 ## Files
 
@@ -58,3 +58,7 @@ Verify the home page, mobile menu, email buttons, Google Play link, GitHub and L
 - Professional email: umar@umarsaeedqureshi.com
 
 # umar200411.github.io
+
+## Portfolio Depot and cursor character
+
+The hero's 3D shipping-container depot is powered by `depot.js` and `depot.css`. Selected portfolio summaries appear in a separate accessible content dock, while the complete original page sections below retain their galleries, filters, State Lab, and contact interactions. Pulse is the featured Flutter project and has one case study at `projects/pulse/`, linked from both the Work container and project gallery. Pulse screenshots and app source were not present in this repository, so its image areas are explicitly labeled placeholders and feature details are presented as evolving product scope rather than verified shipped functionality. Add authentic media files under `assets/projects/pulse/` and update `pulse-media.js`; the page's image slots will use them while retaining placeholders for unset or failed files. Character video scrubbing is implemented as a dependency-free native module in `cursor-scrub-video.js`. The current stage uses `assets/character-still.png`; the matching cursor video has not been supplied, so no eye/head tracking is simulated. See [the CursorScrubVideo guide](docs/cursor-scrub-video.md) for asset preparation and verification details.

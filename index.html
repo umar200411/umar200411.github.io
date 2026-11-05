@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#100c27">
+  <meta name="theme-color" content="#0f74e0">
   <meta name="description"
     content="Umar Saeed Qureshi is a Flutter developer and web creator building mobile applications with Firebase and responsive websites. Explore real projects and product experience.">
   <meta name="author" content="Umar Saeed Qureshi">
@@ -39,7 +39,8 @@
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20261019-2">
   <link rel="stylesheet" href="case-studies.css?v=20261019-2">
-  <link rel="stylesheet" href="depot.css?v=20261104-1">
+  <link rel="stylesheet" href="depot.css?v=20261105-2">
+  <link rel="stylesheet" href="pulse-project.css?v=20261105-1">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -120,18 +121,15 @@
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="scroll-progress" aria-hidden="true"><span></span></div>
-  <div class="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-ring" aria-hidden="true"></div>
-  <div id="top" class="page-top" aria-hidden="true"></div>
+    <div id="top" class="page-top" aria-hidden="true"></div>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Umar Saeed Qureshi, back to top">umar<span class="brand-spark"
           aria-hidden="true">✳</span><small>DEV / DESIGN / SHIP</small></a>
       <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
-        <a href="#work">Projects</a><a href="#about">About</a><a href="#experience">Experience</a><a
-          href="#expertise">Toolkit</a><a href="#state-lab">State Lab</a><a href="#services">Services</a><a href="#process">Process</a>
-        <a class="nav-contact" href="#contact">Let's connect <span aria-hidden="true">↗</span></a>
+        <a href="#depot-work" data-depot-target="work">Projects</a><a href="#depot-about" data-depot-target="about">About</a><a href="#depot-about" data-depot-target="about">Experience</a><a
+          href="#depot-toolkit" data-depot-target="toolkit">Toolkit</a><a href="#depot-toolkit" data-depot-target="toolkit">State Lab</a><a href="#depot-services" data-depot-target="services">Services</a><a href="#depot-process" data-depot-target="journey">Process</a>
+        <a class="nav-contact" href="#depot-contact" data-depot-target="contact">Let's connect <span aria-hidden="true">↗</span></a>
       </nav>
       <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav"
         aria-expanded="false"><span></span><span></span></button>
@@ -139,54 +137,82 @@
   </header>
 
   <main id="main">
-    <section class="hero" aria-labelledby="hero-title">
+    <section class="hero depot-page" aria-labelledby="hero-title">
       <div class="depot-blueprint" aria-hidden="true"></div>
-      <div class="depot-wordmark" aria-hidden="true">PORTFOLIO</div>
-      <div class="depot-intro">
-        <p class="depot-kicker"><span class="depot-status-dot"></span> UMAR SAEED QURESHI <span> / FLUTTER &amp; WEB DEVELOPER</span></p>
-        <h1 id="hero-title">I build apps + web<br><em>that feel alive.</em></h1>
-        <p class="depot-intro-copy">Thoughtful mobile apps, responsive websites, and products built for real people.</p>
-        <a class="depot-intro-link" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
-      </div>
-      <div class="depot-brand-lockup"><a href="#top" aria-label="umar, back to top">umar<span>✳</span></a><small>PORTFOLIO DEPOT / 2026</small></div>
-      <nav class="depot-shortcuts" aria-label="Portfolio shortcuts">
-        <a href="#work">Work</a><a href="#about">About</a><a href="#state-lab">State Lab</a><a href="#contact">Contact</a>
-      </nav>
-      <div class="depot-tools"><a class="depot-talk" href="mailto:umar@umarsaeedqureshi.com">Let's talk <span aria-hidden="true">↗</span></a><button class="depot-explore-toggle" type="button" aria-expanded="false" aria-controls="depot-more-links">Explore</button>
-        <nav id="depot-more-links" class="depot-more-links" aria-label="More portfolio sections"><a href="#experience">Experience</a><a href="#expertise">Toolkit</a><a href="#services">Services</a><a href="#process">Process</a></nav>
-      </div>
-      <div class="depot-rail" aria-hidden="true"><span class="depot-rail-top"></span><span class="depot-rail-track"></span><span class="depot-carriage"><i></i><i></i></span><span class="depot-rod"></span><span class="depot-grip-head"><i class="depot-finger depot-finger-left"></i><i class="depot-finger depot-finger-right"></i></span></div>
-      <div class="depot-stage" data-depot-stage>
-        <div class="depot-floor" aria-hidden="true"></div>
-        <div class="depot-container-pile" role="group" aria-label="Interactive portfolio containers">
-          <button class="depot-container depot-container--intro" type="button" data-depot-container="intro" aria-label="Open container 01, portfolio introduction" style="--pile-x:4%;--pile-y:43%;--pile-r:-5deg;--container-color:#e5322d;--container-depth:48px">
-            <span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">PORT<br>FOLIO</span><span class="depot-tag">UMAR ✳</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span><span class="depot-card-content"><span class="depot-card-kicker">01 / HELLO</span><h2>Hi, I'm Umar.</h2><p class="depot-card-role">Flutter &amp; Web Developer</p><p>I build apps + web that feel alive. I turn ideas into intuitive mobile apps, responsive websites, and thoughtful digital experiences.</p><span class="depot-card-links"><a href="#work">Explore my work ↗</a><a href="#contact">Let's talk ↗</a></span></span>
-          </button>
-          <button class="depot-container depot-container--work" type="button" data-depot-container="work" aria-label="Open container 02, selected work" style="--pile-x:28%;--pile-y:49%;--pile-r:3deg;--container-color:#f26a1f;--container-depth:42px">
-            <span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">THE<br>WORK</span><span class="depot-tag">02</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span><span class="depot-card-content"><span class="depot-card-kicker">02 / SELECTED WORK</span><h2>Things I've built.</h2><article><strong>Beautify</strong><p>Flutter mobile application with a Firebase-powered booking experience.</p></article><article><strong>Magnet Masala</strong><p>Responsive e-commerce storefront and product catalogue.</p></article><span class="depot-card-links"><a href="#work">Explore all projects ↗</a></span></span>
-          </button>
-          <button class="depot-container depot-container--about" type="button" data-depot-container="about" aria-label="Open container 03, about Umar" style="--pile-x:51%;--pile-y:42%;--pile-r:-2deg;--container-color:#1d55d8;--container-depth:44px">
-            <span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">ABOUT<br>ME</span><span class="depot-tag">03</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span><span class="depot-card-content"><span class="depot-card-kicker">03 / ABOUT ME</span><h2>Part creative.<br>Part engineer.</h2><p>I build Flutter and web experiences with product-focused engineering, thoughtful interfaces, and AI-assisted development guided by engineering judgment.</p><span class="depot-card-links"><a href="#about">Read my story ↗</a></span></span>
-          </button>
-          <button class="depot-container depot-container--journey" type="button" data-depot-container="journey" aria-label="Open container 04, experience" style="--pile-x:74%;--pile-y:50%;--pile-r:4deg;--container-color:#f6b919;--container-depth:42px">
-            <span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">MY<br>JOURNEY</span><span class="depot-tag">04</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span><span class="depot-card-content"><span class="depot-card-kicker">04 / EXPERIENCE</span><h2>Building through experience.</h2><p><strong>Zamindar Technologies</strong><br>Engineering experience in a product team.</p><p><strong>Token Talent</strong><br>Mobile app work supporting employee self-service.</p><span class="depot-card-links"><a href="#experience">Explore experience ↗</a></span></span>
-          </button>
-          <button class="depot-container depot-container--toolkit" type="button" data-depot-container="toolkit" aria-label="Open container 05, toolkit" style="--pile-x:12%;--pile-y:69%;--pile-r:2deg;--container-color:#97a1ad;--container-depth:48px">
-            <span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">TOOL<br>KIT</span><span class="depot-tag">05</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span><span class="depot-card-content"><span class="depot-card-kicker">05 / MY TOOLKIT</span><h2>Tools behind the work.</h2><p class="depot-skills"><b>Flutter</b><b>Dart</b><b>Firebase</b><b>REST APIs</b><b>Node.js</b><b>Git &amp; GitHub</b><b>Responsive Web</b><b>AI-assisted dev</b></p><span class="depot-card-links"><a href="#expertise">View full toolkit ↗</a><a href="#state-lab">Explore State Lab ↗</a></span></span>
-          </button>
-          <button class="depot-container depot-container--services" type="button" data-depot-container="services" aria-label="Open container 06, services and process" style="--pile-x:37%;--pile-y:68%;--pile-r:-3deg;--container-color:#e5322d;--container-depth:42px">
-            <span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">WHAT<br>I DO</span><span class="depot-tag">06</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span><span class="depot-card-content"><span class="depot-card-kicker">06 / SERVICES &amp; PROCESS</span><h2>From idea to launch.</h2><p>Flutter Mobile Development · Firebase and Backend Integration · Responsive Web Development · App Maintenance and Improvement</p><p class="depot-process">Discover → Architect → Build &amp; Refine → Test &amp; Ship</p><span class="depot-card-links"><a href="#services">Explore services ↗</a><a href="#process">See my process ↗</a></span></span>
-          </button>
-          <button class="depot-container depot-container--contact" type="button" data-depot-container="contact" aria-label="Open container 07, contact" style="--pile-x:63%;--pile-y:68%;--pile-r:3deg;--container-color:#2546b8;--container-depth:46px">
-            <span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">SAY<br>HELLO</span><span class="depot-tag">07</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span><span class="depot-card-content"><span class="depot-card-kicker">07 / CONTACT</span><h2>Got something in mind?</h2><p>Have a product idea, a Flutter project, or a web experience you'd like to build? Let's talk.</p><span class="depot-card-links"><a href="mailto:umar@umarsaeedqureshi.com">umar@umarsaeedqureshi.com ↗</a><a href="#contact">Start a project ↗</a></span></span>
-          </button>
-        </div>
-        <div class="depot-spotlight" aria-live="polite" aria-atomic="true"><span class="depot-spotlight-content"></span></div>
-      </div>
-      <div class="depot-pick-hint" aria-hidden="true">PICK A CONTAINER <span>↓</span></div>
-      <div class="depot-scroll-cue"><span>SCROLL TO EXPLORE</span><a href="#work" aria-label="Scroll to featured projects">↓</a></div>
-    </section>
+      <div class="depot-atmosphere depot-atmosphere--one" aria-hidden="true"></div>
+      <div class="depot-atmosphere depot-atmosphere--two" aria-hidden="true"></div>
 
+      <header class="depot-nav">
+        <div class="depot-brand-lockup"><a href="#top" aria-label="umar, back to top">umar<span>✳</span></a><small>PORTFOLIO DEPOT / 2026</small></div>
+        <nav class="depot-shortcuts" aria-label="Portfolio shortcuts">
+          <a href="#depot-work" data-depot-target="work">Work</a>
+          <a href="#depot-about" data-depot-target="about">About</a>
+          <a href="#depot-process" data-depot-target="journey">Process</a>
+          <a href="#depot-contact" data-depot-target="contact">Contact</a>
+        </nav>
+        <div class="depot-tools">
+          <a class="depot-talk" href="mailto:umar@umarsaeedqureshi.com">Let's talk <span aria-hidden="true">↗</span></a>
+          <button class="depot-explore-toggle" type="button" aria-expanded="false" aria-controls="depot-more-links">More</button>
+          <nav id="depot-more-links" class="depot-more-links" aria-label="More portfolio containers">
+            <a href="#depot-about" data-depot-target="about">Experience</a>
+            <a href="#depot-toolkit" data-depot-target="toolkit">Toolkit</a>
+            <a href="#depot-services" data-depot-target="services">Services</a>
+          </nav>
+        </div>
+      </header>
+
+      <div class="depot-layout">
+        <section class="depot-intro" aria-labelledby="hero-title">
+          <p class="depot-kicker"><span class="depot-status-dot"></span> UMAR SAEED QURESHI <span>/ FLUTTER &amp; WEB DEVELOPER</span></p>
+          <h1 id="hero-title">I build apps + web <em>that feel alive.</em></h1>
+          <p class="depot-intro-copy">Thoughtful mobile apps, responsive websites, and products built for real people.</p>
+          <div class="depot-intro-actions">
+            <a class="depot-intro-link depot-intro-link--primary" href="#depot-work" data-depot-target="work">Explore my work <span aria-hidden="true">↗</span></a>
+            <a class="depot-intro-link depot-intro-link--secondary" href="mailto:umar@umarsaeedqureshi.com">Let's talk</a>
+          </div>
+          <p class="depot-intro-note">Select a container to explore the work.</p>
+        </section>
+
+        <section class="depot-workspace" aria-label="Interactive portfolio depot">
+          <div class="depot-label">UMAR'S DEPOT <span>·</span> <strong>7 CONTAINERS</strong></div>
+          <div class="depot-character" aria-hidden="true">
+            <div class="cursor-scrub-video" data-cursor-scrub data-video-file="" data-poster="assets/character-still.png" data-axis="horizontal" data-tracking-area="window" data-smoothing="0.22" data-object-fit="contain" data-show-poster="true" data-static-on-touch="true"></div>
+          </div>
+          <div class="depot-stage" id="depot-stage" data-depot-stage>
+            <div class="depot-floor" aria-hidden="true"></div>
+            <div class="depot-rail" aria-hidden="true"><span class="depot-rail-top"></span><span class="depot-rail-track"></span><span class="depot-carriage"><i></i><i></i></span><span class="depot-rod"></span><span class="depot-grip-head"><i class="depot-finger depot-finger-left"></i><i class="depot-finger depot-finger-right"></i></span></div>
+            <div class="depot-container-pile" role="group" aria-label="Interactive portfolio containers">
+              <div class="depot-container depot-container--intro" data-depot-container="intro" aria-label="Open container 01, portfolio introduction" role="group" style="--container-color:#e5322d;--container-depth:48px">
+                <button class="depot-trigger" type="button" aria-label="Select container 01, portfolio introduction"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">PORT<br>FOLIO</span><span class="depot-tag">UMAR ✳</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+              <div class="depot-container depot-container--work" data-depot-container="work" aria-label="Open container 02, selected work" role="group" style="--container-color:#f26a1f;--container-depth:42px">
+                <button class="depot-trigger" type="button" aria-label="Select container 02, selected work"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">THE<br>WORK</span><span class="depot-tag">02</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+              <div class="depot-container depot-container--about" data-depot-container="about" aria-label="Open container 03, about Umar" role="group" style="--container-color:#1d55d8;--container-depth:44px">
+                <button class="depot-trigger" type="button" aria-label="Select container 03, about Umar"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">ABOUT<br>ME</span><span class="depot-tag">03</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+              <div class="depot-container depot-container--journey" data-depot-container="journey" aria-label="Open container 04, process" role="group" style="--container-color:#f6b919;--container-depth:42px">
+                <button class="depot-trigger" type="button" aria-label="Select container 04, process"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">PRO<br>CESS</span><span class="depot-tag">04</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+              <div class="depot-container depot-container--toolkit" data-depot-container="toolkit" aria-label="Open container 05, toolkit" role="group" style="--container-color:#97a1ad;--container-depth:48px">
+                <button class="depot-trigger" type="button" aria-label="Select container 05, toolkit"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">TOOL<br>KIT</span><span class="depot-tag">05</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+              <div class="depot-container depot-container--services" data-depot-container="services" aria-label="Open container 06, services" role="group" style="--container-color:#e5322d;--container-depth:42px">
+                <button class="depot-trigger" type="button" aria-label="Select container 06, services"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">WHAT<br>I DO</span><span class="depot-tag">06</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+              <div class="depot-container depot-container--contact" data-depot-container="contact" aria-label="Open container 07, contact" role="group" style="--container-color:#2546b8;--container-depth:46px">
+                <button class="depot-trigger" type="button" aria-label="Select container 07, contact"><span class="depot-box-shadow" aria-hidden="true"></span><span class="depot-box" aria-hidden="true"><span class="depot-face depot-face-front"><span class="depot-corrugation"></span><span class="depot-container-label">SAY<br>HELLO</span><span class="depot-tag">07</span><span class="depot-corner depot-corner-tl"></span><span class="depot-corner depot-corner-tr"></span><span class="depot-corner depot-corner-bl"></span><span class="depot-corner depot-corner-br"></span><span class="depot-door depot-door-left"><i></i></span><span class="depot-door depot-door-right"><i></i></span></span><span class="depot-face depot-face-side depot-face-side-right"></span><span class="depot-face depot-face-side depot-face-side-left"></span><span class="depot-face depot-face-top"></span><span class="depot-face depot-face-back"></span><span class="depot-face depot-face-bottom"></span></span></button>
+              </div>
+            </div>
+            <aside class="depot-content-dock" aria-label="Selected portfolio content" aria-hidden="true" inert>
+              <div class="depot-dock-content"></div>
+            </aside>
+            <p class="depot-pick-hint" aria-hidden="true">CHOOSE A CONTAINER</p>
+          </div>
+        </section>
+      </div>
+    </section>
+    <div class="portfolio-details">
     <div class="marquee" aria-label="Flutter, Firebase, Dart, mobile experiences, design, and development">
       <div class="marquee-track" aria-hidden="true">
         <div class="marquee-set"><span>FLUTTER</span><b>✳</b><span>FIREBASE</span><b>✳</b><span>GOOD
@@ -211,18 +237,40 @@
       <div class="container">
         <div class="section-heading reveal">
           <div><span class="section-kicker"><span class="kicker-dot"></span> 01 / FEATURED PROJECTS</span>
-            <h2 id="work-title">Real projects.<br><span class="accent-text">Real impact.</span></h2>
+            <h2 id="work-title">Projects built<br><span class="accent-text">with intention.</span></h2>
           </div>
-          <p>Two products built for people: an independently published beauty booking app and a live e-commerce storefront
-            for a Pakistani spice brand.
+          <p>From Pulse, a student-first app in development, to a published mobile product and a live e-commerce storefront.
           </p>
         </div>
         <div class="project-filters reveal" role="group" aria-label="Filter projects">
           <button class="project-filter is-active" type="button" data-filter="all">All work</button>
           <button class="project-filter" type="button" data-filter="mobile">Mobile apps</button>
+          <button class="project-filter" type="button" data-filter="flutter">Flutter</button>
+          <button class="project-filter" type="button" data-filter="productivity">Productivity</button>
           <button class="project-filter" type="button" data-filter="web">Websites</button>
           <button class="project-filter" type="button" data-filter="firebase">Firebase</button>
         </div>
+        <article class="project-card project-card--pulse reveal" data-project-type="mobile flutter productivity">
+          <div class="project-copy pulse-project-copy">
+            <div class="project-top"><span class="project-num">FEATURED PROJECT</span><span class="pulse-status">IN DEVELOPMENT</span></div>
+            <div class="project-main"><span class="project-eyebrow">FLUTTER / MOBILE APPLICATION / PRODUCTIVITY</span>
+              <h3>Pulse<span>✳</span></h3>
+              <p>Pulse is an all-in-one productivity and life-management app designed to help students organize their daily lives, manage academics, build routines, track personal progress, and stay focused—all through a calm, beautifully crafted digital experience.</p>
+              <p class="pulse-tagline">Your day. Your routines. Your progress.</p>
+              <div class="project-tags"><span>Flutter</span><span>Dart</span><span>Student-first</span><span>Productivity</span></div>
+            </div>
+            <div class="project-bottom"><div class="project-actions"><a class="button button-dark" href="/projects/pulse/">View Case Study <span class="button-arrow" aria-hidden="true">↗</span></a></div><span>PRODUCT IN PROGRESS<br>FEATURED CASE STUDY</span></div>
+          </div>
+          <div class="project-art pulse-project-art" role="group" aria-label="Pulse project media placeholder">
+            <div class="pulse-visual-placeholder" role="img" aria-label="Authentic Pulse app screens have not been supplied yet. This is a labeled placeholder, not an app screenshot.">
+              <span class="pulse-placeholder-kicker">PULSE / APP PREVIEW</span>
+              <div class="pulse-placeholder-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+              <strong>Real app screens<br>coming soon</strong>
+              <small>VISUAL PLACEHOLDER · NOT AN APP SCREEN</small>
+            </div>
+            <span class="project-art-caption">MEDIA PLACEHOLDER / REPLACE WITH AUTHENTIC CAPTURE</span>
+          </div>
+        </article>
         <article class="project-card project-card--beautify reveal" data-project-type="mobile firebase">
           <div class="project-copy">
             <div class="project-top"><span class="project-num">PROJECT 001</span><span class="project-year">LIVE / PLAY
@@ -718,8 +766,9 @@
         <div class="contact-bottom-note" aria-hidden="true">MAKE IT MATTER. MAKE IT MEMORABLE. ↗</div>
       </div>
     </section>
-  </main>
 
+    </div>
+  </main>
   <footer class="site-footer">
     <div class="container footer-inner"><a href="#top" class="footer-brand"
         aria-label="Back to top">umar<span>✳</span></a>
@@ -730,8 +779,12 @@
           rel="noopener noreferrer">LINKEDIN ↗</a></div><a class="back-to-top" href="#top">BACK TO TOP ↑</a>
     </div>
   </footer>
-  <script src="script.js?v=20261019-2" defer></script>
-  <script src="depot.js?v=20261104-1" defer></script>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <script src="script.js?v=20261105-2" defer></script>
+  <script src="depot-content.js?v=20261105-3" defer></script>
+  <script src="depot.js?v=20261105-3" defer></script>
+  <script src="cursor-scrub-video.js?v=20261105-2" defer></script>
 </body>
 
 </html>
