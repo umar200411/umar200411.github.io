@@ -122,6 +122,51 @@ test('Pulse case study remains readable without horizontal overflow on mobile an
   }
 });
 
+test('project cards keep the requested gap, column layout, and bounded titles responsively', async ({page}) => {
+  for(const [width,height,gap] of [[1920,1080,40],[1440,900,40],[1100,800,32],[944,1400,32],[768,1024,32],[390,844,24]]) {
+    await page.setViewportSize({width,height});
+    await page.goto('/');
+    await page.locator('#work').scrollIntoViewIfNeeded();
+    const result=await page.locator('.projects-list').evaluate(list=>{
+      const cards=[...list.querySelectorAll('.project-card')];
+      const rect=element=>{const r=element.getBoundingClientRect();return{left:r.left,right:r.right,width:r.width,top:r.top,bottom:r.bottom}};
+      return {
+        rowGap:parseFloat(getComputedStyle(list).rowGap),
+        direction:getComputedStyle(cards[0]).flexDirection,
+        filterWrap:getComputedStyle(document.querySelector('.project-filters')).flexWrap,
+        overflow:document.documentElement.scrollWidth-innerWidth,
+        cards:cards.map(card=>{
+          const box=rect(card),copy=rect(card.querySelector('.project-copy'));
+          const media=rect(card.querySelector('.project-art, .project-media--magnet'));
+          const title=card.querySelector('.project-main h3');
+          const range=document.createRange(); range.selectNodeContents(title);
+          const textRects=[...range.getClientRects()].map(r=>({left:r.left,right:r.right}));
+          return {box,copy,media,textRects};
+        })
+      };
+    });
+    expect(result.rowGap).toBe(gap);
+    expect(result.filterWrap).toBe('wrap');
+    expect(result.overflow).toBeLessThanOrEqual(0);
+    expect(result.cards).toHaveLength(3);
+    for(const {box,copy,media,textRects} of result.cards) {
+      for(const line of textRects) {
+        expect(line.left).toBeGreaterThanOrEqual(copy.left-1);
+        expect(line.right).toBeLessThanOrEqual(copy.right+1);
+      }
+      if(width>1100) {
+        expect(copy.left).toBeCloseTo(box.left,0);
+        expect(copy.right).toBeCloseTo(media.left,0);
+        expect(copy.width/box.width).toBeGreaterThan(.46);
+        expect(copy.width/box.width).toBeLessThan(.50);
+      } else {
+        expect(result.direction).toBe('column');
+        expect(media.top).toBeGreaterThanOrEqual(copy.bottom-1);
+      }
+    }
+  }
+});
+
 test('character keeps the supplied still visible when cursor video is absent', async ({page}) => {
   await loaded(page);
   const state=await page.locator('[data-cursor-scrub]').getAttribute('data-scrub-state');
