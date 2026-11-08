@@ -63,7 +63,7 @@
 .case-text-link { border-bottom: 1px solid var(--line-strong); color: var(--text); font-weight: 500; transition: color .2s, border-color .2s; }
 .case-text-link:hover { color: var(--lime); border-color: var(--lime); }
 .pulse-button { display: inline-flex; min-height: 48px; align-items: center; gap: 10px; padding: 0 20px; border: 1px solid transparent; border-radius: 999px; font: 600 14px/1 var(--body); transition: background-color .2s, border-color .2s, box-shadow .25s; }
-.pulse-button--primary { color: #05070f; background: var(--lime); }
+.pulse-button--primary { color: var(--on-lime); background: var(--lime-fill); }
 .pulse-button--primary:hover { box-shadow: var(--glow-lime); }
 .pulse-button--secondary { border-color: var(--line-strong); color: var(--text); background: var(--surface); }
 .pulse-button--secondary:hover { border-color: var(--lime); }
@@ -71,7 +71,7 @@
 /* Hero media */
 .case-phone-frame { position: relative; justify-self: center; width: min(78vw, 300px); margin: 0; }
 .case-phone-frame img { width: 100%; aspect-ratio: 414 / 896; padding: 9px; border: 1px solid rgba(255,255,255,.16); border-radius: 40px; background: linear-gradient(145deg, #23283a, #0a0c14); object-fit: cover; object-position: top; box-shadow: 0 50px 90px -30px rgba(0,0,0,.9), 0 0 80px -16px color-mix(in srgb, var(--accent) 55%, transparent); }
-.case-phone-frame figcaption { position: absolute; right: -14px; bottom: 12%; padding: 8px 12px; border: 1px solid var(--line-strong); border-radius: 10px; color: var(--text); background: rgba(10,14,27,.85); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font: 500 10px/1.3 var(--mono); letter-spacing: .08em; }
+.case-phone-frame figcaption { position: absolute; right: -14px; bottom: 12%; padding: 8px 12px; border: 1px solid var(--line-strong); border-radius: 10px; color: var(--text); background: var(--glass-bg-strong); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font: 500 10px/1.3 var(--mono); letter-spacing: .08em; }
 .case-web-previews { position: relative; padding-bottom: 40px; }
 .case-browser-frame, .case-mobile-frame { margin: 0; }
 .case-browser-frame { overflow: hidden; border: 1px solid rgba(255,255,255,.14); border-radius: 14px; background: #0b0d14; box-shadow: 0 40px 80px -30px rgba(0,0,0,.85), 0 0 80px -24px color-mix(in srgb, var(--accent) 55%, transparent); }
@@ -159,7 +159,6 @@
 }
 .case-feature-grid article:hover, .pulse-feature-card:hover, .pulse-design-principles article:hover { border-color: color-mix(in srgb, var(--accent) 45%, transparent); transform: translateY(-3px); }
 .case-feature-grid span, .pulse-feature-number, .pulse-design-principles span { color: var(--lime); font: 500 12px/1 var(--mono); }
-.pulse-scope-label { color: var(--soft); font: 500 10px/1 var(--mono); letter-spacing: .1em; }
 .case-feature-grid h3, .pulse-feature-card h3, .pulse-design-principles h3 { font-size: 19px; letter-spacing: -.02em; line-height: 1.25; }
 .case-feature-grid p, .pulse-feature-card p, .pulse-design-principles p { color: var(--muted); font-size: 15px; }
 .pulse-feature-card--wide { grid-column: 1 / -1; }
@@ -251,7 +250,7 @@
 .case-closing h2 em { color: transparent; background: var(--gradient-text); -webkit-background-clip: text; background-clip: text; font-style: normal; }
 .pulse-cta-inner .pulse-hero-actions { justify-content: center; }
 
-.pulse-footer { padding: 36px 0 calc(28px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: #04050b; }
+.pulse-footer { padding: 36px 0 calc(28px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: var(--footer-bg); }
 .pulse-footer .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
 .pulse-footer-brand { font: 700 24px/1 var(--display); letter-spacing: -.06em; }
 .pulse-footer-brand span { color: var(--lime); }
@@ -264,3 +263,17 @@
   .case-mobile-frame { right: 0; width: 32%; }
   .pulse-truth-note { margin-top: -24px; }
 }
+
+/* ---------- Light theme ---------- */
+.case-browser-frame { --soft: #7d86a3; }   /* caption sits inside the dark browser frame */
+:root[data-theme="light"] .case-hero::after, :root[data-theme="light"] .pulse-hero::after { background-image: linear-gradient(rgba(15,23,42,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,.045) 1px, transparent 1px); }
+:root[data-theme="light"] .case-section--tint, :root[data-theme="light"] .pulse-section--tint, :root[data-theme="light"] .pulse-section--blue { background: linear-gradient(180deg, rgba(226,232,246,.75), rgba(226,232,246,.25)); }
+:root[data-theme="light"] .architecture-flow > div, :root[data-theme="light"] .journey-flow li { background: rgba(255,255,255,.85); }
+:root[data-theme="light"] .pulse-hero-visual { border-color: rgba(14,116,144,.3); background: radial-gradient(60% 60% at 50% 45%, rgba(14,165,233,.12), transparent 70%), rgba(255,255,255,.75); }
+:root[data-theme="light"] .pulse-placeholder-orbit { border-color: rgba(14,116,144,.3); }
+:root[data-theme="light"] .case-phone-frame img { box-shadow: 0 50px 90px -40px rgba(15,23,42,.5), 0 0 80px -24px color-mix(in srgb, var(--accent) 45%, transparent); }
+:root[data-theme="light"] .case-browser-frame { box-shadow: 0 40px 80px -40px rgba(15,23,42,.45), 0 0 80px -30px color-mix(in srgb, var(--accent) 45%, transparent); }
+:root[data-theme="light"] .case-screenshot-grid--phone img, :root[data-theme="light"] .case-mobile-frame { box-shadow: 0 30px 60px -28px rgba(15,23,42,.45); }
+:root[data-theme="light"] .pulse-screen-placeholder { background: radial-gradient(80% 60% at 50% 30%, rgba(14,165,233,.08), transparent 70%), var(--bg-raised); }
+/* The Living Sky illustration is a night sky in both themes, so its title stays light. */
+.pulse-living-placeholder { --text: #eef1fb; color: #eef1fb; }

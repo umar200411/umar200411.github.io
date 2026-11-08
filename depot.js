@@ -98,8 +98,8 @@
       const feature = make('article','depot-content-featured-project');
       const art = make('div','depot-pulse-placeholder');
       art.setAttribute('role','img');
-      art.setAttribute('aria-label','Pulse app screenshot placeholder; authentic app screens have not been supplied.');
-      art.append(make('span','','SCREEN IMAGERY PENDING'),make('strong','',data.featured.title));
+      art.setAttribute('aria-label','Pulse preview. Screenshots coming soon.');
+      art.append(make('span','','SCREENS SOON'),make('strong','',data.featured.title));
       const copy = make('div','depot-pulse-feature-copy');
       copy.append(make('span','depot-card-kicker',data.featured.eyebrow));
       const status = make('span','depot-pulse-status',data.featured.status);
@@ -136,7 +136,7 @@
         button.type = 'button'; button.dataset.previewState = state;
         button.setAttribute('aria-pressed',String(state === 'idle')); controls.append(button);
       }
-      demo.append(controls,make('p','depot-state-output','Idle — ready for a new request.'));
+      demo.append(controls,make('p','depot-state-output','Idle: waiting for the user.'));
       dockContent.append(demo);
     }
     if (data.process) dockContent.append(make('p','depot-process',data.process.join(' → ')));
@@ -279,7 +279,7 @@
     const preview = event.target.closest('[data-preview-state]');
     if (preview) {
       const output=preview.closest('.depot-state-lab')?.querySelector('.depot-state-output');
-      const copy={idle:'Idle — ready for a new request.',loading:'Loading — working through the request.',success:'Success — the action completed.',error:'Error — the request needs another try.'};
+      const copy={idle:'Idle: waiting for the user.',loading:'Loading: talking to the server…',success:'Success: action completed.',error:'Error: something went wrong. Try again.'};
       preview.closest('.depot-state-lab')?.querySelectorAll('[data-preview-state]').forEach(button=>button.setAttribute('aria-pressed',String(button===preview)));
       if(output) output.textContent=copy[preview.dataset.previewState];
       return;

@@ -1,6 +1,11 @@
 {
   "name": "umar-portfolio-depot",
   "private": true,
-  "scripts": { "test:depot": "playwright test" },
-  "devDependencies": { "@playwright/test": "^1.56.1" }
+  "scripts": {
+    "test:depot": "playwright test",
+    "og-cards": "node tools/generate-og-cards.cjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
 }

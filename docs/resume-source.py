@@ -119,10 +119,9 @@ def section(title, contents):
 
 section(
     "Professional Summary",
-    "Flutter and web developer experienced in building mobile applications, integrating Firebase and APIs, "
-    "and delivering responsive digital products. Independently developed and published Beautify on Google Play "
-    "and built the Magnet Masala storefront. Uses modern AI-assisted tools to support iteration, debugging, and "
-    "implementation while retaining hands-on technical judgment and responsibility for review.",
+        "Flutter and web developer who builds mobile apps, connects them to Firebase and APIs, and builds "
+    "responsive websites. Built and published Beautify on Google Play independently, and built the Magnet Masala "
+    "online store. Currently building Pulse, an all-in-one app for students.",
 )
 
 section(
@@ -130,8 +129,7 @@ section(
     "<b>Mobile:</b> Flutter, Dart, GetX, Provider  &nbsp;&nbsp; <b>Services:</b> Firebase Authentication, "
     "Cloud Firestore, Firebase Cloud Messaging, REST APIs, Google Maps and location services<br/>"
     "<b>Web:</b> Responsive web development, e-commerce interfaces  &nbsp;&nbsp; "
-    "<b>Workflow:</b> Git, GitHub, testing and release preparation<br/>"
-    "<b>AI-assisted tools:</b> ChatGPT, OpenAI Codex, Claude Code",
+        "<b>Workflow:</b> Git, GitHub, testing and release preparation, AI-assisted debugging",
 )
 
 story.append(Paragraph("SELECTED PROJECTS", styles["Section"]))
@@ -139,9 +137,9 @@ projects = [
     [
         Paragraph("Beautify — Flutter Mobile Application", styles["ProjectTitle"]),
         Paragraph(
-            "Independently developed and published Android app for salon and beauty-service discovery, "
-            "appointment booking, and salon-side service management. Flutter, Dart, Firebase, Google Maps, "
-            "and GetX are identified in the project record. "
+                        "Android app built and published independently: customers find salons and book appointments, "
+            "and salons manage their services and bookings. Built with Flutter, Dart, Firebase, Google Maps "
+            "and GetX. "
             + link("Google Play", "https://play.google.com/store/apps/details?id=com.umar.beautify")
             + "  ·  " + link("Case study", "https://umarsaeedqureshi.com/projects/beautify/"),
             styles["BodySmall"],
@@ -150,9 +148,8 @@ projects = [
     [
         Paragraph("Magnet Masala — Responsive E-commerce Website", styles["ProjectTitle"]),
         Paragraph(
-            "Responsive storefront for a Pakistani spice brand, with product discovery, a basket, and "
-            "WhatsApp-based order continuation. Contribution details and implementation stack are not "
-            "specified in this resume. "
+                        "Responsive online store for a Pakistani spice brand: product browsing, pack sizes, a basket "
+            "and ordering through WhatsApp. "
             + link("Live website", "https://magnetmasala.com/")
             + "  ·  " + link("Case study", "https://umarsaeedqureshi.com/projects/magnet-masala/"),
             styles["BodySmall"],
@@ -175,8 +172,8 @@ story.append(project_table)
 
 story.append(Paragraph("PROFESSIONAL EXPERIENCE", styles["Section"]))
 experience_data = [
-    [Paragraph("Zamindar Technologies", styles["ProjectTitle"]), Paragraph("Mobile app development experience. Company product context is shown on the portfolio. " + link("Company website", "https://zamindartech.com/"), styles["BodySmall"])],
-    [Paragraph("Token Talent", styles["ProjectTitle"]), Paragraph("Mobile app development experience. ESS product context is shown on the portfolio. " + link("Company website", "https://tokentalent.co/"), styles["BodySmall"])],
+    [Paragraph("Zamindar Technologies", styles["ProjectTitle"]), Paragraph("Mobile app development. " + link("Company website", "https://zamindartech.com/"), styles["BodySmall"])],
+    [Paragraph("Token Talent", styles["ProjectTitle"]), Paragraph("Mobile app development for employee self-service (ESS). " + link("Company website", "https://tokentalent.co/"), styles["BodySmall"])],
 ]
 experience_table = Table(experience_data, colWidths=[39 * mm, doc_width - 39 * mm], hAlign="LEFT")
 experience_table.setStyle(TableStyle([
@@ -190,12 +187,7 @@ experience_table.setStyle(TableStyle([
     ("VALIGN", (0, 0), (-1, -1), "TOP"),
 ]))
 story.append(experience_table)
-story.append(Spacer(1, 2 * mm))
-story.append(Paragraph(
-    "AI-assisted workflow: Engineering-led and AI-accelerated. I use coding assistants to explore solutions, "
-    "debug, and refine implementations; code review, testing, and final decisions remain my responsibility.",
-    styles["BodySmall"],
-))
+
 
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)
 doc = ResumeDoc(OUTPUT)

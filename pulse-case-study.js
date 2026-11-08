@@ -19,11 +19,11 @@
       slot.classList.add('has-authentic-media');
       slot.setAttribute('aria-label', image.alt);
       const label = slot.querySelector('.pulse-visual-message > span, .pulse-living-placeholder > span, .pulse-screen-placeholder > span');
-      if (label) label.textContent = 'AUTHENTIC PRODUCT CAPTURE';
+      if (label) label.textContent = 'APP SCREEN';
       const topLine = slot.querySelector('.pulse-visual-topline');
-      if (topLine) topLine.textContent = 'PULSE / AUTHENTIC APP SCREEN';
+      if (topLine) topLine.textContent = 'PULSE / APP SCREEN';
       const caption = slot.querySelector('.pulse-visual-caption');
-      if (caption) caption.textContent = 'AUTHENTIC PULSE PRODUCT SCREEN';
+      if (caption) caption.textContent = 'PULSE APP';
     }, {once:true});
     image.addEventListener('error', () => image.remove(), {once:true});
     slot.prepend(image);
