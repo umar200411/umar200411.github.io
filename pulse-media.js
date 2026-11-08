@@ -1,4 +1,4 @@
-/* Add authentic captures here as they become available. Keep null for absent assets. */
+/* Add real screenshots here as they become available. Keep null for screens that are not ready. */
 window.pulseMediaSources = {
   dashboard: null,
   planner: null,

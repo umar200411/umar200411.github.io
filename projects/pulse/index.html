@@ -6,27 +6,50 @@
   <meta name="description" content="Pulse is a student-focused productivity and life-management application in development by Umar Saeed Qureshi, built with Flutter and Dart.">
   <meta name="author" content="Umar Saeed Qureshi">
   <meta name="theme-color" content="#05070f">
+  <meta name="color-scheme" content="dark light">
   <script>
-    /* Runs before first paint: enables reveal styling and picks an effects tier. */
+    /* Runs before first paint: applies the saved or system theme, enables reveal styling, and picks an effects tier. */
     (function (root, nav) {
       var connection = nav.connection || {};
-      root.classList.add('js');
+            root.classList.add('js');
+      var theme = null;
+      try { theme = localStorage.getItem('theme'); } catch (e) {}
+      if (theme !== 'light' && theme !== 'dark') theme = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      root.setAttribute('data-theme', theme);
+      var themeMeta = document.querySelector('meta[name="theme-color"]');
+      if (themeMeta) themeMeta.setAttribute('content', theme === 'light' ? '#f4f6fb' : '#05070f');
+
       if (connection.saveData || (nav.deviceMemory && nav.deviceMemory <= 2) || (nav.hardwareConcurrency && nav.hardwareConcurrency <= 2)) root.classList.add('fx-lite');
+            // Hold the hero intro briefly so the motion layer can run its entrance (released after 1.5s at most).
+      if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+        root.classList.add('motion-wait');
+        setTimeout(function () { root.classList.remove('motion-wait'); }, 1500);
+      }
       setTimeout(function () { if (!window.__siteReady) { window.__revealFallback = true; root.classList.remove('js'); } }, 4000);
     })(document.documentElement, navigator);
   </script>
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Umar Saeed Qureshi">
   <meta property="og:title" content="Pulse Case Study | Umar Saeed Qureshi">
-  <meta property="og:description" content="A student-first productivity and life-management app in development. Explore the product direction, feature scope, and design principles behind Pulse.">
+  <meta property="og:description" content="An all-in-one app for students that I'm building with Flutter. See what it does and where it's headed.">
   <meta property="og:url" content="https://umarsaeedqureshi.com/projects/pulse/">
+  <meta property="og:image" content="https://umarsaeedqureshi.com/assets/og/pulse.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Pulse case study: an all-in-one app for students, in development">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pulse Case Study | Umar Saeed Qureshi">
+  <meta name="twitter:description" content="An all-in-one app for students that I'm building with Flutter. See what it does and where it's headed.">
+  <meta name="twitter:image" content="https://umarsaeedqureshi.com/assets/og/pulse.jpg">
+  <meta name="twitter:image:alt" content="Pulse case study: an all-in-one app for students, in development">
   <link rel="canonical" href="https://umarsaeedqureshi.com/projects/pulse/">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../site.css?v=20261109-1">
-  <link rel="stylesheet" href="../../case-study.css?v=20261109-1">
+  <link rel="stylesheet" href="../../site.css?v=20261109-4">
+  <link rel="stylesheet" href="../../case-study.css?v=20261109-4">
   <title>Pulse Case Study | Umar Saeed Qureshi</title>
 </head>
 <body class="case-study-page pulse-case-page">
@@ -37,11 +60,10 @@
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="Umar Saeed Qureshi, home">umar<span class="brand-spark" aria-hidden="true">✳</span><small>DEV / DESIGN / SHIP</small></a>
       <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
-        <a href="/#work">Projects</a><a href="/#about">About</a><a href="/#experience">Experience</a>
-        <a href="/#expertise">Toolkit</a><a href="/#process">Process</a><a class="nav-resume" href="/assets/Umar-Saeed-Qureshi-Resume.pdf" target="_blank" rel="noopener">Resume</a>
-        <a href="mailto:umar@umarsaeedqureshi.com" class="nav-contact">Let's talk <span aria-hidden="true">↗</span></a>
+        <a href="/#work">Projects</a><a href="/#services">Services</a><a href="/#process">Process</a><a href="/#about">About</a><a href="/#experience">Experience</a><a href="/#faq">FAQ</a><a class="nav-resume" href="/assets/Umar-Saeed-Qureshi-Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="/#contact" class="nav-contact">Start a project <span aria-hidden="true">↗</span></a>
       </nav>
-      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false"><span></span><span></span></button>
+      <div class="header-actions"><button class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch to light theme"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.2 14.6A8.5 8.5 0 0 1 9.4 3.8a8.5 8.5 0 1 0 10.8 10.8Z"/></svg></button><button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false"><span></span><span></span></button></div>
     </div>
   </header>
 
@@ -52,28 +74,28 @@
       <div class="container pulse-hero-grid">
         <div class="pulse-hero-copy">
           <a class="pulse-back-link" data-pulse-back href="/#work">← Back to projects</a>
-          <span class="pulse-eyebrow">01 / INTRODUCTION · FLUTTER / MOBILE / PRODUCTIVITY</span>
-          <h1 id="pulse-title">Pulse <span>— Productivity that feels alive.</span></h1>
-          <p class="pulse-hero-summary">Pulse brings daily planning, learning, academics, personal finance, wellness, and mindful routines into one thoughtfully designed experience.</p>
+          <span class="pulse-eyebrow">01 / FLUTTER · MOBILE · PRODUCTIVITY</span>
+          <h1 id="pulse-title">Pulse <span>Productivity that feels alive.</span></h1>
+          <p class="pulse-hero-summary">Pulse brings planning, studying, classes, money, wellness and prayer times into one app for students.</p>
           <p class="pulse-tagline">Your day. Your routines. Your progress.</p>
-          <div class="pulse-hero-meta"><span>APP DEVELOPER · PRODUCT DESIGN · UI/UX</span><span>STUDENT-FIRST PRODUCT</span><span>IN DEVELOPMENT</span></div>
-          <div class="pulse-hero-actions"><a class="pulse-button pulse-button--primary" href="#features">Explore the product <span aria-hidden="true">↓</span></a><a class="pulse-button pulse-button--secondary" href="mailto:umar@umarsaeedqureshi.com?subject=Pulse%20product%20inquiry">Ask about Pulse <span aria-hidden="true">↗</span></a></div>
+          <div class="pulse-hero-meta"><span>DEVELOPMENT · PRODUCT DESIGN · UI/UX</span><span>FOR STUDENTS</span><span>IN DEVELOPMENT</span></div>
+          <div class="pulse-hero-actions"><a class="pulse-button pulse-button--primary" href="#features">See the features <span aria-hidden="true">↓</span></a><a class="pulse-button pulse-button--secondary" href="mailto:umar@umarsaeedqureshi.com?subject=Pulse%20product%20inquiry">Ask about Pulse <span aria-hidden="true">↗</span></a></div>
         </div>
-        <div class="pulse-hero-visual" data-pulse-media-slot="dashboard" role="img" aria-label="Clearly labeled placeholder for authentic Pulse app imagery, which has not yet been supplied.">
+        <div class="pulse-hero-visual" data-pulse-media-slot="dashboard" role="img" aria-label="Pulse preview. Screenshots coming soon.">
           <span class="pulse-visual-topline">PULSE / PRODUCT PREVIEW</span>
           <div class="pulse-placeholder-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="pulse-visual-message"><span>AUTHENTIC APP SCREENS PENDING</span><strong>Product imagery<br>will appear here.</strong><small>This visual is a placeholder, not a Pulse interface.</small></div>
-          <span class="pulse-visual-caption">MEDIA PLACEHOLDER · NO SCREENSHOTS IN REPOSITORY</span>
+          <div class="pulse-visual-message"><span>SCREENSHOTS COMING SOON</span><strong>The app is still<br>being built.</strong><small>I'll add real screens here soon.</small></div>
+          <span class="pulse-visual-caption">PULSE / IN DEVELOPMENT</span>
         </div>
       </div>
     </section>
 
-    <div class="pulse-truth-note container" role="note"><strong>About this case study</strong><span>Pulse is in development. The portfolio repository does not include the app source or authentic app screenshots. Feature descriptions below communicate product scope and direction; individual completion and production readiness have not been independently verified.</span></div>
+    <div class="pulse-truth-note container" role="note"><strong>Work in progress</strong><span>Pulse is still in development, so this page describes what I'm building. Some features are further along than others, and screenshots will follow once the app is ready to show.</span></div>
 
     <section class="pulse-section" aria-labelledby="problem-title">
       <div class="container pulse-two-column">
         <div><span class="pulse-section-kicker">02 / THE PROBLEM</span><h2 id="problem-title">Student life happens across too many tools.</h2></div>
-        <div class="pulse-prose"><p>Students often reach for separate applications to manage daily schedules, tasks and reminders, learning sessions, academic materials, expenses, habits, wellness activities, and prayer tracking.</p><p>Moving between disconnected tools can make everyday planning feel more complicated than it needs to be. Pulse explores a simpler, more cohesive place to bring those routines together.</p>
+        <div class="pulse-prose"><p>Students often reach for separate applications to manage daily schedules, tasks and reminders, learning sessions, academic materials, expenses, habits, wellness activities, and prayer tracking.</p><p>Jumping between apps makes planning harder than it needs to be. Pulse puts all of it in one place.</p>
           <ul class="pulse-check-list"><li>Daily schedules, tasks, and reminders</li><li>Learning sessions and academic materials</li><li>Personal expenses, routines, and well-being</li><li>Mindful practices such as prayer tracking</li></ul>
         </div>
       </div>
@@ -82,77 +104,83 @@
     <section class="pulse-section pulse-section--blue" aria-labelledby="solution-title">
       <div class="container pulse-two-column">
         <div><span class="pulse-section-kicker">03 / THE SOLUTION</span><h2 id="solution-title">One calm space to organize the day.</h2></div>
-        <div class="pulse-prose"><p>Pulse brings productivity, academic organization, learning, finance, and personal routines into one student-first experience. Its product direction is to help people move through their day with less visual clutter and clearer next steps.</p>
-          <div class="pulse-principles"><span>Simple navigation</span><span>Unified experience</span><span>Student-friendly flows</span><span>Thoughtful UI/UX</span><span>Progress at a glance</span><span>Calm visual language</span></div>
+        <div class="pulse-prose"><p>Pulse brings planning, classes, studying, money and daily routines into one app built around a student's day. The goal is less clutter and a clear idea of what to do next.</p>
+          <div class="pulse-principles"><span>Simple navigation</span><span>Unified experience</span><span>Student-friendly flows</span><span>Careful UI/UX</span><span>Progress at a glance</span><span>Calm visual language</span></div>
         </div>
       </div>
     </section>
 
     <section class="pulse-section pulse-section--tint" id="features" aria-labelledby="features-title">
       <div class="container">
-        <div class="pulse-section-heading"><span class="pulse-section-kicker">04 / CORE APP FEATURES</span><h2 id="features-title">A connected set of everyday tools.</h2><p>These modules describe Pulse's evolving product scope. Availability varies during development; this overview does not imply that every feature is complete or production-ready.</p></div>
+        <div class="pulse-section-heading"><span class="pulse-section-kicker">04 / CORE APP FEATURES</span><h2 id="features-title">A connected set of everyday tools.</h2><p>Here's everything Pulse is meant to cover. It's still being built, so some of these are further along than others.</p></div>
         <div class="pulse-feature-grid">
-          <article class="pulse-feature-card"><span class="pulse-feature-number">01</span><span class="pulse-scope-label">PRODUCT SCOPE</span><h3>Today Dashboard</h3><p>A daily overview intended to bring tasks, routines, reminders, progress, and contextual information into one place.</p></article>
-          <article class="pulse-feature-card"><span class="pulse-feature-number">02</span><span class="pulse-scope-label">PRODUCT SCOPE</span><h3>Planner, Tasks &amp; Reminders</h3><p>Daily, weekly, and monthly planning with checklists, deadlines, priorities, and reminders.</p></article>
-          <article class="pulse-feature-card"><span class="pulse-feature-number">03</span><span class="pulse-scope-label">PRODUCT SCOPE</span><h3>Learning &amp; Focus</h3><p>Learning goals, study sessions, focus timers, productivity tracking, and tools for managing distractions.</p></article>
-          <article class="pulse-feature-card"><span class="pulse-feature-number">04</span><span class="pulse-scope-label">PRODUCT SCOPE</span><h3>Academics</h3><p>Organization for assignments, study materials, academic deadlines, and collaborative study workflows.</p></article>
-          <article class="pulse-feature-card pulse-feature-card--wide"><span class="pulse-feature-number">05</span><span class="pulse-scope-label">PRODUCT SCOPE</span><h3>Academic Groups</h3><p>A private teacher–student collaboration concept with teacher approval and authority retained at the group level.</p>
+          <article class="pulse-feature-card"><span class="pulse-feature-number">01</span><h3>Today Dashboard</h3><p>One screen for the day: tasks, routines, reminders and progress.</p></article>
+          <article class="pulse-feature-card"><span class="pulse-feature-number">02</span><h3>Planner, Tasks &amp; Reminders</h3><p>Daily, weekly, and monthly planning with checklists, deadlines, priorities, and reminders.</p></article>
+          <article class="pulse-feature-card"><span class="pulse-feature-number">03</span><h3>Learning &amp; Focus</h3><p>Learning goals, study sessions, focus timers, productivity tracking, and tools for managing distractions.</p></article>
+          <article class="pulse-feature-card"><span class="pulse-feature-number">04</span><h3>Academics</h3><p>Organization for assignments, study materials, academic deadlines, and collaborative study workflows.</p></article>
+          <article class="pulse-feature-card pulse-feature-card--wide"><span class="pulse-feature-number">05</span><h3>Academic Groups</h3><p>Private groups for a teacher and their students. The teacher approves who joins and stays in charge.</p>
             <div class="pulse-group-flows"><div><h4>Teacher flow</h4><ul><li>Create a group and generate a unique joining code.</li><li>Review and approve student join requests.</li><li>Manage members and assign student administrators.</li></ul></div><div><h4>Student flow</h4><ul><li>Enter a group code, name, and student ID.</li><li>Submit a request and access the group after approval.</li><li>Receive notifications for announcements and shared materials.</li></ul></div></div>
-            <p>Teachers and authorized student admins can share announcements, documents, PDFs, images, uploaded videos, educational links, and video links. Teachers retain final group authority.</p>
+            <p>Teachers, and student admins they pick, can share announcements, documents, PDFs, images, videos and links. The teacher always has the final say.</p>
           </article>
-          <article class="pulse-feature-card"><span class="pulse-feature-number">06</span><span class="pulse-scope-label">PRODUCT SCOPE</span><h3>Finance</h3><p>Personal income and expenses, budgets, savings, and spending insights for building everyday money awareness.</p></article>
-          <article class="pulse-feature-card"><span class="pulse-feature-number">07</span><span class="pulse-scope-label">PRODUCT SCOPE</span><h3>Wellness</h3><p>Student-friendly nutrition, physical activity, movement, and general well-being features.</p></article>
-          <article class="pulse-feature-card"><span class="pulse-feature-number">08</span><span class="pulse-scope-label">PRODUCT SCOPE</span><h3>Namaz</h3><p>Location-based prayer times, prayer reminders and tracking, and Qibla direction functionality.</p></article>
-          <article class="pulse-feature-card"><span class="pulse-feature-number">09</span><span class="pulse-scope-label">PRODUCT SCOPE</span><h3>Progress &amp; Insights</h3><p>Visual tracking for study activity, tasks, routines, consistency, achievements, and personal progress.</p></article>
-          <article class="pulse-feature-card"><span class="pulse-feature-number">10</span><span class="pulse-scope-label">PRODUCT SCOPE</span><h3>Live Weather</h3><p>Weather information presented through a dynamic visual environment that can complement the day dashboard.</p></article>
+          <article class="pulse-feature-card"><span class="pulse-feature-number">06</span><h3>Finance</h3><p>Track income and expenses, set budgets and savings goals, and see where your money goes.</p></article>
+          <article class="pulse-feature-card"><span class="pulse-feature-number">07</span><h3>Wellness</h3><p>Nutrition, exercise and general well-being, kept simple for students.</p></article>
+          <article class="pulse-feature-card"><span class="pulse-feature-number">08</span><h3>Namaz</h3><p>Prayer times for your location, reminders, prayer tracking and Qibla direction.</p></article>
+          <article class="pulse-feature-card"><span class="pulse-feature-number">09</span><h3>Progress &amp; Insights</h3><p>Charts for study time, tasks, routines and streaks, so you can see how you're doing.</p></article>
+          <article class="pulse-feature-card"><span class="pulse-feature-number">10</span><h3>Live Weather</h3><p>Current weather on your dashboard, later tied into the Living Sky visuals.</p></article>
         </div>
       </div>
     </section>
 
     <section class="pulse-section pulse-living-sky" aria-labelledby="living-sky-title">
       <div class="container pulse-living-grid">
-        <div class="pulse-living-copy"><span class="pulse-section-kicker">05 / SIGNATURE EXPERIENCE</span><h2 id="living-sky-title">Pulse Living Sky <em>—</em> a dashboard that moves with time.</h2><p>Living Sky is the concept for a real-time celestial and atmospheric visual experience: a dashboard environment that reflects time of day and, where supported, current weather.</p><p>The intended visual language includes sun and moon positioning, day-to-night color changes, animated clouds, stars and lunar details, layered atmosphere, mountain silhouettes, and gentle transitions. Weather-responsive appearance remains part of the evolving scope.</p><span class="pulse-inline-status">VISUAL IMPLEMENTATION / IN PROGRESS</span></div>
-        <div class="pulse-living-placeholder" data-pulse-media-slot="livingSky" role="img" aria-label="Labeled placeholder for a genuine Pulse Living Sky capture; no screenshot or animation is available in this repository."><span>REAL LIVING SKY CAPTURE PENDING</span><strong>Living Sky</strong><small>Concept description only · not a product screenshot or animation</small></div>
+        <div class="pulse-living-copy"><span class="pulse-section-kicker">05 / SIGNATURE EXPERIENCE</span><h2 id="living-sky-title">Living Sky: a dashboard that moves with the time of day.</h2><p>Living Sky is the idea behind the Pulse dashboard: a sky that follows the time of day, and the weather where it's available.</p><p>Think of a sun and moon that move across the screen, colours that shift from day to night, drifting clouds, stars and mountains in the distance. Weather effects are still on the to-do list.</p><span class="pulse-inline-status">IN PROGRESS</span></div>
+        <div class="pulse-living-placeholder" data-pulse-media-slot="livingSky" role="img" aria-label="Living Sky preview, coming soon."><span>PREVIEW COMING SOON</span><strong>Living Sky</strong><small>Illustration, not a screenshot</small></div>
       </div>
     </section>
 
     <section class="pulse-section" aria-labelledby="design-title">
       <div class="container">
-        <div class="pulse-section-heading"><span class="pulse-section-kicker">06 / PREMIUM UI/UX</span><h2 id="design-title">Designed to feel effortless.</h2><p>Pulse's design direction favors clear structure and supportive motion, so everyday organization feels approachable rather than demanding.</p></div>
-        <div class="pulse-design-principles"><article><span>01</span><h3>Calm by default</h3><p>Considered colors, comfortable spacing, and restrained visual noise.</p></article><article><span>02</span><h3>Clear next steps</h3><p>Information hierarchy that helps students understand what needs attention.</p></article><article><span>03</span><h3>Motion with purpose</h3><p>Smooth navigation transitions and subtle micro-interactions that support feedback.</p></article><article><span>04</span><h3>Consistent themes</h3><p>A coherent experience across light and dark appearance modes.</p></article></div>
-        <div class="pulse-screen-gallery" aria-label="Pulse screen capture placeholders">
-          <div class="pulse-screen-placeholder" data-pulse-media-slot="dashboard"><span>SCREEN CAPTURE PENDING</span><strong>Today Dashboard</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="learning"><span>SCREEN CAPTURE PENDING</span><strong>Learning</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="planner"><span>SCREEN CAPTURE PENDING</span><strong>Planner</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="academics"><span>SCREEN CAPTURE PENDING</span><strong>Academics</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="academicGroups"><span>SCREEN CAPTURE PENDING</span><strong>Academic Groups</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="progress"><span>SCREEN CAPTURE PENDING</span><strong>Progress</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="settings"><span>SCREEN CAPTURE PENDING</span><strong>Settings</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="namaz"><span>SCREEN CAPTURE PENDING</span><strong>Namaz</strong></div>
+        <div class="pulse-section-heading"><span class="pulse-section-kicker">06 / DESIGN</span><h2 id="design-title">Designed to stay out of the way.</h2><p>Clear layouts and gentle motion, so planning your day feels easy instead of like another chore.</p></div>
+        <div class="pulse-design-principles"><article><span>01</span><h3>Calm by default</h3><p>Soft colours, plenty of space and nothing shouting for attention.</p></article><article><span>02</span><h3>Clear next steps</h3><p>The most important thing on the screen is always the easiest to see.</p></article><article><span>03</span><h3>Motion with purpose</h3><p>Smooth transitions and small animations that confirm what you just did.</p></article><article><span>04</span><h3>Consistent themes</h3><p>Light and dark modes that feel like the same app.</p></article></div>
+        <div class="pulse-screen-gallery" aria-label="Pulse screens, coming soon">
+          <div class="pulse-screen-placeholder" data-pulse-media-slot="dashboard"><span>COMING SOON</span><strong>Today Dashboard</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="learning"><span>COMING SOON</span><strong>Learning</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="planner"><span>COMING SOON</span><strong>Planner</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="academics"><span>COMING SOON</span><strong>Academics</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="academicGroups"><span>COMING SOON</span><strong>Academic Groups</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="progress"><span>COMING SOON</span><strong>Progress</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="settings"><span>COMING SOON</span><strong>Settings</strong></div><div class="pulse-screen-placeholder" data-pulse-media-slot="namaz"><span>COMING SOON</span><strong>Namaz</strong></div>
         </div>
-        <p class="pulse-media-caption">These are labeled media slots, not recreated app interfaces. Authentic captures can replace them when supplied.</p>
+        <p class="pulse-media-caption">Real screenshots will go here as each part of the app is ready.</p>
       </div>
     </section>
 
     <section class="pulse-section pulse-section--dark" aria-labelledby="technical-title">
       <div class="container pulse-two-column">
-        <div><span class="pulse-section-kicker">07 / TECHNICAL DEVELOPMENT</span><h2 id="technical-title">Built with Flutter. Designed with intention.</h2></div>
-        <div class="pulse-prose"><p>The confirmed development technologies for Pulse are Flutter and Dart. My role spans app development, product design, and UI/UX.</p><div class="pulse-confirmed-stack"><span>FLUTTER</span><span>DART</span></div><div class="pulse-evidence-note"><strong>Implementation details are intentionally limited.</strong><p>The Pulse source repository is not present here. Backend services, state-management libraries, database choices, authentication, notifications, media pipelines, and location integrations have not been independently verified and are not presented as implemented facts.</p></div></div>
+        <div><span class="pulse-section-kicker">07 / TECH</span><h2 id="technical-title">Built with Flutter and Dart.</h2></div>
+        <div class="pulse-prose"><p>Pulse is built with Flutter and Dart. I'm doing the development, the product design and the UI/UX.</p><div class="pulse-confirmed-stack"><span>FLUTTER</span><span>DART</span></div><div class="pulse-evidence-note"><strong>More technical detail soon.</strong><p>I'll write up the architecture, backend and state management once the first version ships.</p></div></div>
       </div>
     </section>
 
     <section class="pulse-section pulse-section--tint" aria-labelledby="journey-title">
       <div class="container">
-        <div class="pulse-section-heading"><span class="pulse-section-kicker">08 / DEVELOPMENT JOURNEY</span><h2 id="journey-title">Building Pulse, one experience at a time.</h2><p>This is an ongoing product-building process, not a dated release timeline.</p></div>
-        <ol class="pulse-journey-grid"><li><span>01</span><strong>Define the student productivity problem</strong></li><li><span>02</span><strong>Shape the first MVP</strong></li><li><span>03</span><strong>Develop core experiences</strong></li><li><span>04</span><strong>Improve the dashboard</strong></li><li><span>05</span><strong>Refine Living Sky</strong></li><li><span>06</span><strong>Simplify Academic Groups</strong></li><li><span>07</span><strong>Enhance motion and responsive layouts</strong></li><li><span>08</span><strong>Polish and test the whole experience</strong></li></ol>
+        <div class="pulse-section-heading"><span class="pulse-section-kicker">08 / DEVELOPMENT JOURNEY</span><h2 id="journey-title">Building Pulse, one piece at a time.</h2><p>Roughly the order I'm working in.</p></div>
+        <ol class="pulse-journey-grid"><li><span>01</span><strong>Work out what students actually need</strong></li><li><span>02</span><strong>Shape the first version</strong></li><li><span>03</span><strong>Build the core features</strong></li><li><span>04</span><strong>Improve the dashboard</strong></li><li><span>05</span><strong>Refine Living Sky</strong></li><li><span>06</span><strong>Simplify Academic Groups</strong></li><li><span>07</span><strong>Improve motion and layouts</strong></li><li><span>08</span><strong>Polish and test everything</strong></li></ol>
       </div>
     </section>
 
     <section class="pulse-status-section" id="status" aria-labelledby="status-title">
-      <div class="container pulse-status-inner"><span class="pulse-section-kicker">09 / CURRENT STATUS</span><br><span class="pulse-status-pill"><i aria-hidden="true"></i> IN DEVELOPMENT</span><h2 id="status-title">An evolving product, built with care.</h2><p>Pulse continues through feature development, refinement, and testing. It is not presented as a publicly launched app, and no app-store availability or release date is claimed.</p></div>
+      <div class="container pulse-status-inner"><span class="pulse-section-kicker">09 / CURRENT STATUS</span><br><span class="pulse-status-pill"><i aria-hidden="true"></i> IN DEVELOPMENT</span><h2 id="status-title">Still being built.</h2><p>Pulse isn't on the app stores yet and there's no release date. I'm still building features, refining them and testing.</p></div>
     </section>
 
     <section class="pulse-cta" aria-labelledby="pulse-cta-title">
-      <div class="container pulse-cta-inner"><span class="pulse-section-kicker">10 / NEXT</span><h2 id="pulse-cta-title">More than a productivity app.</h2><p>Pulse is an ongoing exploration of how thoughtful engineering and beautiful design can make everyday productivity feel simpler and more human.</p><div class="pulse-hero-actions"><a class="pulse-button pulse-button--primary" data-pulse-back href="/#work">← Back to Projects</a><a class="pulse-button pulse-button--secondary" href="mailto:umar@umarsaeedqureshi.com?subject=Pulse%20product%20inquiry">Talk with Umar ↗</a></div></div>
+      <div class="container pulse-cta-inner"><span class="pulse-section-kicker">10 / NEXT</span><h2 id="pulse-cta-title">Want to know more?</h2><p>Questions about Pulse, or want to build something similar? Get in touch.</p><div class="pulse-hero-actions"><a class="pulse-button pulse-button--primary" data-pulse-back href="/#work">← Back to Projects</a><a class="pulse-button pulse-button--secondary" href="mailto:umar@umarsaeedqureshi.com?subject=Pulse%20product%20inquiry">Talk with Umar ↗</a></div></div>
     </section>
   </main>
   <footer class="pulse-footer"><div class="container"><a class="pulse-footer-brand" href="/">umar<span>✳</span></a><p>© 2026 UMAR SAEED QURESHI · PULSE / IN DEVELOPMENT</p><a href="/#work">All projects ↑</a></div></footer>
-  <script src="../../script.js?v=20261109-1" defer></script>
-  <script src="../../effects.js?v=20261109-1" defer></script>
-  <script src="../../pulse-media.js?v=20261105-2" defer></script>
-  <script src="../../pulse-case-study.js?v=20261105-2" defer></script>
+  <script src="../../script.js?v=20261109-4" defer></script>
+  <script src="../../effects.js?v=20261109-4" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" integrity="sha384-xb96EMJeax+NLXMC88ZBa1xAeAW+kn+horHh/zFlbMLG2UPWhMJJSlv7fi57hS+Q" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js" integrity="sha384-lg3+EgIwmxYq9YD4ix279pdUEasqmOS17fF+2mI/NEg6JHkawYaWYpJ6nKZenPOy" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" integrity="sha384-FKTX0CNJ8ngN1oGMBReVu7mvjTJyjFiD5etb1NKnYxc+8eFI2O0KWnksTN+oTFcu" crossorigin="anonymous" defer></script>
+  <script src="../../animations.js?v=20261109-4" defer></script>
+  <script src="../../pulse-media.js?v=20261109-4" defer></script>
+  <script src="../../pulse-case-study.js?v=20261109-4" defer></script>
 </body>
 </html>

@@ -5,7 +5,7 @@ This is the static portfolio website for **Umar Saeed Qureshi**, Flutter & Web D
 ## Files
 
 - `index.html` — all page content and SEO metadata
-- `site.css` — shared dark design system (tokens, header, sections, footer) for every page
+- `site.css` — shared design system with light and dark themes (tokens, header, sections, footer) for every page
 - `depot.css` — the interactive container-depot hero
 - `case-study.css` — Beautify, Magnet Masala, and Pulse case-study pages
 - `script.js` — sticky header, mobile menu, reveal animations, galleries, copy-email interaction
@@ -15,6 +15,20 @@ This is the static portfolio website for **Umar Saeed Qureshi**, Flutter & Web D
 - `assets/social-preview.svg` — social sharing placeholder graphic
 - `robots.txt` — search engine crawl configuration
 - `sitemap.xml` — update after your final domain is selected
+
+## Light and dark themes
+
+- The site follows the visitor's device setting. The sun/moon button in the hero bar and the sticky header switches themes; the choice is saved in the browser (`localStorage` key `theme`) and applied by the inline `<head>` script before the first paint, so there is no flash of the wrong theme.
+- Colours are theme tokens: dark values in `:root` and light values in `:root[data-theme="light"]` at the top of `site.css`. The hero's light layer is at the end of `depot.css`, and case-study tweaks are at the end of `case-study.css`. Neon fills such as the lime buttons use `--lime-fill` so they look the same in both themes; device mock-ups and terminal windows stay dark on purpose.
+- Every text element on all four pages was measured against the real rendered background and meets WCAG AA contrast in both themes.
+
+## Client features
+
+- "Start a project" calls to action (header, hero, a floating button on phones) lead to the contact section.
+- Each service has a "Get a quote" link that scrolls to the quick brief with the project type already chosen.
+- The quick brief sends by email or WhatsApp with the details pre-filled. The WhatsApp number it uses is set in `script.js` (`wa.me/923492287799`).
+- The FAQ answers the usual first questions (remote work, cost, timeline, existing apps, design, Google Play). Review the answers so they match how you work.
+- Social preview cards (`assets/og/*.jpg`) give every page its own image when the link is shared on WhatsApp, LinkedIn, X or Facebook. After changing a headline, regenerate them with `npm run og-cards` while a local server is running.
 
 ## Visual effects and performance
 

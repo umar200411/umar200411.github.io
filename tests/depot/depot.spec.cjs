@@ -44,7 +44,7 @@ test('two-column depot renders seven controls and preserves the complete portfol
   }
   await expect(page.locator('.depot-rail')).toBeVisible();
   await expect(page.locator('.depot-carriage')).toBeVisible();
-  await expect(page.getByRole('heading',{name:'I build apps + web that feel alive.'})).toBeVisible();
+  await expect(page.getByRole('heading',{name:'I build Flutter apps and websites.'})).toBeVisible();
   expect(await page.locator('.depot-rail').evaluate(el=>el.getBoundingClientRect().left)).toBeGreaterThan(await page.locator('.depot-intro').evaluate(el=>el.getBoundingClientRect().right));
   const pageStructure=await page.evaluate(()=>({
     renderedSectionCount:document.querySelectorAll('.portfolio-details section').length,
@@ -102,10 +102,10 @@ test('Pulse featured project filters and opens the single detailed case study ro
   await expect(page.getByRole('heading',{name:/Pulse.*Productivity that feels alive/})).toBeVisible();
   await expect(page.locator('.pulse-feature-card')).toHaveCount(10);
   await expect(page.locator('.pulse-screen-placeholder')).toHaveCount(8);
-  await expect(page.locator('.pulse-hero-visual')).toContainText('AUTHENTIC APP SCREENS PENDING');
+  await expect(page.locator('.pulse-hero-visual')).toContainText('SCREENSHOTS COMING SOON');
   await expect(page.locator('.pulse-case-main img')).toHaveCount(0);
-  await expect(page.locator('.pulse-truth-note')).toContainText('individual completion');
-  await expect(page.locator('.pulse-evidence-note')).toContainText('not present here');
+  await expect(page.locator('.pulse-truth-note')).toContainText('still in development');
+  await expect(page.locator('.pulse-evidence-note')).toContainText('once the first version ships');
   await expect(page.locator('.pulse-cta a[href="/#work"]')).toBeVisible();
   await page.locator('.pulse-cta a[href="/#work"]').click();
   await expect(page).toHaveURL(/#work$/);
@@ -430,4 +430,66 @@ test('captures a representative container return and pickup transition', async (
   await expect(getContainer(page,'work')).not.toHaveClass(/is-selected/);
   await capture(page,path.join('test-results','desktop-1440x900-switch-work-to-about.png'));
   await expect(getContainer(page,'about')).toHaveClass(/is-open/);
+});
+
+test('theme toggle switches between light and dark and remembers the choice', async ({browser}) => {
+  const context = await browser.newContext({colorScheme:'dark'});
+  const page = await context.newPage();
+  await loaded(page);
+  const html = page.locator('html');
+  await expect(html).toHaveAttribute('data-theme','dark');
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content','#05070f');
+  const toggle = page.locator('.depot-tools .theme-toggle');
+  await expect(toggle).toHaveAttribute('aria-label','Switch to light theme');
+  await toggle.click();
+  await expect(html).toHaveAttribute('data-theme','light');
+  await expect(toggle).toHaveAttribute('aria-label','Switch to dark theme');
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content','#f4f6fb');
+  expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)).toBe('rgb(244, 246, 251)');
+  await page.reload();
+  await expect(html).toHaveAttribute('data-theme','light');
+  await page.goto('/projects/beautify/');
+  await expect(html).toHaveAttribute('data-theme','light');
+  await page.locator('.site-header .theme-toggle').click();
+  await expect(html).toHaveAttribute('data-theme','dark');
+  await context.close();
+  const lightDevice = await browser.newContext({colorScheme:'light'});
+  const lightPage = await lightDevice.newPage();
+  await lightPage.goto('/');
+  await expect(lightPage.locator('html')).toHaveAttribute('data-theme','light');
+  await lightDevice.close();
+});
+
+test('brief offers email and WhatsApp, and quote links pre-select the project type', async ({page}) => {
+  await loaded(page);
+  await page.locator('#services').scrollIntoViewIfNeeded();
+  await page.locator('.service-quote[data-brief-type="Responsive website"]').click();
+  await expect(page.locator('#project-brief select[name="type"]')).toHaveValue('Responsive website');
+  await page.locator('#project-brief input[name="name"]').fill('Sara');
+  await page.locator('#project-brief textarea[name="message"]').fill('A booking site for my studio.');
+    await page.context().route('https://wa.me/**', route => route.fulfill({status:200,contentType:'text/html',body:'<p>WhatsApp</p>'}));
+  const [popup] = await Promise.all([
+    page.waitForEvent('popup'),
+    page.getByRole('button',{name:/Send on WhatsApp/}).click()
+  ]);
+  await popup.waitForURL(/wa\.me\/923492287799\?text=/);
+  const message = new URL(popup.url()).searchParams.get('text');
+  expect(message).toContain("I'm Sara");
+  expect(message).toContain('Project type: Responsive website');
+  expect(message).toContain('A booking site for my studio.');
+  await popup.close();
+  await expect(page.locator('#faq .faq-item')).toHaveCount(6);
+});
+
+test('motion layer loads and leaves every section fully visible', async ({page}) => {
+  const errors=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  await loaded(page);
+  await expect(page.locator('html')).toHaveClass(/gsap/);
+  await expect(page.getByRole('heading',{name:'I build Flutter apps and websites.'})).toBeVisible();
+  await page.evaluate(async()=>{ for(let y=0;y<document.documentElement.scrollHeight;y+=400){ window.scrollTo(0,y); await new Promise(r=>setTimeout(r,60)); } });
+  await expect.poll(()=>page.evaluate(()=>[...document.querySelectorAll('[data-reveal]')].filter(el=>!el.hidden&&Number(getComputedStyle(el).opacity)<.99).length)).toBe(0);
+  await expect(page.locator('.release-window')).toContainText('ready to ship_');
+  await expect(page.locator('.stat-number').first()).toHaveText('01');
+  expect(errors).toEqual([]);
 });

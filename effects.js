@@ -16,7 +16,9 @@
   const coarse = matchMedia('(pointer: coarse)').matches;
   const lite = root.classList.contains('fx-lite');
   const canObserve = 'IntersectionObserver' in window && 'ResizeObserver' in window;
-  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  const isLight = () => root.getAttribute('data-theme') === 'light';
+  const canvases = [];
   const onMotionChange = callback => {
     if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', callback);
     else if (reduceMotion.addListener) reduceMotion.addListener(callback);
@@ -47,7 +49,8 @@
         this.sync();
       }, { rootMargin: '120px 0px' }).observe(host);
       document.addEventListener('visibilitychange', () => this.sync());
-      onMotionChange(() => { this.sync(); this.paint(0); });
+            onMotionChange(() => { this.sync(); this.paint(0); });
+      canvases.push(this);
       this.resize();
     }
 
@@ -99,7 +102,8 @@
   }
 
   /* ---------- Hero: drifting, twinkling starfield with pointer parallax ---------- */
-  const starColors = { white: '#e8eeff', cyan: '#4de2ff', lime: '#c8ff4d', violet: '#a99bff' };
+    const starColors = { white: '#e8eeff', cyan: '#4de2ff', lime: '#c8ff4d', violet: '#a99bff' };
+  const starColorsLight = { white: '#64748b', cyan: '#0e93b5', lime: '#5b9a0d', violet: '#7c5cf0' };
   function starfieldScene(host) {
     const stars = [];
     const parallax = { x: 0, y: 0, tx: 0, ty: 0 };
@@ -145,7 +149,10 @@
           : (y > height * .1 && y < height * .34 ? .35 : 1);
         parallax.x += (parallax.tx - parallax.x) * ease;
         parallax.y += (parallax.ty - parallax.y) * ease;
-        let color = '';
+                let color = '';
+        const light = isLight();
+        const palette = light ? starColorsLight : starColors;
+        const strength = light ? .5 : 1;
         for (const star of stars) {
           star.y -= dt * .007 * star.z;
           if (star.y < -.02) { star.y = 1.02; star.x = Math.random(); }
@@ -153,8 +160,8 @@
           const size = .45 + star.z * 1.25;
           const x = star.x * width - parallax.x * star.z * 16;
           const y = star.y * height - parallax.y * star.z * 10;
-          if (star.color !== color) { color = star.color; ctx.fillStyle = starColors[color]; }
-          ctx.globalAlpha = (.18 + .62 * star.z) * twinkle * quiet(x, y);
+          if (star.color !== color) { color = star.color; ctx.fillStyle = palette[color]; }
+          ctx.globalAlpha = (.18 + .62 * star.z) * twinkle * quiet(x, y) * strength;
           if (size < 1.1) {
             ctx.fillRect(x - size, y - size, size * 2, size * 2);
           } else {
@@ -163,8 +170,8 @@
             ctx.fill();
           }
         }
-        if (!dt) return;
-        // An occasional shooting star crossing the upper sky.
+                if (!dt || light) return;
+        // An occasional shooting star crossing the upper sky (night theme only).
         nextShot -= dt;
         if (!shooting && nextShot <= 0) {
           shooting = { x: width * (.35 + Math.random() * .6), y: height * Math.random() * .35, life: 0, span: .9 + Math.random() * .5 };
@@ -196,7 +203,8 @@
   function constellationScene(host) {
     const nodes = [];
     const pointer = { x: 0, y: 0, active: false };
-    const palette = ['#c8ff4d', '#8f80ff', '#4de2ff', '#e8eeff'];
+        const palette = ['#c8ff4d', '#8f80ff', '#4de2ff', '#e8eeff'];
+    const paletteLight = ['#5b9a0d', '#6d4ee0', '#0e7490', '#475569'];
     const move = event => {
       const rect = host.getBoundingClientRect();
       pointer.x = event.clientX - rect.left;
@@ -250,8 +258,9 @@
             if (node.y < -20) node.y = height + 20; else if (node.y > height + 20) node.y = -20;
           }
         }
+                const light = isLight();
         ctx.lineWidth = 1;
-        ctx.strokeStyle = '#8f9cff';
+        ctx.strokeStyle = light ? '#6366f1' : '#8f9cff';
         for (let i = 0; i < nodes.length; i += 1) {
           const a = nodes[i];
           for (let j = i + 1; j < nodes.length; j += 1) {
@@ -260,7 +269,7 @@
             const dy = a.y - b.y;
             const d2 = dx * dx + dy * dy;
             if (d2 > link2) continue;
-            ctx.globalAlpha = (1 - d2 / link2) * .32 * Math.max(0, Math.min(edge(a.y), edge(b.y)));
+                        ctx.globalAlpha = (1 - d2 / link2) * (light ? .22 : .32) * Math.max(0, Math.min(edge(a.y), edge(b.y)));
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -268,7 +277,7 @@
           }
         }
         if (pointer.active && dt) {
-          ctx.strokeStyle = '#c8ff4d';
+                    ctx.strokeStyle = light ? '#4d7c0f' : '#c8ff4d';
           for (const node of nodes) {
             const dx = node.x - pointer.x;
             const dy = node.y - pointer.y;
@@ -281,9 +290,9 @@
             ctx.stroke();
           }
         }
-        for (const node of nodes) {
-          ctx.globalAlpha = .85 * Math.max(0, edge(node.y));
-          ctx.fillStyle = node.color;
+                for (const [index, node] of nodes.entries()) {
+          ctx.globalAlpha = (light ? .7 : .85) * Math.max(0, edge(node.y));
+          ctx.fillStyle = light ? paletteLight[index % paletteLight.length] : node.color;
           ctx.beginPath();
           ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
           ctx.fill();
@@ -296,7 +305,8 @@
     const hero = document.querySelector('.depot-page');
     if (hero) new AmbientCanvas(hero, starfieldScene(hero));
     const contact = document.querySelector('.contact-section');
-    if (contact) new AmbientCanvas(contact, constellationScene(contact));
+        if (contact) new AmbientCanvas(contact, constellationScene(contact));
+    document.addEventListener('themechange', () => canvases.forEach(view => view.paint(0)));
   }
 
   /* ---------- Hero light that follows the pointer (composited transform only) ---------- */
@@ -326,7 +336,7 @@
   if (finePointer.matches && !reduceMotion.matches) {
     const selector = [
       '.project-card', '.skill-card', '.service-card', '.now-grid article', '.working-points article',
-      '.process-step', '.experience-item', '.state-demo', '.state-architecture', '.ai-flow-list li',
+      '.process-step', '.experience-item', '.state-demo', '.state-architecture',
       '.contact-channel', '.case-feature-grid article', '.pulse-feature-card', '.pulse-design-principles article'
     ].join(',');
     document.querySelectorAll(selector).forEach(card => card.classList.add('fx-spot'));
@@ -349,6 +359,15 @@
     }, { passive: true });
   }
 
+    /* ---------- Phones and tablets: a "Start a project" button that follows the reader ---------- */
+  const contactSection = document.getElementById('contact');
+  const projectCta = document.createElement('a');
+  projectCta.className = 'fx-cta';
+  projectCta.href = contactSection ? '#contact' : '/#contact';
+  projectCta.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/><path d="M8.5 11.5h7M8.5 14.5h4"/></svg>Start a project';
+  document.body.append(projectCta);
+  let contactInView = false;
+
   /* ---------- Floating back-to-top button with a scroll-progress ring ---------- */
   const topButton = document.createElement('a');
   topButton.className = 'fx-top';
@@ -364,7 +383,8 @@
     const max = document.documentElement.scrollHeight - innerHeight;
     const fraction = max > 0 ? clamp(scrollY / max, 0, 1) : 0;
     ring.style.strokeDashoffset = String(100 - fraction * 100);
-    topButton.classList.toggle('is-visible', scrollY > innerHeight * .9 && !footerInView);
+        topButton.classList.toggle('is-visible', scrollY > innerHeight * .9 && !footerInView);
+    projectCta.classList.toggle('is-visible', scrollY > innerHeight * .9 && !footerInView && !contactInView);
   };
   const requestTopUpdate = () => { if (!scrollFrame) scrollFrame = requestAnimationFrame(updateTopButton); };
   window.addEventListener('scroll', requestTopUpdate, { passive: true });
@@ -376,7 +396,31 @@
       requestTopUpdate();
     }).observe(footer);
   }
+    if (contactSection && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      contactInView = entry.isIntersecting;
+      requestTopUpdate();
+    }).observe(contactSection);
+  }
   updateTopButton();
+
+  /* ---------- Ticker rows: always long enough to cover the screen ---------- */
+  // Each row slides by half its length per loop, so the row must be at least twice the viewport
+  // wide or a gap opens at the end of every loop on wide monitors. Whole copies of the original
+  // sets are appended (keeping the loop seamless) and the duration grows to keep the same speed.
+  document.querySelectorAll('.marquee-track').forEach(track => {
+    const sets = [...track.children];
+    if (!sets.length) return;
+    const baseDuration = parseFloat(getComputedStyle(track).animationDuration) || 40;
+    const fill = () => {
+      while (track.scrollWidth < innerWidth * 2 + 240 && track.children.length < sets.length * 8) {
+        sets.forEach(set => track.append(set.cloneNode(true)));
+      }
+      track.style.animationDuration = `${baseDuration * track.children.length / sets.length}s`;
+    };
+    fill();
+    window.addEventListener('resize', fill, { passive: true });
+  });
 
   /* ---------- Pause decorative CSS animations while their section is off-screen ---------- */
   if ('IntersectionObserver' in window) {

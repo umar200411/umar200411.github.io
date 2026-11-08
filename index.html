@@ -6,38 +6,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#05070f">
-  <meta name="color-scheme" content="dark">
+  <meta name="color-scheme" content="dark light">
   <script>
-    /* Runs before first paint: enables reveal styling and picks an effects tier so heavy
-       visuals scale to the device. If script.js never arrives, content is shown anyway. */
+    /* Runs before first paint: applies the saved or system theme, enables reveal styling,
+       and picks an effects tier. If script.js never arrives, content is shown anyway. */
     (function (root, nav) {
       var connection = nav.connection || {};
-      root.classList.add('js');
+            root.classList.add('js');
+      var theme = null;
+      try { theme = localStorage.getItem('theme'); } catch (e) {}
+      if (theme !== 'light' && theme !== 'dark') theme = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      root.setAttribute('data-theme', theme);
+      var themeMeta = document.querySelector('meta[name="theme-color"]');
+      if (themeMeta) themeMeta.setAttribute('content', theme === 'light' ? '#f4f6fb' : '#05070f');
+
       if (connection.saveData || (nav.deviceMemory && nav.deviceMemory <= 2) || (nav.hardwareConcurrency && nav.hardwareConcurrency <= 2)) root.classList.add('fx-lite');
+            // Hold the hero intro briefly so the motion layer can run its entrance (released after 1.5s at most).
+      if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+        root.classList.add('motion-wait');
+        setTimeout(function () { root.classList.remove('motion-wait'); }, 1500);
+      }
       setTimeout(function () { if (!window.__siteReady) { window.__revealFallback = true; root.classList.remove('js'); } }, 4000);
     })(document.documentElement, navigator);
   </script>
   <meta name="description"
-    content="Umar Saeed Qureshi is a Flutter developer and web creator building mobile applications with Firebase and responsive websites. Explore real projects and product experience.">
+    content="Flutter and web developer from Pakistan, available for app and website projects. I build mobile apps with Flutter and Firebase, and fast, responsive websites.">
   <meta name="author" content="Umar Saeed Qureshi">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Umar Saeed Qureshi">
-  <meta property="og:title" content="Umar Saeed Qureshi | Flutter &amp; Web Developer">
+  <meta property="og:title" content="Umar Saeed Qureshi | Flutter App &amp; Web Developer">
   <meta property="og:description"
-    content="Umar Saeed Qureshi is a Flutter developer and web creator building mobile applications with Firebase and responsive websites. Explore real projects and product experience.">
+    content="Flutter and web developer from Pakistan, available for app and website projects. I build mobile apps with Flutter and Firebase, and fast, responsive websites.">
   <meta property="og:url" content="https://umarsaeedqureshi.com/">
-  <meta property="og:image" content="https://umarsaeedqureshi.com/assets/social-preview.png">
-  <meta property="og:image:alt" content="Umar Saeed Qureshi — Flutter and web developer">
-  <meta property="og:image:type" content="image/png">
+  <meta property="og:image" content="https://umarsaeedqureshi.com/assets/og/home.jpg">
+  <meta property="og:image:alt" content="Umar Saeed Qureshi, Flutter and web developer, available for projects">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Umar Saeed Qureshi | Flutter &amp; Web Developer">
+  <meta name="twitter:title" content="Umar Saeed Qureshi | Flutter App &amp; Web Developer">
   <meta name="twitter:description"
-    content="Flutter developer and web creator building mobile applications with Firebase and responsive websites.">
-  <meta name="twitter:image" content="https://umarsaeedqureshi.com/assets/social-preview.png">
-  <meta name="twitter:image:alt" content="Umar Saeed Qureshi — Flutter and web developer">
-  <title>Umar Saeed Qureshi | Flutter &amp; Web Developer</title>
+    content="Available for app and website projects. Mobile apps with Flutter and Firebase, and fast, responsive websites.">
+  <meta name="twitter:image" content="https://umarsaeedqureshi.com/assets/og/home.jpg">
+  <meta name="twitter:image:alt" content="Umar Saeed Qureshi, Flutter and web developer, available for projects">
+  <title>Umar Saeed Qureshi | Flutter App &amp; Web Developer</title>
   <link rel="canonical" href="https://umarsaeedqureshi.com/">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96.png">
@@ -49,8 +61,8 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap"
     rel="stylesheet">
   <link rel="preload" as="image" href="assets/character-still.webp" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="site.css?v=20261109-1">
-  <link rel="stylesheet" href="depot.css?v=20261109-1">
+  <link rel="stylesheet" href="site.css?v=20261109-4">
+  <link rel="stylesheet" href="depot.css?v=20261109-4">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -60,7 +72,7 @@
         "@id": "https://umarsaeedqureshi.com/#website",
         "url": "https://umarsaeedqureshi.com/",
         "name": "Umar Saeed Qureshi",
-        "description": "Portfolio of Umar Saeed Qureshi, a Flutter developer and web creator.",
+        "description": "Portfolio of Umar Saeed Qureshi, a Flutter and web developer.",
         "publisher": {
           "@id": "https://umarsaeedqureshi.com/#person"
         }
@@ -138,11 +150,10 @@
       <a class="brand" href="#top" aria-label="Umar Saeed Qureshi, back to top">umar<span class="brand-spark"
           aria-hidden="true">✳</span></a>
       <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
-        <a href="#work">Projects</a><a href="#about">About</a><a href="#experience">Experience</a><a href="#expertise">Toolkit</a><a href="#services">Services</a><a href="#process">Process</a><a class="nav-resume" href="/assets/Umar-Saeed-Qureshi-Resume.pdf" target="_blank" rel="noopener">Resume</a>
-        <a class="nav-contact" href="#contact">Let's connect <span aria-hidden="true">↗</span></a>
+        <a href="#work">Projects</a><a href="#services">Services</a><a href="#process">Process</a><a href="#about">About</a><a href="#experience">Experience</a><a href="#faq">FAQ</a><a class="nav-resume" href="/assets/Umar-Saeed-Qureshi-Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="nav-contact" href="#contact" data-magnetic>Start a project <span aria-hidden="true">↗</span></a>
       </nav>
-      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav"
-        aria-expanded="false"><span></span><span></span></button>
+      <div class="header-actions"><button class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch to light theme"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.2 14.6A8.5 8.5 0 0 1 9.4 3.8a8.5 8.5 0 1 0 10.8 10.8Z"/></svg></button><button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false"><span></span><span></span></button></div>
     </div>
   </header>
 
@@ -162,7 +173,8 @@
           <a href="/assets/Umar-Saeed-Qureshi-Resume.pdf" target="_blank" rel="noopener">Resume</a>
         </nav>
         <div class="depot-tools">
-          <a class="depot-talk" href="mailto:umar@umarsaeedqureshi.com">Let's talk <span aria-hidden="true">↗</span></a>
+          <button class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch to light theme"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.2 14.6A8.5 8.5 0 0 1 9.4 3.8a8.5 8.5 0 1 0 10.8 10.8Z"/></svg></button>
+          <a class="depot-talk" href="#contact" data-magnetic>Let's talk <span aria-hidden="true">↗</span></a>
           <button class="depot-explore-toggle" type="button" aria-expanded="false" aria-controls="depot-more-links">More</button>
           <nav id="depot-more-links" class="depot-more-links" aria-label="More portfolio containers">
             <a href="#depot-about" data-depot-target="about">Experience</a>
@@ -174,21 +186,21 @@
 
       <div class="depot-layout">
         <section class="depot-intro" aria-labelledby="hero-title">
-          <p class="depot-kicker"><span class="depot-status-dot"></span> UMAR SAEED QURESHI <span>/ FLUTTER &amp; WEB DEVELOPER</span></p>
-          <h1 id="hero-title">I build apps + web <em>that feel alive.</em></h1>
-          <p class="depot-intro-copy">Thoughtful mobile apps, responsive websites, and products built for real people.</p>
+          <p class="depot-kicker"><span class="depot-status-dot"></span> UMAR SAEED QURESHI <span>/ AVAILABLE FOR PROJECTS</span></p>
+          <h1 id="hero-title" data-split="lines"><span class="w" style="--i:0">I</span> <span class="w" style="--i:1">build</span> <span class="w" style="--i:2">Flutter</span> <span class="w" style="--i:3">apps</span> <em class="w" style="--i:4">and websites.</em></h1>
+          <p class="depot-intro-copy">I design and build apps and websites for businesses and startups. My salon booking app, Beautify, is live on Google Play.</p>
           <div class="depot-intro-actions">
-            <a class="depot-intro-link depot-intro-link--primary" href="#depot-work" data-depot-target="work">Explore my work <span aria-hidden="true">↗</span></a>
-            <a class="depot-intro-link depot-intro-link--secondary" href="mailto:umar@umarsaeedqureshi.com">Let's talk</a>
+            <a class="depot-intro-link depot-intro-link--primary" href="#contact" data-magnetic>Start a project <span aria-hidden="true">↗</span></a>
+            <a class="depot-intro-link depot-intro-link--secondary" href="#work">See my work</a>
             <a class="depot-intro-icon" href="https://github.com/umar200411/" target="_blank" rel="noopener noreferrer" aria-label="Umar on GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
             <a class="depot-intro-icon" href="https://www.linkedin.com/in/umar-saeed-qureshi-8a6484296/" target="_blank" rel="noopener noreferrer" aria-label="Umar on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13Zm1.78 13.02H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a>
           </div>
           <ul class="depot-intro-meta" aria-label="Highlights">
-            <li><strong>01</strong><span>App live on Google Play</span></li>
-            <li><strong>03</strong><span>Product case studies</span></li>
-            <li><strong>PK</strong><span>Available worldwide</span></li>
+            <li><strong data-count="1">01</strong><span>App live on Google Play</span></li>
+            <li><strong data-count="3">03</strong><span>Case studies</span></li>
+            <li><strong>PK</strong><span>Open to remote work</span></li>
           </ul>
-          <p class="depot-intro-note"><span aria-hidden="true">↘</span> Pick a container to explore the work</p>
+          <p class="depot-intro-note"><span aria-hidden="true">↘</span> Click a container to look inside</p>
         </section>
 
         <section class="depot-workspace" aria-label="Interactive portfolio depot">
@@ -196,6 +208,7 @@
           <div class="depot-character" aria-hidden="true">
             <div class="cursor-scrub-video" data-cursor-scrub data-video-file="" data-poster="assets/character-still.webp" data-axis="horizontal" data-tracking-area="window" data-smoothing="0.22" data-object-fit="contain" data-show-poster="true" data-static-on-touch="true"></div>
           </div>
+          <div class="depot-chips" aria-hidden="true"><span class="depot-chip depot-chip--flutter">Flutter</span><span class="depot-chip depot-chip--firebase">Firebase</span><span class="depot-chip depot-chip--dart">Dart</span></div>
           <div class="depot-stage" id="depot-stage" data-depot-stage>
             <div class="depot-floor" aria-hidden="true"></div>
             <div class="depot-rail" aria-hidden="true"><span class="depot-rail-top"></span><span class="depot-rail-track"></span><span class="depot-carriage"><i></i><i></i></span><span class="depot-rod"></span><span class="depot-grip-head"><i class="depot-finger depot-finger-left"></i><i class="depot-finger depot-finger-right"></i></span></div>
@@ -231,14 +244,10 @@
       </div>
     </section>
     <div class="portfolio-details">
-    <div class="marquee" aria-label="Flutter, Firebase, Dart, mobile experiences, design, and development">
+    <div class="marquee" data-marquee  aria-label="Flutter, Firebase, Dart, mobile experiences, design, and development">
       <div class="marquee-track" aria-hidden="true">
-        <div class="marquee-set"><span>FLUTTER</span><b>✳</b><span>FIREBASE</span><b>✳</b><span>GOOD
-            DESIGN</span><b>✳</b><span>REAL PRODUCTS</span><b>✳</b><span>DART</span><b>✳</b><span>LET'S
-            BUILD</span><b>✳</b></div>
-        <div class="marquee-set"><span>FLUTTER</span><b>✳</b><span>FIREBASE</span><b>✳</b><span>GOOD
-            DESIGN</span><b>✳</b><span>REAL PRODUCTS</span><b>✳</b><span>DART</span><b>✳</b><span>LET'S
-            BUILD</span><b>✳</b></div>
+        <div class="marquee-set"><span>FLUTTER</span><b>✳</b><span>DART</span><b>✳</b><span>FIREBASE</span><b>✳</b><span>UI DESIGN</span><b>✳</b><span>ANDROID</span><b>✳</b><span>STATE MANAGEMENT</span><b>✳</b><span>APIS</span><b>✳</b><span>WEB</span><b>✳</b></div>
+        <div class="marquee-set"><span>FLUTTER</span><b>✳</b><span>DART</span><b>✳</b><span>FIREBASE</span><b>✳</b><span>UI DESIGN</span><b>✳</b><span>ANDROID</span><b>✳</b><span>STATE MANAGEMENT</span><b>✳</b><span>APIS</span><b>✳</b><span>WEB</span><b>✳</b></div>
       </div>
       <div class="marquee-track marquee-track--reverse" aria-hidden="true">
         <div class="marquee-set"><span>GETX</span><b>◇</b><span>PROVIDER</span><b>◇</b><span>CLOUD FIRESTORE</span><b>◇</b><span>NODE.JS</span><b>◇</b><span>REST APIS</span><b>◇</b><span>GOOGLE MAPS</span><b>◇</b><span>RESPONSIVE WEB</span><b>◇</b><span>PLAY STORE</span><b>◇</b></div>
@@ -248,23 +257,22 @@
 
     <section class="proof-strip" aria-label="Portfolio highlights">
       <div class="container proof-strip-inner">
-        <div><strong>01</strong><span>Published mobile app</span></div>
-        <div><strong>03</strong><span>Featured product case studies</span></div>
-        <div><strong>05+</strong><span>Core delivery capabilities</span></div>
-        <div><strong>PK</strong><span>Available worldwide</span></div>
+        <div><strong class="stat-number" data-count="1">01</strong><span>App on Google Play</span></div>
+        <div><strong class="stat-number" data-count="3">03</strong><span>Project case studies</span></div>
+        <div><strong class="stat-number" data-count="2">02</strong><span>Companies worked with</span></div>
+        <div><strong>PK</strong><span>Based in Pakistan</span></div>
       </div>
     </section>
 
     <section class="section work-section" id="work" aria-labelledby="work-title">
       <div class="container">
-        <div class="section-heading reveal">
-          <div><span class="section-kicker"><span class="kicker-dot"></span> 01 / FEATURED PROJECTS</span>
-            <h2 id="work-title">Projects built<br><span class="accent-text">with intention.</span></h2>
+        <div data-reveal class="section-heading reveal">
+          <div><span class="section-kicker"><span class="kicker-dot"></span> 01 / PROJECTS</span>
+            <h2 id="work-title">Things I've<br><span class="accent-text">built.</span></h2>
           </div>
-          <p>From Pulse, a student-first app in development, to a published mobile product and a live e-commerce storefront.
-          </p>
+          <p>An app I'm building for students, a salon booking app on Google Play, and an online spice store that's live today.</p>
         </div>
-        <div class="project-filters reveal" role="group" aria-label="Filter projects">
+        <div data-reveal class="project-filters reveal" role="group" aria-label="Filter projects">
           <button class="project-filter is-active" type="button" data-filter="all">All work</button>
           <button class="project-filter" type="button" data-filter="mobile">Mobile apps</button>
           <button class="project-filter" type="button" data-filter="flutter">Flutter</button>
@@ -273,51 +281,50 @@
           <button class="project-filter" type="button" data-filter="firebase">Firebase</button>
         </div>
         <div class="projects-list">
-        <article class="project-card project-card--pulse reveal" data-project-type="mobile flutter productivity">
+        <article data-reveal class="project-card project-card--pulse reveal" data-project-type="mobile flutter productivity">
           <div class="project-copy pulse-project-copy">
             <div class="project-top"><span class="project-num">FEATURED PROJECT</span><span class="pulse-status">IN DEVELOPMENT</span></div>
             <div class="project-main"><span class="project-eyebrow">FLUTTER / MOBILE APPLICATION / PRODUCTIVITY</span>
               <h3>Pulse<span>✳</span></h3>
-              <p>Pulse is an all-in-one productivity and life-management app designed to help students organize their daily lives, manage academics, build routines, track personal progress, and stay focused—all through a calm, beautifully crafted digital experience.</p>
+              <p>Pulse is an all-in-one app for students. Classes, tasks, study sessions, routines and habits live in one place, so you're not juggling five different apps to get through the day.</p>
               <p class="pulse-tagline">Your day. Your routines. Your progress.</p>
               <div class="project-tags"><span>Flutter</span><span>Dart</span><span>Student-first</span><span>Productivity</span></div>
             </div>
-            <div class="project-bottom"><div class="project-actions"><a class="button button-dark" href="/projects/pulse/">View Case Study <span class="button-arrow" aria-hidden="true">↗</span></a></div><span>PRODUCT IN PROGRESS<br>FEATURED CASE STUDY</span></div>
+            <div class="project-bottom"><div class="project-actions"><a class="button button-dark" href="/projects/pulse/">View Case Study <span class="button-arrow" aria-hidden="true">↗</span></a></div><span>IN DEVELOPMENT<br>FULL CASE STUDY</span></div>
           </div>
-          <div class="project-art pulse-project-art" role="group" aria-label="Pulse project media placeholder">
-            <div class="pulse-visual-placeholder" role="img" aria-label="Authentic Pulse app screens have not been supplied yet. This is a labeled placeholder, not an app screenshot.">
+          <div class="project-art pulse-project-art" role="group" aria-label="Pulse preview">
+            <div class="pulse-visual-placeholder" role="img" aria-label="Pulse preview. App screenshots are coming soon.">
               <span class="pulse-placeholder-kicker">PULSE / APP PREVIEW</span>
               <div class="pulse-placeholder-mark" aria-hidden="true"><svg class="pulse-ecg" viewBox="0 0 320 80" focusable="false"><path class="pulse-ecg-base" d="M0 46H92l12 0 8-14 8 14h10l10-38 11 66 10-28h16l9-9 9 9H320"/><path class="pulse-ecg-glow" pathLength="100" d="M0 46H92l12 0 8-14 8 14h10l10-38 11 66 10-28h16l9-9 9 9H320"/><path class="pulse-ecg-trace" pathLength="100" d="M0 46H92l12 0 8-14 8 14h10l10-38 11 66 10-28h16l9-9 9 9H320"/></svg></div>
-              <strong>Real app screens<br>coming soon</strong>
-              <small>VISUAL PLACEHOLDER · NOT AN APP SCREEN</small>
+              <strong>Screenshots<br>coming soon</strong>
+              <small>STILL IN DEVELOPMENT</small>
             </div>
-            <span class="project-art-caption">MEDIA PLACEHOLDER / REPLACE WITH AUTHENTIC CAPTURE</span>
+            <span class="project-art-caption">FIG 00 / WORK IN PROGRESS</span>
           </div>
         </article>
-        <article class="project-card project-card--beautify reveal" data-project-type="mobile firebase">
+        <article data-reveal class="project-card project-card--beautify reveal" data-project-type="mobile firebase">
           <div class="project-copy">
             <div class="project-top"><span class="project-num">PROJECT 001</span><span class="project-year">LIVE / PLAY
                 ↗</span></div>
             <div class="project-main"><span class="project-eyebrow">BEAUTY & WELLNESS / MOBILE APP</span>
               <h3>Beautify<span>✳</span></h3>
-              <p>An independently developed Flutter application that helps users discover nearby salons, explore beauty
-                services, and manage appointments through a Firebase-powered booking experience.</p>
+              <p>A salon booking app I built on my own and published on Google Play. People find salons nearby, look through their services and book a time. Salons get their own side of the app to manage services and bookings.</p>
               <div class="project-tags">
                 <span>Flutter</span><span>Dart</span><span>Firebase</span><span>Google Maps</span><span>Bookings</span>
               </div>
-              <div class="project-impact"><div><strong>01</strong><span>Published product</span></div><div><strong>04+</strong><span>Core user flows</span></div><div><strong>REAL</strong><span>Firebase backend</span></div></div>
+              <div class="project-impact"><div><strong>LIVE</strong><span>On Google Play</span></div><div><strong>2 SIDES</strong><span>Customers + salons</span></div><div><strong>FIREBASE</strong><span>Auth, data, push</span></div></div>
             </div>
             <div class="project-bottom"><div class="project-actions"><a class="button button-dark magnetic"
                   href="https://play.google.com/store/apps/details?id=com.umar.beautify" target="_blank"
                   rel="noopener noreferrer">View on Google Play <span class="button-arrow"
                     aria-hidden="true">↗</span></a><a class="case-study-link" href="/projects/beautify/">Explore Case Study
-                  <span aria-hidden="true">↗</span></a></div><span>INDEPENDENTLY BUILT<br>AND PUBLISHED</span></div>
+                  <span aria-hidden="true">↗</span></a></div><span>BUILT SOLO<br>AND PUBLISHED</span></div>
           </div>
           <div class="project-art project-media--beautify" role="group"
-            aria-label="Authentic screenshots from the Beautify Android app"><span
+            aria-label="Screenshots from the Beautify Android app"><span
               class="project-orbit project-orbit-a" aria-hidden="true"></span><span
               class="project-orbit project-orbit-b" aria-hidden="true"></span><span class="project-art-label"
-              aria-hidden="true">REAL APP / GOOGLE PLAY</span>
+              aria-hidden="true">BEAUTIFY / GOOGLE PLAY</span>
             <div class="project-phone" id="beautify-phone">
               <div class="phone-buttons" aria-hidden="true"><span></span><span></span></div>
               <div class="phone-screen" id="beautify-screen" aria-live="polite" aria-atomic="true">
@@ -343,21 +350,19 @@
                 data-label="Salon service setup">Service setup</button>
               <span class="sr-only gallery-status" aria-live="polite">Showing Discover home screenshot.</span>
             </div>
-            <div class="project-art-chip" aria-hidden="true"><span>✦</span><span>MADE FOR<br><strong>REAL
-                  LIFE</strong></span></div><span class="project-art-caption" aria-hidden="true">FIG 01 / LIVE APP
+            <div class="project-art-chip" aria-hidden="true"><span>✦</span><span>LIVE ON<br><strong>GOOGLE PLAY</strong></span></div><span class="project-art-caption" aria-hidden="true">FIG 01 / LIVE APP
               SCREEN</span>
           </div>
         </article>
-        <div class="project-postscript reveal"><span>THE PRODUCT <b>✳</b></span>
-          <p>Users can find nearby salons and book appointments. Salon-side tools support service and appointment
-            management in the same published product.</p><a
+        <div data-reveal class="project-postscript reveal"><span>THE PRODUCT <b>✳</b></span>
+          <p>One app with two sides: customers find a salon and book a time, and salon owners list their services and keep track of appointments.</p><a
             href="https://play.google.com/store/apps/details?id=com.umar.beautify" target="_blank"
             rel="noopener noreferrer">See the Play listing <span aria-hidden="true">↗</span></a>
         </div>
 
-        <article class="project-card project-card--magnet reveal" data-project-type="web">
+        <article data-reveal class="project-card project-card--magnet reveal" data-project-type="web">
           <div class="project-media project-media--magnet" role="group"
-            aria-label="Authentic screenshots of the Magnet Masala website">
+            aria-label="Screenshots of the Magnet Masala website">
             <div class="project-orbit project-orbit-a" aria-hidden="true"></div>
             <div class="project-orbit project-orbit-b" aria-hidden="true"></div>
             <div class="browser-preview" id="magnet-preview">
@@ -397,12 +402,11 @@
                 ↗</span></div>
             <div class="project-main"><span class="project-eyebrow">E-COMMERCE / WEB DEVELOPMENT</span>
               <h3>Magnet<br>Masala<span>✳</span></h3>
-              <p>A responsive e-commerce storefront for a Pakistani spice brand, bringing product discovery, a shopping
-                basket, and a polished brand experience together across desktop and mobile.</p>
+              <p>An online store for a Pakistani spice brand. Shoppers browse the spices, pick a pack size, fill a basket and send the order over WhatsApp. It works on phones and desktops.</p>
               <div class="project-tags">
                 <span>Responsive Web</span><span>E-commerce</span><span>Product Catalog</span><span>WhatsApp Ordering</span>
               </div>
-              <div class="project-impact"><div><strong>LIVE</strong><span>Storefront</span></div><div><strong>100%</strong><span>Responsive UI</span></div><div><strong>FAST</strong><span>Purchase path</span></div></div>
+              <div class="project-impact"><div><strong>LIVE</strong><span>Online store</span></div><div><strong>BASKET</strong><span>Review before ordering</span></div><div><strong>ORDERS</strong><span>Sent via WhatsApp</span></div></div>
             </div>
             <div class="project-bottom"><div class="project-actions"><a class="button button-dark magnetic"
                   href="https://magnetmasala.com/" target="_blank" rel="noopener noreferrer">Visit Live Website
@@ -415,42 +419,101 @@
       </div>
     </section>
 
-    <section class="now-section" aria-labelledby="now-title">
-      <div class="container now-layout">
-        <div class="reveal"><span class="section-kicker"><span class="kicker-dot"></span> CURRENTLY / 2026</span><h2 id="now-title">Building with<br><span class="accent-text">intent.</span></h2></div>
-        <div class="now-grid reveal">
-          <article><span>01</span><h3>Open to the right build</h3><p>Available for Flutter roles, product collaborations, and focused web projects where thoughtful engineering matters.</p><a href="#contact">Start a conversation ↗</a></article>
-          <article><span>02</span><h3>Learning in public</h3><p>Deepening architecture, testing, and BLoC patterns while shipping practical products with clean, readable code.</p><a href="#expertise">See the toolkit ↗</a></article>
-          <article><span>03</span><h3>Designing for the next state</h3><p>Exploring resilient interfaces where loading, empty, error, and success states feel intentional—not accidental.</p><a href="#state-lab">Explore State Lab ↗</a></article>
+    <section class="section services-section" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div data-reveal class="section-heading reveal">
+          <div><span class="section-kicker"><span class="kicker-dot"></span> 02 / SERVICES</span>
+            <h2 id="services-title">What I can<br><span class="accent-text">build for you.</span></h2>
+          </div>
+          <p>Here's what I can help with. If your project doesn't fit neatly into one of these, message me anyway.</p>
         </div>
+        <div class="services-grid">
+          <article data-reveal class="service-card service-card--flutter reveal tilt-card">
+            <div class="service-top"><span>01 / MOBILE</span><span class="service-icon" aria-hidden="true">◈</span></div>
+            <h3>Flutter apps</h3>
+            <p>Mobile apps built with Flutter, from the first screens all the way to a store release.</p>
+            <div class="service-tags"><span>Flutter</span><span>Dart</span><span>Firebase</span></div>
+            <a class="service-quote" href="#project-brief" data-brief-type="Flutter mobile app">Get a quote <span aria-hidden="true">↗</span></a>
+          </article>
+          <article data-reveal class="service-card service-card--backend reveal tilt-card">
+            <div class="service-top"><span>02 / INTEGRATION</span><span class="service-icon" aria-hidden="true">⌁</span></div>
+            <h3>Firebase &amp; backend</h3>
+            <p>Sign-in, databases, push notifications and API connections, for a new app or one you already have.</p>
+            <div class="service-tags"><span>Authentication</span><span>Firestore</span><span>REST APIs</span></div>
+            <a class="service-quote" href="#project-brief" data-brief-type="Firebase / API integration">Get a quote <span aria-hidden="true">↗</span></a>
+          </article>
+          <article data-reveal class="service-card service-card--web reveal tilt-card">
+            <div class="service-top"><span>03 / WEB</span><span class="service-icon" aria-hidden="true">⌘</span></div>
+            <h3>Websites</h3>
+            <p>Fast, responsive websites and online stores that look right on every screen.</p>
+            <div class="service-tags"><span>Responsive UI</span><span>E-commerce</span><span>Accessibility</span></div>
+            <a class="service-quote" href="#project-brief" data-brief-type="Responsive website">Get a quote <span aria-hidden="true">↗</span></a>
+          </article>
+          <article data-reveal class="service-card service-card--care reveal tilt-card">
+            <div class="service-top"><span>04 / IMPROVEMENT</span><span class="service-icon" aria-hidden="true">✳</span></div>
+            <h3>Fixes &amp; improvements</h3>
+            <p>Bug fixes, UI updates and new features for an app that's already out there.</p>
+            <div class="service-tags"><span>Refinement</span><span>Debugging</span><span>Testing</span></div>
+            <a class="service-quote" href="#project-brief" data-brief-type="App improvement">Get a quote <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+        <div data-reveal class="services-cta reveal"><p>Have something in mind?</p><a href="#contact" class="button button-lime magnetic">Tell me about it <span class="button-arrow" aria-hidden="true">↗</span></a></div>
       </div>
     </section>
 
     <section class="working-section" aria-labelledby="working-title">
       <div class="container working-layout">
-        <div class="reveal"><span class="section-kicker"><span class="kicker-dot"></span> THE DIFFERENCE</span><h2 id="working-title">A thoughtful<br><span>technical partner.</span></h2></div>
-        <div class="working-points reveal"><article><span>01</span><h3>Clear communication</h3><p>Short feedback loops, readable updates, and decisions explained in plain language.</p></article><article><span>02</span><h3>Product-minded builds</h3><p>I care about the user flow, not just the widget tree or API response.</p></article><article><span>03</span><h3>Release confidence</h3><p>Edge cases, responsive behavior, and the final handoff are part of the build.</p></article></div>
+        <div data-reveal class="reveal"><span class="section-kicker"><span class="kicker-dot"></span> WORKING WITH ME</span><h2 id="working-title">How I like<br><span>to work.</span></h2></div>
+        <div data-reveal class="working-points reveal"><article><span>01</span><h3>You'll know where things stand</h3><p>Regular updates in plain language, without the jargon.</p></article><article><span>02</span><h3>The user comes first</h3><p>A screen isn't done just because it works. It also has to make sense to the person using it.</p></article><article><span>03</span><h3>I finish the job</h3><p>Edge cases, different screen sizes and a clean handover are part of the work.</p></article></div>
+      </div>
+    </section>
+
+    <section class="process-section" id="process" aria-labelledby="process-title">
+      <div class="container">
+          <div data-reveal class="process-heading reveal"><span class="section-kicker"><span class="kicker-dot"></span> 03 / HOW I WORK</span>
+          <h2 id="process-title">From <span>idea</span><br>to <em>launch.</em></h2>
+          <p>Most projects go through these four steps, and you'll know what's happening at each one.</p>
+        </div>
+        <ol class="process-grid" data-process-line>
+          <li data-reveal class="process-step reveal is-open"><button class="process-trigger" type="button" aria-expanded="true"><span class="step-number">01</span><span class="step-icon"
+              aria-hidden="true">✳</span>
+            <h3>Discover</h3>
+            <p>We talk through the problem, who it's for and what "done" looks like.</p><span class="step-arrow"
+              aria-hidden="true">↗</span></button><div class="process-details"><span>ACTIVITIES</span><ul><li>Brief &amp; user goals</li><li>Similar apps</li></ul><span>DELIVERABLE</span><strong>A clear goal</strong></div>
+          </li>
+          <li data-reveal class="process-step reveal"><button class="process-trigger" type="button" aria-expanded="false"><span class="step-number">02</span><span class="step-icon"
+              aria-hidden="true">⌘</span>
+            <h3>Architect</h3>
+            <p>I sketch the screens and flows and plan the data before writing code.</p><span class="step-arrow"
+              aria-hidden="true">↗</span></button><div class="process-details"><span>ACTIVITIES</span><ul><li>Flows &amp; wireframes</li><li>Data model</li></ul><span>DELIVERABLE</span><strong>A plan we agree on</strong></div>
+          </li>
+          <li data-reveal class="process-step reveal"><button class="process-trigger" type="button" aria-expanded="false"><span class="step-number">03</span><span class="step-icon"
+              aria-hidden="true">◈</span>
+            <h3>Build &amp; refine</h3>
+            <p>I build in small steps and share progress as I go, so there are no surprises at the end.</p><span class="step-arrow"
+              aria-hidden="true">↗</span></button><div class="process-details"><span>ACTIVITIES</span><ul><li>Flutter implementation</li><li>Polish</li></ul><span>DELIVERABLE</span><strong>A working build to try</strong></div>
+          </li>
+          <li data-reveal class="process-step reveal"><button class="process-trigger" type="button" aria-expanded="false"><span class="step-number">04</span><span class="step-icon"
+              aria-hidden="true">↗</span>
+            <h3>Test &amp; ship</h3>
+            <p>I test on different screen sizes, fix what comes up, then publish.</p><span class="step-arrow"
+              aria-hidden="true">↗</span></button><div class="process-details"><span>ACTIVITIES</span><ul><li>QA &amp; release checks</li><li>Store submission</li></ul><span>DELIVERABLE</span><strong>A live app</strong></div>
+          </li>
+        </ol>
       </div>
     </section>
 
     <section class="section about-section" id="about" aria-labelledby="about-title">
       <div class="about-decoration" aria-hidden="true">✳</div>
       <div class="container about-layout">
-        <div class="reveal"><span class="section-kicker"><span class="kicker-dot"></span> 02 / A LITTLE ABOUT ME</span>
-          <h2 id="about-title">Part <em>creative.</em><br>Part <em>engineer.</em><br>All in.</h2><span
+        <div data-reveal class="reveal"><span class="section-kicker"><span class="kicker-dot"></span> 04 / ABOUT ME</span>
+          <h2 id="about-title">Hi, I'm<br><em>Umar.</em></h2><span
             class="about-asterisk" aria-hidden="true">↗</span>
         </div>
-        <div class="about-right reveal">
-          <p class="about-lead">I like apps that make people say <em>“wow”</em> — and keep working after the wow wears
-            off.</p>
-          <p>I'm Umar, a Flutter developer and web creator working across mobile interfaces, responsive websites,
-            authentication, backend integrations, maps, notifications, and state management. I write clean,
-            collaborative code with GitHub workflows, readable commits, and organized delivery behind every product.</p>
-          <p>I combine hands-on development expertise with modern AI tools to build smarter and ship faster. Using tools
-            like ChatGPT, OpenAI Codex, and Claude Code, I accelerate prototyping, debugging, code refinement, and
-            problem-solving — while keeping architecture, code quality, and final decisions in my own hands.</p>
-          <p>My background in computer science, business, and information systems helps me connect the technical details
-            to what a product actually needs.</p>
+        <div data-reveal class="about-right reveal">
+          <p class="about-lead">I like apps that make people say <em>“wow”</em>, and keep working long after the wow wears off.</p>
+          <p>I'm a Flutter developer from Pakistan. Most of my time goes into building app screens and connecting them to Firebase and APIs, with maps, notifications and sign-in along the way. I also build websites, like the Magnet Masala store. I keep my work on GitHub with small, readable commits.</p>
+          <p>My background mixes computer science, business and information systems, so I think about what the product needs, not just the code.</p>
           <div class="about-actions"><a class="button button-dark magnetic resume-download"
               href="/assets/Umar-Saeed-Qureshi-Resume.pdf" download>Download Resume <span class="button-arrow"
                 aria-hidden="true">↓</span></a></div>
@@ -466,32 +529,32 @@
 
     <section class="section experience-section" id="experience" aria-labelledby="experience-title">
       <div class="container">
-        <div class="section-heading section-heading-dark reveal">
-          <div><span class="section-kicker"><span class="kicker-dot"></span> 03 / THE JOURNEY</span>
-            <h2 id="experience-title">Where the<br><span class="accent-text">work happens.</span></h2>
+        <div data-reveal class="section-heading section-heading-dark reveal">
+          <div><span class="section-kicker"><span class="kicker-dot"></span> 05 / EXPERIENCE</span>
+            <h2 id="experience-title">Where I've<br><span class="accent-text">worked.</span></h2>
           </div>
-          <p>Growing through collaboration, hands-on engineering, and shipping software with real teams.</p>
+          <p>Two companies where I worked on mobile apps.</p>
         </div>
-        <div class="experience-list">
-          <article class="experience-item experience-item--zamindar reveal">
+        <div class="experience-list" data-journey>
+          <article data-reveal class="experience-item experience-item--zamindar reveal">
             <div class="experience-copy"><span class="experience-number">01 /</span>
               <h3>Zamindar<br class="mobile-only"> Technologies</h3>
-              <p>Mobile app development experience</p>
+              <p>Mobile app development</p>
               <span class="experience-tag">ZAMINDAR PARTNER / AGRI COMMERCE</span>
               <a class="experience-link" href="https://zamindartech.com/" target="_blank"
                 rel="noopener noreferrer">Visit Zamindar Technologies <span aria-hidden="true">↗</span></a>
             </div>
             <div class="experience-media experience-media--zamindar">
-              <span class="experience-media-label">PRODUCT REFERENCE / ZAMINDAR PARTNER</span>
+              <span class="experience-media-label">ZAMINDAR PARTNER APP</span>
               <img src="assets/experience/zamindar-tech/partner-catalog.webp" width="180" height="320"
                 alt="Zamindar Partner Google Play screenshot showing its agricultural product catalog."
                 loading="lazy" decoding="async">
             </div>
           </article>
-          <article class="experience-item experience-item--token reveal">
+          <article data-reveal class="experience-item experience-item--token reveal">
             <div class="experience-copy"><span class="experience-number">02 /</span>
               <h3>Token Talent</h3>
-              <p>Mobile app development experience</p>
+              <p>Mobile app development</p>
               <span class="experience-tag">EMPLOYEE SELF-SERVICE / MOBILE</span>
               <div class="experience-links">
                 <a class="experience-link" href="https://tokentalent.co/" target="_blank"
@@ -501,7 +564,7 @@
               </div>
             </div>
             <div class="experience-media experience-media--token" aria-label="Official Token Talent ESS app screenshots">
-              <span class="experience-media-label">OFFICIAL ESS APP SCREENS</span>
+              <span class="experience-media-label">TOKEN TALENT ESS APP</span>
               <div class="experience-screen-pair">
                 <img src="assets/experience/token-talent/ess-attendance.webp" width="456" height="654"
                   alt="Token Talent ESS mobile attendance screen with location verification and a check-in control."
@@ -513,46 +576,44 @@
             </div>
           </article>
         </div>
-        <p class="experience-attribution-note">Company product screenshots are included for context and do not identify who implemented individual screens.</p>
+        <p class="experience-attribution-note">Screens shown are from each company's published app.</p>
       </div>
     </section>
 
     <section class="section expertise-section" id="expertise" aria-labelledby="expertise-title">
       <div class="container">
-        <div class="section-heading reveal">
-          <div><span class="section-kicker"><span class="kicker-dot"></span> 04 / MY TOOLKIT</span>
-            <h2 id="expertise-title">Good ideas.<br><span class="accent-text">Great execution.</span></h2>
+        <div data-reveal class="section-heading reveal">
+          <div><span class="section-kicker"><span class="kicker-dot"></span> 06 / MY TOOLKIT</span>
+            <h2 id="expertise-title">What I<br><span class="accent-text">work with.</span></h2>
           </div>
-          <p>The tools I use to take mobile and web products from the very first sketch to their next release.</p>
+          <p>The tools I use every day, from the first screen to the Play Store release.</p>
         </div>
         <div class="skills-grid">
-          <article class="skill-card skill-flutter reveal tilt-card">
-            <div class="skill-top"><span>01 / THE FOUNDATION</span><span>↗</span></div>
+          <article data-reveal class="skill-card skill-flutter reveal tilt-card">
+            <div class="skill-top"><span>01 / MOBILE</span><span>↗</span></div>
             <div class="skill-graphic flutter-graphic" aria-hidden="true"><span
                 class="flutter-orbit flutter-orbit-one"></span><span
                 class="flutter-orbit flutter-orbit-two"></span><span class="flutter-mark">F</span><span
                 class="flutter-brace">{ &nbsp; }</span></div>
             <div class="skill-body">
               <h3>Flutter <span>+</span> Dart</h3>
-              <p>Fluid interfaces with Material Design, Cupertino Widgets, responsive UI, Theming &amp; Dark Mode,
-                Clean Architecture, modular project structure, and maintainable mobile architecture.</p>
+              <p>My main tool. Material and Cupertino widgets, responsive layouts, theming and dark mode, and a clean, modular project structure that's easy to change later.</p>
               <div class="skill-pills"><span>Widgets</span><span>GetX</span><span>Provider</span><span>Dependency Injection</span>
                 <span>BLoC (Learning Phase)</span>
               </div>
             </div>
           </article>
-          <article class="skill-card skill-firebase reveal tilt-card">
-            <div class="skill-top"><span>02 / THE BACKEND</span><span>↗</span></div>
+          <article data-reveal class="skill-card skill-firebase reveal tilt-card">
+            <div class="skill-top"><span>02 / BACKEND</span><span>↗</span></div>
             <div class="skill-icon" aria-hidden="true">◇</div>
             <div class="skill-body">
               <h3>Firebase</h3>
-              <p>Firebase Authentication, Cloud Firestore, Cloud Functions, Cloud Storage, Firebase Cloud Messaging
-                (FCM), Data Modeling, Google Sign-In, phone OTP, and Firebase Security Rules.</p><span
-                class="skill-bottom">POWER BEHIND THE PIXELS <b>✳</b></span>
+              <p>Google and phone OTP sign-in, Firestore data modelling, Cloud Functions, Storage, push notifications with FCM, and security rules.</p><span
+                class="skill-bottom">AUTH · DATA · PUSH <b>✳</b></span>
             </div>
           </article>
-          <article class="skill-card skill-apis reveal tilt-card">
-            <div class="skill-top"><span>03 / THE CONNECTIONS</span><span>↗</span></div>
+          <article data-reveal class="skill-card skill-apis reveal tilt-card">
+            <div class="skill-top"><span>03 / APIS &amp; MAPS</span><span>↗</span></div>
             <div class="skill-icon" aria-hidden="true">⌁</div>
             <svg class="skill-network" viewBox="0 0 260 112" aria-hidden="true" focusable="false">
               <path class="net-link" d="M28 84 92 30"/><path class="net-link" d="M92 30 156 74"/><path class="net-link" d="M156 74 232 26"/><path class="net-link" d="M92 30 232 26"/><path class="net-link" d="M28 84 156 74"/>
@@ -561,26 +622,24 @@
             </svg>
             <div class="skill-body">
               <h3>APIs &amp; Maps</h3>
-              <p>REST APIs, WebSocket APIs, OpenAI API, Google Gemini API, JSON, Postman, Google Maps, In-App Purchases,
-                and Subscriptions.</p><span
-                class="skill-bottom">BEYOND THE SCREEN <b>✳</b></span>
+              <p>REST and WebSocket APIs, Google Maps, in-app purchases and subscriptions, plus the OpenAI and Gemini APIs. Postman for testing.</p><span
+                class="skill-bottom">REST · WEBSOCKETS · MAPS <b>✳</b></span>
             </div>
           </article>
-          <article class="skill-card skill-node reveal tilt-card">
-            <div class="skill-top"><span>04 / THE API LAYER</span><span>↗</span></div>
+          <article data-reveal class="skill-card skill-node reveal tilt-card">
+            <div class="skill-top"><span>04 / SERVER</span><span>↗</span></div>
             <div class="skill-icon skill-node-icon" aria-hidden="true">JS</div>
             <div class="api-snippet" aria-hidden="true"><p><span class="api-verb">POST</span> /api/bookings <b>201</b></p><p class="api-json">{ "status": "confirmed" }<i></i></p></div>
             <div class="skill-body">
               <h3>Node.js APIs</h3>
-              <p>Practical backend endpoints for mobile apps, with JSON data, integrations, validation, and reliable
-                client-server flows.</p>
+              <p>Simple Node.js backends for mobile apps: REST endpoints, validation, and connecting to other services.</p>
               <div class="skill-pills"><span>Node.js</span><span>REST</span><span>JSON</span><span>Version Control</span>
               </div>
             </div>
           </article>
-          <article class="skill-card skill-delivery reveal tilt-card">
-            <div class="skill-top"><span>05 / THE FINISH LINE</span><span>↗</span></div>
-            <div class="release-window" aria-label="Illustrative software release checklist">
+          <article data-reveal class="skill-card skill-delivery reveal tilt-card">
+            <div class="skill-top"><span>05 / RELEASE</span><span>↗</span></div>
+            <div class="release-window" data-type-lines  aria-label="Illustrative software release checklist">
               <div class="release-title"><span>● ● ●</span> release.sh</div>
               <p><span>✓</span> build &amp; test</p>
               <p><span>✓</span> verify integrations</p>
@@ -588,29 +647,26 @@
               <p class="release-success">● ready to ship_</p>
             </div>
             <div class="skill-body">
-              <h3>Build. Test.<br>Ship.</h3>
-              <p>Responsive browser checks, testing, Play Store publishing, updates, and collaborative product delivery.</p>
+              <h3>Testing &amp;<br>release</h3>
+              <p>Checking every screen size, fixing what breaks, then publishing and updating apps on Google Play.</p>
             </div>
           </article>
-          <article class="skill-card skill-github reveal tilt-card">
-            <div class="skill-top"><span>06 / THE WORKFLOW</span><span>↗</span></div>
+          <article data-reveal class="skill-card skill-github reveal tilt-card">
+            <div class="skill-top"><span>06 / VERSION CONTROL</span><span>↗</span></div>
             <div class="skill-icon skill-github-icon" aria-hidden="true">⌘</div>
             <div class="skill-body">
               <h3>GitHub &amp; Git</h3>
-              <p>Git, GitHub, and version control through readable commits, collaborative review, issue tracking, and
-                organized project delivery.</p>
-              <span class="skill-bottom">SHIP WITH CONFIDENCE <b>↗</b></span>
+              <p>Git and GitHub, with small, readable commits, pull requests and issues to keep work organised.</p>
+              <span class="skill-bottom">COMMITS · PRS · ISSUES <b>↗</b></span>
             </div>
           </article>
-          <article class="skill-card skill-ai reveal tilt-card">
-            <div class="skill-top"><span>07 / THE AI WORKFLOW</span><span>↗</span></div>
+          <article data-reveal class="skill-card skill-ai reveal tilt-card">
+            <div class="skill-top"><span>07 / AI</span><span>↗</span></div>
             <div class="skill-icon skill-ai-icon" aria-hidden="true"><span>✳</span></div>
             <div class="skill-body">
-              <h3>AI-Assisted Development</h3>
-              <p>Using AI-powered development tools to speed up implementation, explore solutions, debug complex issues,
-                and improve code quality. Combining AI efficiency with human engineering judgment to deliver reliable
-                products faster.</p>
-              <div class="skill-pills"><span>ChatGPT</span><span>OpenAI Codex</span><span>Claude Code</span></div>
+              <h3>AI in my workflow</h3>
+              <p>I use AI tools to track down bugs faster and skip repetitive boilerplate. I still read, test and fix the code myself before it ships.</p>
+              <div class="skill-pills"><span>Debugging</span><span>Prototyping</span><span>Refactoring</span></div>
             </div>
           </article>
         </div>
@@ -619,17 +675,17 @@
 
     <section class="state-lab-section" id="state-lab" aria-labelledby="state-lab-title">
       <div class="container">
-        <div class="section-heading state-lab-heading reveal">
-          <div><span class="section-kicker"><span class="kicker-dot"></span> 05 / STATE LAB</span>
-            <h2 id="state-lab-title"><span class="state-title-accent">Good state</span><br><span class="accent-text">feels invisible.</span></h2>
+        <div data-reveal class="section-heading state-lab-heading reveal">
+          <div><span class="section-kicker"><span class="kicker-dot"></span> 07 / STATE LAB</span>
+            <h2 id="state-lab-title"><span class="state-title-accent">Every screen</span><br><span class="accent-text">has a state.</span></h2>
           </div>
-          <p>State management is where product thinking becomes interaction design: predictable data, clear loading states, and UI that always knows what to do next.</p>
+          <p>People notice when an app freezes or fails without saying why. Try the booking demo: each state gets its own screen and a clear next step.</p>
         </div>
         <div class="state-lab-grid">
-          <div class="state-demo reveal" aria-live="polite">
-            <div class="state-demo-top"><span>INTERACTIVE FLOW / BOOKING</span><span class="state-live"><i></i> LIVE STATE</span></div>
+          <div data-reveal class="state-demo reveal" aria-live="polite">
+            <div class="state-demo-top"><span>DEMO / SALON BOOKING</span><span class="state-live"><i></i> LIVE STATE</span></div>
             <div class="state-demo-body">
-              <div class="state-status"><span class="state-status-dot"></span><strong data-state-title>Ready to book</strong><small data-state-copy>Select a service to see the state change.</small></div>
+              <div class="state-status"><span class="state-status-dot"></span><strong data-state-title>Ready to book</strong><small data-state-copy>Pick a state below, or run the full flow.</small></div>
               <div class="state-progress" aria-hidden="true"><span></span><span></span><span></span></div>
               <div class="state-actions" role="group" aria-label="Booking state controls">
                 <button class="state-control is-selected" type="button" data-state="idle">Idle</button>
@@ -640,113 +696,48 @@
               <button class="button button-lime state-trigger" type="button" data-state="loading">Run booking flow <span class="button-arrow" aria-hidden="true">↗</span></button>
             </div>
           </div>
-          <div class="state-architecture reveal">
+          <div data-reveal class="state-architecture reveal">
             <div class="state-architecture-head"><span class="section-kicker"><span class="kicker-dot"></span> THE PATTERN</span><span>01 → 02 → 03</span></div>
             <div class="state-flow">
               <article><span>01</span><h3>Event</h3><p>User taps “Book now”.</p><code>bookService()</code></article>
               <b aria-hidden="true">→</b>
               <article><span>02</span><h3>State</h3><p>Controller updates one source of truth.</p><code>status = loading</code></article>
               <b aria-hidden="true">→</b>
-              <article><span>03</span><h3>UI</h3><p>Every state gets a useful response.</p><code>view(status)</code></article>
+              <article><span>03</span><h3>UI</h3><p>The screen redraws to match.</p><code>view(status)</code></article>
             </div>
             <div class="state-tools"><span>Flutter</span><span>GetX</span><span>Provider</span><span>Firebase</span><span>Clean Architecture</span></div>
           </div>
         </div>
-        <div class="state-proof reveal"><span>What this means in a real product</span><strong>Less guesswork for users.</strong><strong>Fewer surprises for teams.</strong><strong>Interfaces that stay resilient.</strong></div>
+        <div data-reveal class="state-proof reveal"><span>In a real app this means</span><strong>A loader while data arrives</strong><strong>A clear message when it fails</strong><strong>A button to try again</strong></div>
       </div>
     </section>
 
-    <section class="section services-section" id="services" aria-labelledby="services-title">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div><span class="section-kicker"><span class="kicker-dot"></span> 06 / SERVICES</span>
-            <h2 id="services-title">What I can<br><span class="accent-text">build for you.</span></h2>
-          </div>
-          <p>From mobile applications to responsive web experiences, I turn practical ideas into functional digital products with thoughtful design and reliable engineering.</p>
+    <section class="now-section" aria-labelledby="now-title">
+      <div class="container now-layout">
+        <div data-reveal class="reveal"><span class="section-kicker"><span class="kicker-dot"></span> CURRENTLY / 2026</span><h2 id="now-title">What I'm<br><span class="accent-text">up to.</span></h2></div>
+        <div data-reveal class="now-grid reveal">
+          <article><span>01</span><h3>Open to work</h3><p>Looking for Flutter roles, web projects and product collaborations.</p><a href="#contact">Get in touch ↗</a></article>
+          <article><span>02</span><h3>Learning</h3><p>Getting deeper into testing, app architecture and BLoC.</p><a href="#expertise">See my toolkit ↗</a></article>
+          <article><span>03</span><h3>Designing every state</h3><p>Loading, empty and error screens deserve real design too. The State Lab below shows what I mean.</p><a href="#state-lab">Try the State Lab ↗</a></article>
         </div>
-        <div class="services-grid">
-          <article class="service-card service-card--flutter reveal tilt-card">
-            <div class="service-top"><span>01 / MOBILE</span><span class="service-icon" aria-hidden="true">◈</span></div>
-            <h3>Flutter Mobile App Development</h3>
-            <p>Building intuitive mobile applications with Flutter and Dart, including navigation, state management, API connectivity, and polished user experiences.</p>
-            <div class="service-tags"><span>Flutter</span><span>Dart</span><span>Firebase</span></div>
-          </article>
-          <article class="service-card service-card--backend reveal tilt-card">
-            <div class="service-top"><span>02 / INTEGRATION</span><span class="service-icon" aria-hidden="true">⌁</span></div>
-            <h3>Firebase &amp; Backend Integration</h3>
-            <p>Connecting applications to authentication, databases, APIs, and cloud services to support real product workflows.</p>
-            <div class="service-tags"><span>Authentication</span><span>Firestore</span><span>REST APIs</span></div>
-          </article>
-          <article class="service-card service-card--web reveal tilt-card">
-            <div class="service-top"><span>03 / WEB</span><span class="service-icon" aria-hidden="true">⌘</span></div>
-            <h3>Responsive Web Development</h3>
-            <p>Creating mobile-friendly websites and storefronts with accessible layouts, interactive interfaces, and consistent experiences across screen sizes.</p>
-            <div class="service-tags"><span>Responsive UI</span><span>E-commerce</span><span>Accessibility</span></div>
-          </article>
-          <article class="service-card service-card--care reveal tilt-card">
-            <div class="service-top"><span>04 / IMPROVEMENT</span><span class="service-icon" aria-hidden="true">✳</span></div>
-            <h3>App Maintenance &amp; Improvement</h3>
-            <p>Improving existing applications through UI refinements, bug investigation, integration updates, and careful testing.</p>
-            <div class="service-tags"><span>Refinement</span><span>Debugging</span><span>Testing</span></div>
-          </article>
-        </div>
-        <div class="services-cta reveal"><p>Have a product in mind?</p><a href="#contact" class="button button-lime magnetic">Let's discuss your project <span class="button-arrow" aria-hidden="true">↗</span></a></div>
       </div>
     </section>
 
-    <section class="process-section" id="process" aria-labelledby="process-title">
+    <section class="section faq-section" id="faq" aria-labelledby="faq-title">
       <div class="container">
-          <div class="process-heading reveal"><span class="section-kicker"><span class="kicker-dot"></span> 07 / HOW I
-            WORK</span>
-          <h2 id="process-title">From <span>what if?</span><br>to <em>it's live.</em></h2>
-          <p>A simple, practical process that keeps the product — and the people using it — at the center.</p>
+        <div data-reveal class="section-heading reveal">
+          <div><span class="section-kicker"><span class="kicker-dot"></span> 08 / FAQ</span>
+            <h2 id="faq-title">Before you<br><span class="accent-text">get in touch.</span></h2>
+          </div>
+          <p>Quick answers to common questions. Anything else, just ask.</p>
         </div>
-        <ol class="process-grid">
-          <li class="process-step reveal is-open"><button class="process-trigger" type="button" aria-expanded="true"><span class="step-number">01</span><span class="step-icon"
-              aria-hidden="true">✳</span>
-            <h3>Discover</h3>
-            <p>Understand the problem, the users, and what success looks like.</p><span class="step-arrow"
-              aria-hidden="true">↗</span></button><div class="process-details"><span>ACTIVITIES</span><ul><li>Brief &amp; user goals</li><li>Market signals</li></ul><span>DELIVERABLE</span><strong>Product direction</strong></div>
-          </li>
-          <li class="process-step reveal"><button class="process-trigger" type="button" aria-expanded="false"><span class="step-number">02</span><span class="step-icon"
-              aria-hidden="true">⌘</span>
-            <h3>Architect</h3>
-            <p>Map the flows, data, interactions, and technical approach.</p><span class="step-arrow"
-              aria-hidden="true">↗</span></button><div class="process-details"><span>ACTIVITIES</span><ul><li>Flows &amp; wireframes</li><li>Data architecture</li></ul><span>DELIVERABLE</span><strong>Build-ready blueprint</strong></div>
-          </li>
-          <li class="process-step reveal"><button class="process-trigger" type="button" aria-expanded="false"><span class="step-number">03</span><span class="step-icon"
-              aria-hidden="true">◈</span>
-            <h3>Build &amp; refine</h3>
-            <p>I build with Flutter, Firebase, and modern web technologies, using AI-assisted workflows to accelerate
-              development, investigate issues, and refine implementations. Every solution is reviewed, tested, and
-              improved before release.</p><span class="step-arrow"
-              aria-hidden="true">↗</span></button><div class="process-details"><span>ACTIVITIES</span><ul><li>Flutter implementation</li><li>Interaction polish</li></ul><span>DELIVERABLE</span><strong>Testable product</strong></div>
-          </li>
-          <li class="process-step reveal"><button class="process-trigger" type="button" aria-expanded="false"><span class="step-number">04</span><span class="step-icon"
-              aria-hidden="true">↗</span>
-            <h3>Test &amp; ship</h3>
-            <p>Validate the experience and put it in people's hands.</p><span class="step-arrow"
-              aria-hidden="true">↗</span></button><div class="process-details"><span>ACTIVITIES</span><ul><li>QA &amp; release checks</li><li>Store submission</li></ul><span>DELIVERABLE</span><strong>Live, supported release</strong></div>
-          </li>
-        </ol>
-        <div class="ai-workflow reveal" aria-labelledby="ai-workflow-title">
-          <div class="ai-workflow-heading">
-            <span class="section-kicker"><span class="kicker-dot"></span> ENGINEERING-LED / AI-ACCELERATED</span>
-            <h3 id="ai-workflow-title">AI supports the work.<br><span>Engineering judgment leads it.</span></h3>
-            <p>AI helps me explore ideas, accelerate implementation, and investigate problems. Code review, testing, and delivery remain my responsibility.</p>
-          </div>
-          <ol class="ai-flow-list">
-            <li><span>01</span><h4>Define</h4><p>Clarify requirements, user flows, and constraints.</p></li>
-            <li><span>02</span><h4>Explore</h4><p>Compare approaches with ChatGPT, Codex, or Claude Code.</p></li>
-            <li><span>03</span><h4>Build</h4><p>Implement and integrate the chosen solution.</p></li>
-            <li><span>04</span><h4>Verify</h4><p>Review code, test behavior, and check edge cases.</p></li>
-            <li><span>05</span><h4>Ship</h4><p>Confirm release requirements and deliver.</p></li>
-          </ol>
-          <div class="ai-use-cases">
-            <article><h4>AI-assisted debugging</h4><p>Investigate errors and possible causes, then validate fixes in code and tests.</p></article>
-            <article><h4>Faster implementation</h4><p>Draft routine patterns or refactors, then review and adapt the result.</p></article>
-            <article><h4>UI and quality refinement</h4><p>Explore responsive and accessibility checks, then verify them in a browser.</p></article>
-          </div>
+        <div data-reveal class="faq-list reveal">
+          <details class="faq-item"><summary>Do you work with clients outside Pakistan?</summary><p>Yes. I work remotely, so where you're based doesn't matter. You can reach me by email or on WhatsApp, including my international number.</p></details>
+          <details class="faq-item"><summary>How much will my project cost?</summary><p>It depends on the screens, features and backend your project needs. <a href="#project-brief">Send me a short brief</a> and I'll get back to you with questions and an estimate.</p></details>
+          <details class="faq-item"><summary>How long will it take?</summary><p>That depends on the scope too. Once I understand what you need, I'll give you a realistic timeline before any work starts.</p></details>
+          <details class="faq-item"><summary>Can you work on an app I already have?</summary><p>Yes. I can fix bugs, update the design or add new features to an existing Flutter app.</p></details>
+          <details class="faq-item"><summary>Do you design the screens as well?</summary><p>Yes. I can design the screens and build them, or build from designs you already have.</p></details>
+          <details class="faq-item"><summary>Can you help publish the app on Google Play?</summary><p>Yes. I can prepare the release and help you publish it on Google Play, as I did with my own app, Beautify.</p></details>
         </div>
       </div>
     </section>
@@ -755,18 +746,15 @@
         class="contact-deco contact-deco-one" aria-hidden="true">✳</span><span class="contact-deco contact-deco-two"
         aria-hidden="true">✦</span>
       <div class="container contact-content">
-        <div class="contact-top reveal"><span class="section-kicker"><span class="kicker-dot"></span> 08 / YOUR
-            MOVE</span><span>GOT AN IDEA? I WANT TO HEAR IT.</span></div>
-        <h2 id="contact-title" class="reveal">Let's build<br>something <em>unreal.</em></h2>
-        <div class="contact-bottom reveal">
-          <p>I'm open to Flutter roles, web projects, and product collaborations. Tell me what you're dreaming up.
-          </p>
+        <div data-reveal class="contact-top reveal"><span class="section-kicker"><span class="kicker-dot"></span> 09 / CONTACT</span><span>BASED IN PAKISTAN · UTC+5</span></div>
+        <h2 id="contact-title" data-reveal class="reveal">Have a project?<br><em>Let's talk.</em></h2>
+        <div data-reveal class="contact-bottom reveal">
+          <p>I'm open to Flutter roles, web projects and product collaborations. Send me a message, even if it's just a rough idea for now.</p>
           <div class="contact-actions"><a class="button button-lime magnetic"
               href="mailto:umar@umarsaeedqureshi.com?subject=Project%20Inquiry%20for%20Umar%20Saeed%20Qureshi"><svg
                 class="contact-email-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M2.5 5.5A2.5 2.5 0 0 1 5 3h14a2.5 2.5 0 0 1 2.5 2.5v13A2.5 2.5 0 0 1 19 21H5a2.5 2.5 0 0 1-2.5-2.5v-13Zm2.8.1L12 11l6.7-5.4H5.3ZM19.5 8.2 12.8 13a1.4 1.4 0 0 1-1.6 0L4.5 8.2v10.3c0 .3.2.5.5.5h14c.3 0 .5-.2.5-.5V8.2Z"/>
-              </svg>Start a
-              conversation <span class="button-arrow" aria-hidden="true">↗</span></a><button
+              </svg>Email me <span class="button-arrow" aria-hidden="true">↗</span></a><button
               class="contact-email copy-email" type="button" data-email="umar@umarsaeedqureshi.com">or copy
               umar@umarsaeedqureshi.com</button><span class="copy-status" role="status" aria-live="polite"></span></div>
           <div class="contact-channels" aria-label="Additional contact options">
@@ -787,13 +775,13 @@
             </a>
           </div>
         </div>
-        <form class="project-brief reveal" id="project-brief">
-          <div class="project-brief-heading"><span class="section-kicker"><span class="kicker-dot"></span> QUICK BRIEF</span><h3>Start with the shape<br>of your idea.</h3><p>Share the essentials. I’ll bring the technical questions.</p></div>
-          <div class="brief-steps" aria-label="Project brief steps"><span><b>01</b> Choose a direction</span><span><b>02</b> Add context</span><span><b>03</b> Open your email</span></div>
-          <div class="brief-fields"><label>Your project type<select name="type"><option>Flutter mobile app</option><option>Responsive website</option><option>Firebase / API integration</option><option>App improvement</option></select></label><label>Timeline<select name="timeline"><option>Exploring an idea</option><option>1–4 weeks</option><option>1–3 months</option><option>Flexible</option></select></label><label class="brief-message">What are you building?<textarea name="message" rows="3" placeholder="A short note about the product, users, or challenge…"></textarea></label></div>
-          <button class="button button-ghost" type="submit">Prepare project email <span class="button-arrow" aria-hidden="true">↗</span></button><span class="brief-status" role="status" aria-live="polite"></span>
+        <form data-reveal class="project-brief reveal" id="project-brief">
+          <div class="project-brief-heading"><span class="section-kicker"><span class="kicker-dot"></span> QUICK BRIEF</span><h3>Not sure what<br>to write?</h3><p>Pick a few options and send it by email or WhatsApp, with the details already filled in.</p></div>
+          <div class="brief-steps" aria-label="Project brief steps"><span><b>01</b> Pick a type</span><span><b>02</b> Add a short note</span><span><b>03</b> Send it</span></div>
+          <div class="brief-fields"><label class="brief-name">Your name<input name="name" type="text" autocomplete="name" placeholder="So I know who I'm talking to"></label><label>Your project type<select name="type"><option>Flutter mobile app</option><option>Responsive website</option><option>Firebase / API integration</option><option>App improvement</option></select></label><label>Timeline<select name="timeline"><option>Exploring an idea</option><option>1–4 weeks</option><option>1–3 months</option><option>Flexible</option></select></label><label class="brief-message">What are you building?<textarea name="message" rows="3" placeholder="What are you building, and who is it for?"></textarea></label></div>
+          <div class="brief-actions"><button class="button button-lime" type="submit" name="via" value="email">Send by email <span class="button-arrow" aria-hidden="true">↗</span></button><button class="button button-ghost" type="submit" name="via" value="whatsapp">Send on WhatsApp <span class="button-arrow" aria-hidden="true">↗</span></button></div><span class="brief-status" role="status" aria-live="polite"></span>
         </form>
-        <div class="contact-bottom-note" aria-hidden="true">MAKE IT MATTER. MAKE IT MEMORABLE. ↗</div>
+        <div class="contact-bottom-note" aria-hidden="true">THANKS FOR SCROLLING THIS FAR ✳</div>
       </div>
     </section>
 
@@ -802,18 +790,24 @@
   <footer class="site-footer">
     <div class="container footer-inner"><a href="#top" class="footer-brand"
         aria-label="Back to top">umar<span>✳</span></a>
-      <p>© <span id="year">2026</span> UMAR SAEED QURESHI<br><span>MADE WITH INTENTION / PAKISTAN</span></p><nav class="footer-sitemap" aria-label="Footer sitemap"><a href="#work">Projects</a><a href="#about">About</a><a href="#expertise">Toolkit</a><a href="#services">Services</a><a href="#process">Process</a><a href="#contact">Contact</a></nav>
+      <p>© <span id="year">2026</span> UMAR SAEED QURESHI<br><span>BASED IN PAKISTAN · AVAILABLE FOR PROJECTS</span></p><nav class="footer-sitemap" aria-label="Footer sitemap"><a href="#work">Projects</a><a href="#services">Services</a><a href="#process">Process</a><a href="#about">About</a><a href="#expertise">Toolkit</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
       <div class="footer-links"><a href="mailto:umar@umarsaeedqureshi.com">EMAIL ↗</a><a
           href="https://github.com/umar200411/" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><a
           href="https://www.linkedin.com/in/umar-saeed-qureshi-8a6484296/" target="_blank"
           rel="noopener noreferrer">LINKEDIN ↗</a><a href="/assets/Umar-Saeed-Qureshi-Resume.pdf" target="_blank" rel="noopener">RESUME ↗</a></div><a class="back-to-top" href="#top">BACK TO TOP ↑</a>
     </div>
   </footer>
-  <script src="script.js?v=20261109-1" defer></script>
-  <script src="depot-content.js?v=20261109-1" defer></script>
-  <script src="depot.js?v=20261109-1" defer></script>
+  <script src="script.js?v=20261109-4" defer></script>
+  <script src="depot-content.js?v=20261109-4" defer></script>
+  <script src="depot.js?v=20261109-4" defer></script>
   <script src="cursor-scrub-video.js?v=20261105-2" defer></script>
-  <script src="effects.js?v=20261109-1" defer></script>
+  <script src="effects.js?v=20261109-4" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" integrity="sha384-xb96EMJeax+NLXMC88ZBa1xAeAW+kn+horHh/zFlbMLG2UPWhMJJSlv7fi57hS+Q" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js" integrity="sha384-lg3+EgIwmxYq9YD4ix279pdUEasqmOS17fF+2mI/NEg6JHkawYaWYpJ6nKZenPOy" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" integrity="sha384-FKTX0CNJ8ngN1oGMBReVu7mvjTJyjFiD5etb1NKnYxc+8eFI2O0KWnksTN+oTFcu" crossorigin="anonymous" defer></script>
+  <script src="animations.js?v=20261109-4" defer></script>
 </body>
 
 </html>
