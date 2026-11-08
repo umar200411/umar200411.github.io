@@ -53,8 +53,8 @@
   };
   const displayPoint = () => {
     const rect = stage.getBoundingClientRect();
-    const x = matchMedia('(max-width: 700px)').matches ? .82 : .84;
-    const y = matchMedia('(max-width: 700px)').matches ? .25 : .54;
+    const x = matchMedia('(max-width: 900px)').matches ? .82 : .84;
+    const y = matchMedia('(max-width: 900px)').matches ? .25 : .54;
     return { x, y: rect.height * y };
   };
   const railPercentForStageX = stagePercent => {
@@ -290,16 +290,21 @@
       if (moreMenu?.contains(link)) {
         moreMenu.classList.remove('is-open');
         moreButton?.setAttribute('aria-expanded','false');
+        // Hiding the menu would drop focus to <body>; return it to the toggle so keyboard
+        // users stay in the depot (and Escape still reaches it).
+        moreButton?.focus({preventScroll:true});
       }
       const target=byId(link.dataset.depotTarget);
       if(target) { history.replaceState(null,'',link.getAttribute('href')); activate(target,{keyboard:event.detail===0,focus:link}); }
     }
   });
   hero.addEventListener('keydown',event => {
-    if (event.key === 'Escape' && (machine.active || moreMenu?.classList.contains('is-open'))) {
+    // A container that is still being picked up (machine.target) can be dismissed too; the close
+    // runs as soon as the current mechanical step finishes instead of being silently ignored.
+    if (event.key === 'Escape' && (machine.active || machine.target || moreMenu?.classList.contains('is-open'))) {
       event.preventDefault();
       if (moreMenu?.classList.contains('is-open')) { moreMenu.classList.remove('is-open'); moreButton?.setAttribute('aria-expanded','false'); }
-      close({restoreFocus:machine.active?.querySelector('.depot-trigger'),keyboard:true});
+      close({restoreFocus:(machine.active || machine.target)?.querySelector('.depot-trigger'),keyboard:true});
     }
   });
   moreButton?.addEventListener('click',() => {

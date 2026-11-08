@@ -2,7 +2,8 @@ const { defineConfig } = require('@playwright/test');
 module.exports = defineConfig({
   testDir: './tests/depot',
   timeout: 30000,
-  expect: { timeout: 5000 },
+  // Switching between open depot containers takes ~5.6s by design (return, then pick up).
+  expect: { timeout: 10000 },
   fullyParallel: false,
   retries: process.env.CI ? 1 : 0,
   reporter: [['list'], ['html', { outputFolder: 'playwright-report', open: 'never' }]],

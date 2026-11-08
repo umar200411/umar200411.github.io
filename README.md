@@ -5,12 +5,23 @@ This is the static portfolio website for **Umar Saeed Qureshi**, Flutter & Web D
 ## Files
 
 - `index.html` — all page content and SEO metadata
-- `styles.css` — full responsive design
-- `script.js` — mobile menu, reveal animations, copy-email interaction
+- `site.css` — shared dark design system (tokens, header, sections, footer) for every page
+- `depot.css` — the interactive container-depot hero
+- `case-study.css` — Beautify, Magnet Masala, and Pulse case-study pages
+- `script.js` — sticky header, mobile menu, reveal animations, galleries, copy-email interaction
+- `effects.js` — visual effects layer: hero starfield, contact particle field, hero/card pointer spotlights, floating back-to-top progress ring, and off-screen animation pausing. Effects scale to the device (fewer particles, 30 fps and capped pixel density on touch devices, static on low-power devices that the inline head script flags with `fx-lite`) and render a single still frame for `prefers-reduced-motion`
+- Images: pages load the `.webp` versions of the portrait and screenshots (about 83% smaller); the original `.png`/`.jpg` files stay for social-preview tags and as source files
 - `assets/favicon.svg` — browser icon
 - `assets/social-preview.svg` — social sharing placeholder graphic
 - `robots.txt` — search engine crawl configuration
 - `sitemap.xml` — update after your final domain is selected
+
+## Visual effects and performance
+
+- **Tuning:** particle counts and frame rates live at the top of each scene in `effects.js` (`starfieldScene`, `constellationScene`); colours come from the `site.css` tokens. The "Effects & motion layer" section at the end of `site.css` and the "Motion" block near the end of `depot.css` hold the CSS animations.
+- **Device tiers:** the inline script in each page's `<head>` adds `fx-lite` on devices that report Data Saver, ≤2 GB memory, or ≤2 CPU cores; those devices keep the full design with static effects and no backdrop blur. Touch devices run the canvases at 30 fps with a lower pixel density.
+- **Accessibility:** with `prefers-reduced-motion: reduce`, the canvases draw one still frame and CSS animations are skipped; decorative layers are `aria-hidden`.
+- **Adding images:** export screenshots as `.webp` (keep a `.png`/`.jpg` alongside only if it is used for social previews).
 
 ## Easiest way to preview
 

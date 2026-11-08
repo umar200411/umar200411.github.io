@@ -5,7 +5,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#0f74e0">
+  <meta name="theme-color" content="#05070f">
+  <meta name="color-scheme" content="dark">
+  <script>
+    /* Runs before first paint: enables reveal styling and picks an effects tier so heavy
+       visuals scale to the device. If script.js never arrives, content is shown anyway. */
+    (function (root, nav) {
+      var connection = nav.connection || {};
+      root.classList.add('js');
+      if (connection.saveData || (nav.deviceMemory && nav.deviceMemory <= 2) || (nav.hardwareConcurrency && nav.hardwareConcurrency <= 2)) root.classList.add('fx-lite');
+      setTimeout(function () { if (!window.__siteReady) { window.__revealFallback = true; root.classList.remove('js'); } }, 4000);
+    })(document.documentElement, navigator);
+  </script>
   <meta name="description"
     content="Umar Saeed Qureshi is a Flutter developer and web creator building mobile applications with Firebase and responsive websites. Explore real projects and product experience.">
   <meta name="author" content="Umar Saeed Qureshi">
@@ -35,12 +46,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@500;600;700;800&amp;display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261019-2">
-  <link rel="stylesheet" href="case-studies.css?v=20261019-2">
-  <link rel="stylesheet" href="depot.css?v=20261105-2">
-  <link rel="stylesheet" href="pulse-project.css?v=20261105-1">
+  <link rel="preload" as="image" href="assets/character-still.webp" type="image/webp" fetchpriority="high">
+  <link rel="stylesheet" href="site.css?v=20261109-1">
+  <link rel="stylesheet" href="depot.css?v=20261109-1">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -123,13 +133,13 @@
   <a class="skip-link" href="#main">Skip to content</a>
     <div id="top" class="page-top" aria-hidden="true"></div>
   <header class="site-header">
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Umar Saeed Qureshi, back to top">umar<span class="brand-spark"
-          aria-hidden="true">✳</span><small>DEV / DESIGN / SHIP</small></a>
+          aria-hidden="true">✳</span></a>
       <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
-        <a href="#depot-work" data-depot-target="work">Projects</a><a href="#depot-about" data-depot-target="about">About</a><a href="#depot-about" data-depot-target="about">Experience</a><a
-          href="#depot-toolkit" data-depot-target="toolkit">Toolkit</a><a href="#depot-toolkit" data-depot-target="toolkit">State Lab</a><a href="#depot-services" data-depot-target="services">Services</a><a href="#depot-process" data-depot-target="journey">Process</a>
-        <a class="nav-contact" href="#depot-contact" data-depot-target="contact">Let's connect <span aria-hidden="true">↗</span></a>
+        <a href="#work">Projects</a><a href="#about">About</a><a href="#experience">Experience</a><a href="#expertise">Toolkit</a><a href="#services">Services</a><a href="#process">Process</a><a class="nav-resume" href="/assets/Umar-Saeed-Qureshi-Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="nav-contact" href="#contact">Let's connect <span aria-hidden="true">↗</span></a>
       </nav>
       <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav"
         aria-expanded="false"><span></span><span></span></button>
@@ -149,6 +159,7 @@
           <a href="#depot-about" data-depot-target="about">About</a>
           <a href="#depot-process" data-depot-target="journey">Process</a>
           <a href="#depot-contact" data-depot-target="contact">Contact</a>
+          <a href="/assets/Umar-Saeed-Qureshi-Resume.pdf" target="_blank" rel="noopener">Resume</a>
         </nav>
         <div class="depot-tools">
           <a class="depot-talk" href="mailto:umar@umarsaeedqureshi.com">Let's talk <span aria-hidden="true">↗</span></a>
@@ -169,14 +180,21 @@
           <div class="depot-intro-actions">
             <a class="depot-intro-link depot-intro-link--primary" href="#depot-work" data-depot-target="work">Explore my work <span aria-hidden="true">↗</span></a>
             <a class="depot-intro-link depot-intro-link--secondary" href="mailto:umar@umarsaeedqureshi.com">Let's talk</a>
+            <a class="depot-intro-icon" href="https://github.com/umar200411/" target="_blank" rel="noopener noreferrer" aria-label="Umar on GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+            <a class="depot-intro-icon" href="https://www.linkedin.com/in/umar-saeed-qureshi-8a6484296/" target="_blank" rel="noopener noreferrer" aria-label="Umar on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13Zm1.78 13.02H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a>
           </div>
-          <p class="depot-intro-note">Select a container to explore the work.</p>
+          <ul class="depot-intro-meta" aria-label="Highlights">
+            <li><strong>01</strong><span>App live on Google Play</span></li>
+            <li><strong>03</strong><span>Product case studies</span></li>
+            <li><strong>PK</strong><span>Available worldwide</span></li>
+          </ul>
+          <p class="depot-intro-note"><span aria-hidden="true">↘</span> Pick a container to explore the work</p>
         </section>
 
         <section class="depot-workspace" aria-label="Interactive portfolio depot">
           <div class="depot-label">UMAR'S DEPOT <span>·</span> <strong>7 CONTAINERS</strong></div>
           <div class="depot-character" aria-hidden="true">
-            <div class="cursor-scrub-video" data-cursor-scrub data-video-file="" data-poster="assets/character-still.png" data-axis="horizontal" data-tracking-area="window" data-smoothing="0.22" data-object-fit="contain" data-show-poster="true" data-static-on-touch="true"></div>
+            <div class="cursor-scrub-video" data-cursor-scrub data-video-file="" data-poster="assets/character-still.webp" data-axis="horizontal" data-tracking-area="window" data-smoothing="0.22" data-object-fit="contain" data-show-poster="true" data-static-on-touch="true"></div>
           </div>
           <div class="depot-stage" id="depot-stage" data-depot-stage>
             <div class="depot-floor" aria-hidden="true"></div>
@@ -222,12 +240,16 @@
             DESIGN</span><b>✳</b><span>REAL PRODUCTS</span><b>✳</b><span>DART</span><b>✳</b><span>LET'S
             BUILD</span><b>✳</b></div>
       </div>
+      <div class="marquee-track marquee-track--reverse" aria-hidden="true">
+        <div class="marquee-set"><span>GETX</span><b>◇</b><span>PROVIDER</span><b>◇</b><span>CLOUD FIRESTORE</span><b>◇</b><span>NODE.JS</span><b>◇</b><span>REST APIS</span><b>◇</b><span>GOOGLE MAPS</span><b>◇</b><span>RESPONSIVE WEB</span><b>◇</b><span>PLAY STORE</span><b>◇</b></div>
+        <div class="marquee-set"><span>GETX</span><b>◇</b><span>PROVIDER</span><b>◇</b><span>CLOUD FIRESTORE</span><b>◇</b><span>NODE.JS</span><b>◇</b><span>REST APIS</span><b>◇</b><span>GOOGLE MAPS</span><b>◇</b><span>RESPONSIVE WEB</span><b>◇</b><span>PLAY STORE</span><b>◇</b></div>
+      </div>
     </div>
 
     <section class="proof-strip" aria-label="Portfolio highlights">
       <div class="container proof-strip-inner">
         <div><strong>01</strong><span>Published mobile app</span></div>
-        <div><strong>02</strong><span>Featured product case studies</span></div>
+        <div><strong>03</strong><span>Featured product case studies</span></div>
         <div><strong>05+</strong><span>Core delivery capabilities</span></div>
         <div><strong>PK</strong><span>Available worldwide</span></div>
       </div>
@@ -265,7 +287,7 @@
           <div class="project-art pulse-project-art" role="group" aria-label="Pulse project media placeholder">
             <div class="pulse-visual-placeholder" role="img" aria-label="Authentic Pulse app screens have not been supplied yet. This is a labeled placeholder, not an app screenshot.">
               <span class="pulse-placeholder-kicker">PULSE / APP PREVIEW</span>
-              <div class="pulse-placeholder-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="pulse-placeholder-mark" aria-hidden="true"><svg class="pulse-ecg" viewBox="0 0 320 80" focusable="false"><path class="pulse-ecg-base" d="M0 46H92l12 0 8-14 8 14h10l10-38 11 66 10-28h16l9-9 9 9H320"/><path class="pulse-ecg-glow" pathLength="100" d="M0 46H92l12 0 8-14 8 14h10l10-38 11 66 10-28h16l9-9 9 9H320"/><path class="pulse-ecg-trace" pathLength="100" d="M0 46H92l12 0 8-14 8 14h10l10-38 11 66 10-28h16l9-9 9 9H320"/></svg></div>
               <strong>Real app screens<br>coming soon</strong>
               <small>VISUAL PLACEHOLDER · NOT AN APP SCREEN</small>
             </div>
@@ -299,7 +321,7 @@
             <div class="project-phone" id="beautify-phone">
               <div class="phone-buttons" aria-hidden="true"><span></span><span></span></div>
               <div class="phone-screen" id="beautify-screen" aria-live="polite" aria-atomic="true">
-                <img id="beautify-screenshot" src="assets/projects/beautify/discover.png" width="414" height="896"
+                <img id="beautify-screenshot" src="assets/projects/beautify/discover.webp" width="414" height="896"
                   alt="Beautify Discover screen showing salon offers, beauty service categories, and nearby services."
                   loading="lazy" decoding="async">
               </div>
@@ -308,15 +330,15 @@
               data-preload-neighbors="true">
               <span class="demo-label">SCREEN GALLERY</span>
               <button class="demo-control is-active" type="button" aria-controls="beautify-screen" aria-pressed="true"
-                data-image="assets/projects/beautify/discover.png"
+                data-image="assets/projects/beautify/discover.webp"
                 data-alt="Beautify Discover screen showing salon offers, beauty service categories, and nearby services."
                 data-label="Discover home">Discover</button>
               <button class="demo-control" type="button" aria-controls="beautify-screen" aria-pressed="false"
-                data-image="assets/projects/beautify/get-started.png"
+                data-image="assets/projects/beautify/get-started.webp"
                 data-alt="Beautify registration screen with options to register as a user or a salon business."
                 data-label="Get started">Get started</button>
               <button class="demo-control" type="button" aria-controls="beautify-screen" aria-pressed="false"
-                data-image="assets/projects/beautify/service-setup.png"
+                data-image="assets/projects/beautify/service-setup.webp"
                 data-alt="Beautify salon service setup screen for selecting a category and entering service details."
                 data-label="Salon service setup">Service setup</button>
               <span class="sr-only gallery-status" aria-live="polite">Showing Discover home screenshot.</span>
@@ -340,30 +362,30 @@
             <div class="project-orbit project-orbit-b" aria-hidden="true"></div>
             <div class="browser-preview" id="magnet-preview">
               <div class="browser-chrome" aria-hidden="true"><span></span><span></span><span></span><b>magnetmasala.com</b></div>
-              <img id="magnet-screenshot" src="assets/projects/magnet-masala/home-desktop.jpg" width="1440" height="900"
+              <img id="magnet-screenshot" src="assets/projects/magnet-masala/home-desktop.webp" width="1440" height="900"
                 alt="Magnet Masala live homepage with spice products and its responsive storefront design."
                 loading="lazy" decoding="async">
             </div>
             <div class="mobile-web-preview" aria-label="Magnet Masala mobile homepage preview">
-              <img src="assets/projects/magnet-masala/home-mobile.jpg" width="390" height="844"
+              <img src="assets/projects/magnet-masala/home-mobile.webp" width="390" height="844"
                 alt="Magnet Masala homepage captured at a 390 pixel mobile viewport."
                 loading="lazy" decoding="async">
             </div>
             <div class="magnet-gallery screenshot-gallery" role="group" aria-label="Magnet Masala website screenshots">
               <button class="demo-control is-active" type="button" aria-controls="magnet-preview" aria-pressed="true"
-                data-image="assets/projects/magnet-masala/home-desktop.jpg"
+                data-image="assets/projects/magnet-masala/home-desktop.webp"
                 data-alt="Magnet Masala live homepage with spice products and its responsive storefront design."
                 data-label="Desktop homepage">Home</button>
               <button class="demo-control" type="button" aria-controls="magnet-preview" aria-pressed="false"
-                data-image="assets/projects/magnet-masala/home-mobile.jpg"
+                data-image="assets/projects/magnet-masala/home-mobile.webp"
                 data-alt="Magnet Masala homepage captured at a 390 pixel mobile viewport."
                 data-layout="mobile" data-label="Mobile homepage">Mobile</button>
               <button class="demo-control" type="button" aria-controls="magnet-preview" aria-pressed="false"
-                data-image="assets/projects/magnet-masala/shop-desktop.jpg"
+                data-image="assets/projects/magnet-masala/shop-desktop.webp"
                 data-alt="Magnet Masala product catalog with search, category filters, and spice product cards."
                 data-label="Product catalog">Catalog</button>
               <button class="demo-control" type="button" aria-controls="magnet-preview" aria-pressed="false"
-                data-image="assets/projects/magnet-masala/basket-desktop.jpg"
+                data-image="assets/projects/magnet-masala/basket-desktop.webp"
                 data-alt="Magnet Masala empty basket drawer, with the homepage blurred behind it."
                 data-label="Basket drawer">Basket</button>
               <span class="sr-only gallery-status" aria-live="polite">Showing Desktop homepage screenshot.</span>
@@ -433,9 +455,9 @@
               href="/assets/Umar-Saeed-Qureshi-Resume.pdf" download>Download Resume <span class="button-arrow"
                 aria-hidden="true">↓</span></a></div>
           <div class="about-stats">
-            <div><strong class="stat-number" data-count="1">00</strong><small>APP ON<br>GOOGLE PLAY</small></div>
-            <div><strong class="stat-number" data-count="2">00</strong><small>FEATURED<br>PROJECTS</small></div>
-            <div><strong class="stat-number" data-count="2">00</strong><small>TECH COMPANIES<br>WORKED WITH</small></div>
+            <div><strong class="stat-number" data-count="1">01</strong><small>APP ON<br>GOOGLE PLAY</small></div>
+            <div><strong class="stat-number" data-count="3">03</strong><small>FEATURED<br>PROJECTS</small></div>
+            <div><strong class="stat-number" data-count="2">02</strong><small>TECH COMPANIES<br>WORKED WITH</small></div>
             <div><strong>PK</strong><small>BASED IN<br>PAKISTAN</small></div>
           </div>
         </div>
@@ -481,10 +503,10 @@
             <div class="experience-media experience-media--token" aria-label="Official Token Talent ESS app screenshots">
               <span class="experience-media-label">OFFICIAL ESS APP SCREENS</span>
               <div class="experience-screen-pair">
-                <img src="assets/experience/token-talent/ess-attendance.png" width="456" height="654"
+                <img src="assets/experience/token-talent/ess-attendance.webp" width="456" height="654"
                   alt="Token Talent ESS mobile attendance screen with location verification and a check-in control."
                   loading="lazy" decoding="async">
-                <img src="assets/experience/token-talent/ess-leave.png" width="426" height="652"
+                <img src="assets/experience/token-talent/ess-leave.webp" width="426" height="652"
                   alt="Token Talent ESS mobile leave application screen with leave type, date, and reason fields."
                   loading="lazy" decoding="async">
               </div>
@@ -532,6 +554,11 @@
           <article class="skill-card skill-apis reveal tilt-card">
             <div class="skill-top"><span>03 / THE CONNECTIONS</span><span>↗</span></div>
             <div class="skill-icon" aria-hidden="true">⌁</div>
+            <svg class="skill-network" viewBox="0 0 260 112" aria-hidden="true" focusable="false">
+              <path class="net-link" d="M28 84 92 30"/><path class="net-link" d="M92 30 156 74"/><path class="net-link" d="M156 74 232 26"/><path class="net-link" d="M92 30 232 26"/><path class="net-link" d="M28 84 156 74"/>
+              <circle class="net-node" cx="28" cy="84" r="5"/><circle class="net-node net-node--hub" cx="92" cy="30" r="8"/><circle class="net-node" cx="156" cy="74" r="5"/><circle class="net-node" cx="232" cy="26" r="5"/>
+              <text x="28" y="106">REST</text><text x="92" y="12">JSON</text><text x="156" y="98">MAPS</text><text x="232" y="50">WS</text>
+            </svg>
             <div class="skill-body">
               <h3>APIs &amp; Maps</h3>
               <p>REST APIs, WebSocket APIs, OpenAI API, Google Gemini API, JSON, Postman, Google Maps, In-App Purchases,
@@ -542,6 +569,7 @@
           <article class="skill-card skill-node reveal tilt-card">
             <div class="skill-top"><span>04 / THE API LAYER</span><span>↗</span></div>
             <div class="skill-icon skill-node-icon" aria-hidden="true">JS</div>
+            <div class="api-snippet" aria-hidden="true"><p><span class="api-verb">POST</span> /api/bookings <b>201</b></p><p class="api-json">{ "status": "confirmed" }<i></i></p></div>
             <div class="skill-body">
               <h3>Node.js APIs</h3>
               <p>Practical backend endpoints for mobile apps, with JSON data, integrations, validation, and reliable
@@ -778,15 +806,14 @@
       <div class="footer-links"><a href="mailto:umar@umarsaeedqureshi.com">EMAIL ↗</a><a
           href="https://github.com/umar200411/" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><a
           href="https://www.linkedin.com/in/umar-saeed-qureshi-8a6484296/" target="_blank"
-          rel="noopener noreferrer">LINKEDIN ↗</a></div><a class="back-to-top" href="#top">BACK TO TOP ↑</a>
+          rel="noopener noreferrer">LINKEDIN ↗</a><a href="/assets/Umar-Saeed-Qureshi-Resume.pdf" target="_blank" rel="noopener">RESUME ↗</a></div><a class="back-to-top" href="#top">BACK TO TOP ↑</a>
     </div>
   </footer>
-  <div class="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-ring" aria-hidden="true"></div>
-  <script src="script.js?v=20261105-2" defer></script>
-  <script src="depot-content.js?v=20261105-3" defer></script>
-  <script src="depot.js?v=20261105-3" defer></script>
+  <script src="script.js?v=20261109-1" defer></script>
+  <script src="depot-content.js?v=20261109-1" defer></script>
+  <script src="depot.js?v=20261109-1" defer></script>
   <script src="cursor-scrub-video.js?v=20261105-2" defer></script>
+  <script src="effects.js?v=20261109-1" defer></script>
 </body>
 
 </html>

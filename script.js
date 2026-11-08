@@ -1,4 +1,7 @@
-document.documentElement.classList.add('js');
+// The inline head script normally adds `js` before first paint; keep reveals off if its
+// slow-network fallback already showed the content.
+if (!window.__revealFallback) document.documentElement.classList.add('js');
+window.__siteReady = true;
 
 const header = document.querySelector('.site-header');
 const menuButton = document.querySelector('.nav-toggle');
@@ -7,6 +10,7 @@ const progress = document.querySelector('.scroll-progress span');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 const coarsePointer = window.matchMedia('(hover: none), (pointer: coarse)');
+const heroSection = document.querySelector('.depot-page');
 
 // Keep the compact header oriented to the section currently in view.
 const sectionLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')]
@@ -52,12 +56,16 @@ function animateStats() {
   });
 }
 
-document.querySelectorAll('a[href="#top"]').forEach(link => {
-  link.addEventListener('click', event => {
-    event.preventDefault();
-    window.scrollTo({ top: 0, left: 0, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
-    history.replaceState(null, '', '#top');
-  });
+// Delegated so links added later (such as the floating back-to-top button) behave the same.
+document.addEventListener('click', event => {
+  const link = event.target.closest?.('a[href="#top"]');
+  if (!link) return;
+  event.preventDefault();
+  window.scrollTo({ top: 0, left: 0, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+  history.replaceState(null, '', '#top');
+  // Keyboard users continue from the top of the page instead of the footer.
+  // (The hero brand comes first: the sticky header's brand is off-screen at the top of the homepage.)
+  if (event.detail === 0) (document.querySelector('.depot-brand-lockup > a') || document.querySelector('.brand'))?.focus({ preventScroll: true });
 });
 
 function closeMenu() {
@@ -84,6 +92,9 @@ function updateScrollUI() {
   const fraction = max > 0 ? Math.min(1, scrollY / max) : 0;
   if (progress) progress.style.transform = `scaleX(${fraction})`;
   header?.classList.toggle('scrolled', scrollY > 14);
+  // The hero has its own navigation; the compact header takes over once it scrolls away.
+  const heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight - 120 : 0;
+  header?.classList.toggle('is-visible', scrollY > heroBottom);
   scrollPending = false;
 }
 window.addEventListener('scroll', () => {
@@ -91,7 +102,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 window.addEventListener('resize', () => {
   updateScrollUI();
-  if (innerWidth > 1100) closeMenu();
+  if (innerWidth > 1023) closeMenu();
 }, { passive: true });
 updateScrollUI();
 
@@ -162,17 +173,29 @@ document.querySelectorAll('.screenshot-gallery').forEach(gallery => {
   });
 });
 
-const phoneShowcase = document.querySelector('.project-art');
+// Scroll-linked phone tilt: one layout read per frame, and only while the showcase is on screen.
+const phoneShowcase = document.querySelector('.project-media--beautify');
 if (phoneShowcase && !reduceMotion.matches) {
+  let showcaseFrame = 0;
+  let showcaseVisible = !('IntersectionObserver' in window);
   const updatePhoneShowcase = () => {
+    showcaseFrame = 0;
     const rect = phoneShowcase.getBoundingClientRect();
     const viewportProgress = Math.max(0, Math.min(1, (innerHeight - rect.top) / (innerHeight + rect.height)));
     phoneShowcase.style.setProperty('--phone-shift', `${Math.round(42 - viewportProgress * 27)}px`);
     phoneShowcase.style.setProperty('--phone-tilt', `${(viewportProgress * 7).toFixed(2)}deg`);
-    phoneShowcase.classList.toggle('is-scrolling', rect.top < innerHeight && rect.bottom > 0);
   };
-  window.addEventListener('scroll', updatePhoneShowcase, { passive: true });
-  updatePhoneShowcase();
+  const requestShowcaseUpdate = () => {
+    if (showcaseVisible && !showcaseFrame) showcaseFrame = requestAnimationFrame(updatePhoneShowcase);
+  };
+  if (!showcaseVisible) {
+    new IntersectionObserver(([entry]) => {
+      showcaseVisible = entry.isIntersecting;
+      requestShowcaseUpdate();
+    }).observe(phoneShowcase);
+  }
+  window.addEventListener('scroll', requestShowcaseUpdate, { passive: true });
+  requestShowcaseUpdate();
 }
 
 const stats = document.querySelector('.about-stats');
@@ -211,59 +234,8 @@ if ('IntersectionObserver' in window && !reduceMotion.matches) {
   revealElements.forEach(element => element.classList.add('in-view'));
 }
 
-// Pointer-reactive light, subtle 3D tilt, and magnetic buttons on desktop only.
+// Subtle 3D tilt and magnetic buttons on desktop only (the hero light lives in effects.js).
 if (finePointer.matches && !reduceMotion.matches) {
-  const cursorDot = document.querySelector('.cursor-dot');
-  const cursorRing = document.querySelector('.cursor-ring');
-  const hero = document.querySelector('.hero');
-  let pointerPending = false;
-  let pointerX = 0;
-  let pointerY = 0;
-  let cursorFrame = 0;
-  let cursorX = -100;
-  let cursorY = -100;
-  let ringX = -100;
-  let ringY = -100;
-
-  document.documentElement.classList.add('has-custom-cursor');
-  const renderCursor = () => {
-    cursorFrame = 0;
-    ringX += (cursorX - ringX) * .2;
-    ringY += (cursorY - ringY) * .2;
-    cursorDot?.style.setProperty('--cursor-x', `${cursorX}px`);
-    cursorDot?.style.setProperty('--cursor-y', `${cursorY}px`);
-    cursorRing?.style.setProperty('--cursor-x', `${ringX}px`);
-    cursorRing?.style.setProperty('--cursor-y', `${ringY}px`);
-    if (Math.abs(cursorX - ringX) > .1 || Math.abs(cursorY - ringY) > .1) {
-      cursorFrame = requestAnimationFrame(renderCursor);
-    }
-  };
-
-  document.addEventListener('pointermove', event => {
-    cursorX = event.clientX;
-    cursorY = event.clientY;
-    if (!cursorFrame) cursorFrame = requestAnimationFrame(renderCursor);
-  }, { passive: true });
-  document.addEventListener('pointerleave', () => document.documentElement.classList.remove('has-custom-cursor'));
-  document.addEventListener('pointerenter', () => document.documentElement.classList.add('has-custom-cursor'));
-  document.querySelectorAll('a, button, .tilt-card, .project-art').forEach(element => {
-    element.addEventListener('pointerenter', () => document.documentElement.classList.add('cursor-hover'));
-    element.addEventListener('pointerleave', () => document.documentElement.classList.remove('cursor-hover'));
-  });
-
-  hero?.addEventListener('pointermove', event => {
-    const rect = hero.getBoundingClientRect();
-    pointerX = event.clientX - rect.left;
-    pointerY = event.clientY - rect.top;
-    if (pointerPending) return;
-    pointerPending = true;
-    requestAnimationFrame(() => {
-      hero.style.setProperty('--cursor-x', `${pointerX}px`);
-      hero.style.setProperty('--cursor-y', `${pointerY}px`);
-      pointerPending = false;
-    });
-  }, { passive: true });
-
   document.querySelectorAll('.tilt-card').forEach(card => {
     let rect;
     card.addEventListener('pointermove', event => {
@@ -331,18 +303,26 @@ const stateMessages = {
   success: ['Booking confirmed', 'A clear success state keeps the next step obvious.'],
   error: ['Could not complete booking', 'The user gets a recovery path instead of a dead end.']
 };
-stateButtons.forEach(button => button.addEventListener('click', () => {
-  const state = button.dataset.state;
+const stateDemo = document.querySelector('.state-demo');
+let bookingFlowTimer = 0;
+function setLabState(state) {
   const message = stateMessages[state];
   if (!message) return;
-  stateButtons.forEach(item => item.classList.toggle('is-selected', item.dataset.state === state));
+  stateButtons.forEach(item => item.classList.toggle('is-selected', item.dataset.state === state && !item.classList.contains('state-trigger')));
   if (stateTitle) stateTitle.textContent = message[0];
   if (stateCopy) stateCopy.textContent = message[1];
-  const demo = document.querySelector('.state-demo');
-  demo?.setAttribute('data-active-state', state);
-  if (demo && !reduceMotion.matches) {
-    demo.classList.remove('state-changing');
-    requestAnimationFrame(() => demo.classList.add('state-changing'));
+  stateDemo?.setAttribute('data-active-state', state);
+  if (stateDemo && !reduceMotion.matches) {
+    stateDemo.classList.remove('state-changing');
+    requestAnimationFrame(() => stateDemo.classList.add('state-changing'));
+  }
+}
+stateButtons.forEach(button => button.addEventListener('click', () => {
+  window.clearTimeout(bookingFlowTimer);
+  setLabState(button.dataset.state);
+  // "Run booking flow" plays the whole sequence: loading, then a confirmed booking.
+  if (button.classList.contains('state-trigger')) {
+    bookingFlowTimer = window.setTimeout(() => setLabState('success'), reduceMotion.matches ? 600 : 1700);
   }
 }));
 

@@ -25,7 +25,7 @@ async function loaded(page) {
 async function capture(page,file,options={}) {
   await page.evaluate(async()=>{
     if(document.fonts?.ready) await document.fonts.ready;
-    await Promise.all(Array.from(document.images,image=>
+    await Promise.all(Array.from(document.images).filter(image=>image.complete&&image.naturalWidth).map(image=>
       typeof image.decode==='function' ? image.decode().catch(()=>{}) : Promise.resolve()
     ));
   });
@@ -95,7 +95,7 @@ test('Pulse featured project filters and opens the single detailed case study ro
   await page.getByRole('button',{name:'Productivity'}).click();
   await expect(pulse).toBeVisible();
   await expect(page.locator('.project-card--beautify')).toBeHidden();
-  await page.getByRole('button',{name:'Flutter'}).click();
+  await page.getByRole('button',{name:'Flutter',exact:true}).click();
   await expect(pulse).toBeVisible();
   await pulse.getByRole('link',{name:/View Case Study/}).click();
   await expect(page).toHaveURL(/\/projects\/pulse\/$/);
@@ -209,6 +209,7 @@ test('CursorScrubVideo exposes configurable single-axis tracking and an empty-so
 });
 
 test('each container opens its own readable dock content', async ({page}) => {
+  test.setTimeout(120000);
   await loaded(page);
   for(const id of ['intro','work','about','journey','toolkit','services','contact']) {
     const target=getContainer(page,id);
@@ -223,7 +224,7 @@ test('each container opens its own readable dock content', async ({page}) => {
     await expect(page.locator('.depot-content-dock')).not.toHaveAttribute('inert','');
     await expect(page.locator('.depot-dock-content h2')).toContainText(({intro:'Umar',work:'work',about:'about me',journey:'build',toolkit:'box',services:'do',contact:'idea'})[id]);
   }
-},{timeout:120000});
+});
 
 test('pickup passes through mechanical stages and returns previous container', async ({page}) => {
   await loaded(page);
@@ -296,6 +297,7 @@ test('rapid selections keep the latest requested container', async ({page}) => {
 });
 
 test('keyboard, touch, Escape, and reduced motion are supported', async ({page,browser}) => {
+  test.setTimeout(60000);
   await loaded(page);
   const work=getTrigger(page,'work');
   await work.focus();
@@ -309,7 +311,7 @@ test('keyboard, touch, Escape, and reduced motion are supported', async ({page,b
   await expect(page.locator('.hero')).toHaveAttribute('data-depot-state','IDLE');
   await expect(work).toBeFocused();
   await page.locator('.depot-explore-toggle').click();
-  await page.getByRole('link',{name:'Toolkit'}).last().focus();
+  await page.locator('.depot-more-links').getByRole('link',{name:'Toolkit'}).focus();
   await page.keyboard.press('Enter');
   await expect(getContainer(page,'toolkit')).toHaveClass(/is-open/);
   await page.keyboard.press('Escape');
@@ -337,9 +339,10 @@ test('keyboard, touch, Escape, and reduced motion are supported', async ({page,b
   await touchPage.locator('.depot-dock-close').tap();
   await expect(touchPage.locator('.hero')).toHaveAttribute('data-depot-state','IDLE');
   await touchContext.close();
-},{timeout:60000});
+});
 
 test('navigation activates depot containers and real project/contact links are retained', async ({page}) => {
+  test.setTimeout(90000);
   await loaded(page);
   await page.locator('.depot-shortcuts a[data-depot-target="work"]').click();
   await expect(getContainer(page,'work')).toHaveClass(/is-open/);
@@ -347,7 +350,8 @@ test('navigation activates depot containers and real project/contact links are r
   await expect(page.locator('.depot-dock-content a[href="https://magnetmasala.com/"]')).toHaveCount(1);
   await expect(page.locator('.depot-dock-content a[href^="mailto:umar@umarsaeedqureshi.com"]')).toHaveCount(1);
   await selectFromNav(page,'toolkit');
-  await page.getByRole('button',{name:'Success',exact:true}).click();
+  await expect(getContainer(page,'toolkit')).toHaveClass(/is-open/);
+  await page.locator('.depot-state-lab').getByRole('button',{name:'Success',exact:true}).click();
   await expect(page.locator('.depot-state-output')).toContainText('action completed');
   await page.locator('.depot-shortcuts a[data-depot-target="journey"]').click();
   await expect(getContainer(page,'journey')).toHaveClass(/is-open/);
@@ -364,6 +368,7 @@ test('navigation activates depot containers and real project/contact links are r
 });
 
 test('stage remains within viewport and captures idle plus opened content at every target size', async ({page}) => {
+  test.setTimeout(240000);
   for(const [name,width,height] of sizes) {
     await page.setViewportSize({width,height});
     await loaded(page);
@@ -378,7 +383,7 @@ test('stage remains within viewport and captures idle plus opened content at eve
       };
     });
     expect(bounds.scrollWidth).toBeLessThanOrEqual(width);
-    if(width>700) expect(bounds.intro.right).toBeLessThanOrEqual(bounds.workspace.x+2);
+    if(width>900) expect(bounds.intro.right).toBeLessThanOrEqual(bounds.workspace.x+2);
     for(const box of bounds.containers) {
       expect(box.x).toBeGreaterThanOrEqual(bounds.stage.x-8);
       expect(box.right).toBeLessThanOrEqual(bounds.stage.right+8);
@@ -413,14 +418,14 @@ test('stage remains within viewport and captures idle plus opened content at eve
     }
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   }
-},{timeout:240000});
+});
 
 test('captures a representative container return and pickup transition', async ({page}) => {
   await page.setViewportSize({width:1440,height:900});
   await loaded(page);
   await getTrigger(page,'work').click();
   await expect(getContainer(page,'work')).toHaveClass(/is-open/);
-  await getTrigger(page,'about').click();
+  await selectFromNav(page,'about');
   await expect(page.locator('.hero')).toHaveAttribute('data-depot-state','RETURNING');
   await expect(getContainer(page,'work')).not.toHaveClass(/is-selected/);
   await capture(page,path.join('test-results','desktop-1440x900-switch-work-to-about.png'));

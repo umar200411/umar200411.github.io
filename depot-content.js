@@ -16,7 +16,7 @@ window.umarDepotContent = {
       ['Beautify','Independently developed Flutter app for nearby salon discovery, beauty services, and appointments with a Firebase-powered booking experience.',['Google Play','https://play.google.com/store/apps/details?id=com.umar.beautify'],['Case study','/projects/beautify/']],
       ['Magnet Masala','Responsive e-commerce storefront for a Pakistani spice brand, with product discovery, a shopping basket, and WhatsApp ordering.',['Live website','https://magnetmasala.com/'],['Case study','/projects/magnet-masala/']]
     ],
-    links:[['Full project details ↓','#work']]
+    links:[['Full project details ↓','#work'],["Let's talk ↗",'mailto:umar@umarsaeedqureshi.com?subject=Project%20inquiry']]
   },
   about: {
     kicker:'03 / ABOUT ME', title:'A little about me.',
