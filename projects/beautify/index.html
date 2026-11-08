@@ -5,7 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="A case study of Beautify, an independently developed Flutter salon discovery and appointment booking app by Umar Saeed Qureshi.">
   <meta name="author" content="Umar Saeed Qureshi">
-  <meta name="theme-color" content="#100c27">
+  <meta name="theme-color" content="#05070f">
+  <script>
+    /* Runs before first paint: enables reveal styling and picks an effects tier. */
+    (function (root, nav) {
+      var connection = nav.connection || {};
+      root.classList.add('js');
+      if (connection.saveData || (nav.deviceMemory && nav.deviceMemory <= 2) || (nav.hardwareConcurrency && nav.hardwareConcurrency <= 2)) root.classList.add('fx-lite');
+      setTimeout(function () { if (!window.__siteReady) { window.__revealFallback = true; root.classList.remove('js'); } }, 4000);
+    })(document.documentElement, navigator);
+  </script>
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Umar Saeed Qureshi">
   <meta property="og:title" content="Beautify Case Study | Flutter App — Umar Saeed Qureshi">
@@ -20,10 +29,10 @@
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="../../assets/projects/beautify/discover.png" fetchpriority="high">
-  <link rel="stylesheet" href="../../styles.css?v=20261019-2">
-  <link rel="stylesheet" href="../../case-studies.css?v=20261019-2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="preload" as="image" type="image/webp" href="../../assets/projects/beautify/discover.webp" fetchpriority="high">
+  <link rel="stylesheet" href="../../site.css?v=20261109-1">
+  <link rel="stylesheet" href="../../case-study.css?v=20261109-1">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -41,14 +50,13 @@
 <body class="case-study-page case-study-page--beautify">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
-  <div class="cursor-dot" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
-  <div id="top" class="page-top" aria-hidden="true"></div>
+    <div id="top" class="page-top" aria-hidden="true"></div>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="Umar Saeed Qureshi, home">umar<span class="brand-spark" aria-hidden="true">✳</span><small>DEV / DESIGN / SHIP</small></a>
       <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
         <a href="/#work">Projects</a><a href="/#about">About</a><a href="/#experience">Experience</a>
-        <a href="/#expertise">Toolkit</a><a href="/#services">Services</a><a href="/#process">Process</a>
+        <a href="/#expertise">Toolkit</a><a href="/#services">Services</a><a href="/#process">Process</a><a class="nav-resume" href="/assets/Umar-Saeed-Qureshi-Resume.pdf" target="_blank" rel="noopener">Resume</a>
         <a href="/#contact" class="nav-contact">Let's connect <span aria-hidden="true">↗</span></a>
       </nav>
       <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false"><span></span><span></span></button>
@@ -67,7 +75,7 @@
           <div class="case-actions"><a class="button button-lime magnetic" href="https://play.google.com/store/apps/details?id=com.umar.beautify" target="_blank" rel="noopener noreferrer">View on Google Play <span class="button-arrow" aria-hidden="true">↗</span></a><a class="case-text-link" href="/#work">All projects <span aria-hidden="true">↗</span></a></div>
         </div>
         <figure class="case-phone-frame reveal">
-          <img src="../../assets/projects/beautify/discover.png" width="414" height="896" fetchpriority="high" decoding="async" alt="Beautify Discover screen showing salon offers, beauty service categories, and nearby services.">
+          <img src="../../assets/projects/beautify/discover.webp" width="414" height="896" fetchpriority="high" decoding="async" alt="Beautify Discover screen showing salon offers, beauty service categories, and nearby services.">
           <figcaption>REAL APP SCREEN / DISCOVER</figcaption>
         </figure>
       </div>
@@ -116,8 +124,8 @@
       <div class="container">
         <div class="case-section-heading"><span class="section-kicker"><span class="kicker-dot"></span> REAL PRODUCT SCREENS</span><h2 id="screens-title">Customer and salon workflows.</h2><p>Screenshots are from the published Beautify app listing and are shown without recreating the interface.</p></div>
         <div class="case-screenshot-grid case-screenshot-grid--phone">
-          <figure><img src="../../assets/projects/beautify/get-started.png" width="414" height="896" loading="lazy" decoding="async" alt="Beautify registration screen with options to register as a user or a salon business."><figcaption><span>01 / ACCOUNT PATHS</span><strong>Choose a customer or salon experience.</strong></figcaption></figure>
-          <figure><img src="../../assets/projects/beautify/service-setup.png" width="414" height="896" loading="lazy" decoding="async" alt="Beautify salon service setup screen for selecting a category and entering service details."><figcaption><span>02 / SALON TOOLS</span><strong>Set up a service for customers to discover.</strong></figcaption></figure>
+          <figure><img src="../../assets/projects/beautify/get-started.webp" width="414" height="896" loading="lazy" decoding="async" alt="Beautify registration screen with options to register as a user or a salon business."><figcaption><span>01 / ACCOUNT PATHS</span><strong>Choose a customer or salon experience.</strong></figcaption></figure>
+          <figure><img src="../../assets/projects/beautify/service-setup.webp" width="414" height="896" loading="lazy" decoding="async" alt="Beautify salon service setup screen for selecting a category and entering service details."><figcaption><span>02 / SALON TOOLS</span><strong>Set up a service for customers to discover.</strong></figcaption></figure>
         </div>
       </div>
     </section>
@@ -131,6 +139,7 @@
     <section class="case-closing"><div class="container"><span class="section-kicker"><span class="kicker-dot"></span> HAVE A PRODUCT IDEA?</span><h2>Let's build an app<br>that feels <em>right.</em></h2><a class="button button-lime magnetic" href="/#contact">Let's discuss your project <span class="button-arrow" aria-hidden="true">↗</span></a></div></section>
   </main>
   <footer class="site-footer"><div class="container footer-inner"><a href="/" class="footer-brand" aria-label="Back to portfolio home">umar<span>✳</span></a><p>© <span id="year">2026</span> UMAR SAEED QURESHI<br><span>MADE WITH INTENTION / PAKISTAN</span></p><div class="footer-links"><a href="mailto:umar@umarsaeedqureshi.com">EMAIL ↗</a><a href="https://github.com/umar200411/" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><a href="https://www.linkedin.com/in/umar-saeed-qureshi-8a6484296/" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a></div><a class="back-to-top" href="#top">BACK TO TOP ↑</a></div></footer>
-  <script src="../../script.js?v=20261019-2" defer></script>
+  <script src="../../script.js?v=20261109-1" defer></script>
+  <script src="../../effects.js?v=20261109-1" defer></script>
 </body>
 </html>

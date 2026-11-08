@@ -5,7 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Pulse is a student-focused productivity and life-management application in development by Umar Saeed Qureshi, built with Flutter and Dart.">
   <meta name="author" content="Umar Saeed Qureshi">
-  <meta name="theme-color" content="#1176dc">
+  <meta name="theme-color" content="#05070f">
+  <script>
+    /* Runs before first paint: enables reveal styling and picks an effects tier. */
+    (function (root, nav) {
+      var connection = nav.connection || {};
+      root.classList.add('js');
+      if (connection.saveData || (nav.deviceMemory && nav.deviceMemory <= 2) || (nav.hardwareConcurrency && nav.hardwareConcurrency <= 2)) root.classList.add('fx-lite');
+      setTimeout(function () { if (!window.__siteReady) { window.__revealFallback = true; root.classList.remove('js'); } }, 4000);
+    })(document.documentElement, navigator);
+  </script>
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Umar Saeed Qureshi">
   <meta property="og:title" content="Pulse Case Study | Umar Saeed Qureshi">
@@ -15,10 +24,9 @@
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../styles.css?v=20261019-2">
-  <link rel="stylesheet" href="../../case-studies.css?v=20261019-2">
-  <link rel="stylesheet" href="../../pulse-project.css?v=20261105-1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../site.css?v=20261109-1">
+  <link rel="stylesheet" href="../../case-study.css?v=20261109-1">
   <title>Pulse Case Study | Umar Saeed Qureshi</title>
 </head>
 <body class="case-study-page pulse-case-page">
@@ -30,7 +38,7 @@
       <a class="brand" href="/" aria-label="Umar Saeed Qureshi, home">umar<span class="brand-spark" aria-hidden="true">✳</span><small>DEV / DESIGN / SHIP</small></a>
       <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
         <a href="/#work">Projects</a><a href="/#about">About</a><a href="/#experience">Experience</a>
-        <a href="/#expertise">Toolkit</a><a href="/#process">Process</a>
+        <a href="/#expertise">Toolkit</a><a href="/#process">Process</a><a class="nav-resume" href="/assets/Umar-Saeed-Qureshi-Resume.pdf" target="_blank" rel="noopener">Resume</a>
         <a href="mailto:umar@umarsaeedqureshi.com" class="nav-contact">Let's talk <span aria-hidden="true">↗</span></a>
       </nav>
       <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false"><span></span><span></span></button>
@@ -142,7 +150,8 @@
     </section>
   </main>
   <footer class="pulse-footer"><div class="container"><a class="pulse-footer-brand" href="/">umar<span>✳</span></a><p>© 2026 UMAR SAEED QURESHI · PULSE / IN DEVELOPMENT</p><a href="/#work">All projects ↑</a></div></footer>
-  <script src="../../script.js?v=20261105-2" defer></script>
+  <script src="../../script.js?v=20261109-1" defer></script>
+  <script src="../../effects.js?v=20261109-1" defer></script>
   <script src="../../pulse-media.js?v=20261105-2" defer></script>
   <script src="../../pulse-case-study.js?v=20261105-2" defer></script>
 </body>
